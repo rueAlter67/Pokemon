@@ -1,12 +1,9 @@
 public class Driver 
 {
 
-
     public static void main(String[] args)
     {
-        // get the precreature
-
-
+        Game CGame = new Game();
 
     }
 
