@@ -1,7 +1,7 @@
 public class Player 
 {
     // attributes/fields/state
-    private int nStarterCreature;
+    private Creature nStarterCreature;
     private Inventory CInventory; 
     private int nPosX; 
     private int nPosY; 
@@ -29,6 +29,33 @@ public class Player
 
         return true; 
     }
+
+    //+++++++++++ PLAYER'S INTERACTION WITH ENEMY
+    /* swapCreature changes the 
+     * activecreature of the player with
+     * one of the creatures in its inventory
+     */
+    public boolean swapCreature()
+    {
+
+        return true; 
+
+    }
+
+    /* does not interact with the creature  */
+    public boolean skip()
+    {
+        return true; 
+    }
+
+    public boolean catchCreature(Creature CEnemy)
+    {
+
+        return true; 
+    }
+
+
+
 
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
     // players can move ()
@@ -71,5 +98,22 @@ public class Player
     {
         return true; 
     }
+
+
+  //+++++++++++ setters and getters
+    
+    public int getPosX()
+    {
+        return this.nPosX;
+    }
+    
+    public int getnPosY() {
+        return nPosY;
+    }
+
+    public Creature getnStarterCreature() {
+        return nStarterCreature;
+    }
+
 
 }
