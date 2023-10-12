@@ -5,24 +5,21 @@ public class Game {
     private Player CPlayer;
     private int nMenuChoice; 
 
-    public void run()
+    public void run() // instantiation ng mga class na need natin 
     {
         this.CMasterInventory = new Creature; 
         this.CPlayer = new Player(); 
+    
     }
 
-    public void displayPreMenu() 
-    {
-        int nChoice; 
+    // get players starter creature 
 
-        System.out.print();
     }
 
     public void displayMenu() 
     {
         Scanner CReader = new Scanner(System.in);
-
-        int nMenuChoice;
+        int nMenuChoice = 0; 
         int nValid = 0;  
         System.out.print("\n\n\t\t\t=======MAIN MENU=======\n"+
                          "\t\t\t[1]  View Inventory\n" + 
@@ -31,24 +28,31 @@ public class Game {
                         "\t\t\t=======================\n");
         while(nValid == 0 )
         {
-            System.out.println("\n\t\t\t[INPUT]: ");
+            System.out.print("\n\t\t\t[INPUT]: ");
 
             if(CReader.hasNextInt())
-            {
+            {   
                 nMenuChoice = CReader.nextInt();
-                nValid = 1; 
-                CReader.nextLine(); // buffer
-                this.nMenuChoice = nMenuChoice;
+                if(nMenuChoice >= 1 && nMenuChoice <= 4)
+                {
+                    nValid = 1; 
+                    CReader.nextLine(); // buffer
+                }
+                else
+                {
+                    System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
+                    CReader.nextLine(); //buffer
+                }
             }
             else
             {
-                System.err.println("[SYSTEM MESSAGE]: Invalid Input.\n Input must be an integer only.\n");
+                System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
                 CReader.nextLine(); //buffer
             }
         }
 
 
-        switch(this.nMenuChoice)
+        switch(nMenuChoice)
         {
             case 1: 
                     System.out.println("you are no in inventory interface");
@@ -56,10 +60,11 @@ public class Game {
             case 2: 
                     System.out.println("you are no in area interface");
                     break;
-            case 3: System.out.println"FEATURE NOT YET AVAILABLE");
+            case 3: 
+                    System.out.println("FEATURE NOT YET AVAILABLE");
                     break;
             case 4: 
-                    exitGame();
+                    System.out.println("EXIT");
                     break;
         }
     }
