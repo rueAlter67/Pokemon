@@ -5,6 +5,12 @@ public class Driver
     {
         Game CGame = new Game();
 
+        CGame.run();
+        
+        do{
+            CGame.displayMenu();
+        }while(CGame.getnChoice() != 4);
+
     }
 
 

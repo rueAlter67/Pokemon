@@ -1,20 +1,19 @@
 import java.util.Scanner;
-public class Game {
+public class Game{
     
-    private Creature[] CMasterInventory; // will contain all the creatures 
+    private Creature[9] CMasterInventory; // will contain all the creatures 
     private Player CPlayer;
     private int nMenuChoice; 
 
     public void run() // instantiation ng mga class na need natin 
     {
-        this.CMasterInventory = new Creature; 
-        this.CPlayer = new Player(); 
+       // this.CMasterInventory = new Creature; 
+        //this.CPlayer = new Player(); 
     
     }
 
     // get players starter creature 
 
-    }
 
     public void displayMenu() 
     {
@@ -64,7 +63,7 @@ public class Game {
                     System.out.println("FEATURE NOT YET AVAILABLE");
                     break;
             case 4: 
-                    System.out.println("EXIT");
+                    exitGame();
                     break;
         }
     }
@@ -72,40 +71,18 @@ public class Game {
     public void exitGame()
     {
         System.out.println("You have exited the game.");
-
+        System.exit(0);
     }
 
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // setters and getters 
     public void setnChoice(int nChoice) 
     {
-        this.nChoice = nChoice;
+        this.nMenuChoice = nChoice;
     }
     public int getnChoice() 
     {
-        return nChoice;
+        return this.nMenuChoice;
     }
 }

@@ -1,27 +1,17 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class display 
 {
     public static void main(String[] args) {
+        Player CPlayer1 = new Player();
+        Player CPlayer2 = new Player();
 
-        int row, col; 
-        int x = 5; 
-        int y = 1; 
-        int playerX = 0;
-        int playerY = 0; 
-        System.out.println("\n");
-        
-        for(col = 0; col < y; col++)
-        {
-            for(row = 0; row < x; row++)
-            {
-                if(row == playerX && col == playerY)
-                    System.out.print("O ");
-                else 
-                    System.out.print("+ ");
-            }
+        ArrayList<Player> aPlayers = new ArrayList<Player>();
+        aPlayers.add(CPlayer1);
+        aPlayers.add(CPlayer2);
 
-            System.out.print("\n");
-        }
+        System.out.println(aPlayers.size()+
+        "\nPlayers health = " + aPlayers.CPlayer1.getHealth());
+
     }
 }

@@ -9,7 +9,7 @@ public class Player
     // constructor 
     public Player()
     {
-        this.CInventory = new Inventory(); 
+        this.CInventory = new Inventory(Creature nStarterCreature); 
         this.nPosX = 0; 
         this.nPosY = 0; 
     } 
@@ -56,7 +56,6 @@ public class Player
 
 
 
-
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
     // players can move ()
     public boolean goLeft(int nXLimit, int nYLimit)
@@ -87,7 +86,7 @@ public class Player
     {
         if(this.nPosY < nYLimit)
             this.nPosY+=1; 
-        else if(this.nPosY = nYLimit)
+        else if(this.nPosY == nYLimit)
         {
             // can't move to the left anymore
         }
