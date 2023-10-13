@@ -1,15 +1,52 @@
 import java.util.Scanner;
 public class Game{
     
-    private Creature[9] CMasterInventory; // will contain all the creatures 
+    private Creature[] CMasterInventory = new Creature[9]; // will contain all the creatures 
     private Player CPlayer;
     private int nMenuChoice; 
+    private Inventory CPlayerInventory = new Inventory();
+    /*
+    list bellow is instantiation of initial creature list
+    999 cause unlimited health, would have to change it for the enemy creatures health
+    sa image ID i assigned it muna sa index nila sa MasterInventory
+    */
+    Creature CStrawander = new Creature(999, 0, "Strawander",'A',"Fire",1,true);
+    Creature CChocowool = new Creature(999, 1,"Chocowool",'B',"Fire",1,false);
+    Creature CParfwit = new Creature(999, 2,"Parfwit",'C',"Fire",1,false);
+    Creature CBrownisaur = new Creature(999, 3,"Brownisaur",'D',"Grass",1,false);
+    Creature CFrubat = new Creature(999, 4,"Frubat",'E',"Grass",1,false);
+    Creature CMalts = new Creature(999, 5,"Malts",'F',"Grass",1,false);
+    Creature CSquirpie = new Creature(999, 6,"Squirpie",'G',"Water",1,false);
+    Creature CChocolite = new Creature(999, 7,"Chocolite",'H',"Water",1,false);
+    Creature COshacone = new Creature(999, 8,"Oshacone",'I',"Water",1,false);
+
+    // public void setMasterInventory(int nHealth){
+    //     this.CMasterInventory = CMasterInventory;
+    // }
+    
+    // public Creature getMasterInventory(){
+    //     return CMasterInventory;
+    // }
 
     public void run() // instantiation ng mga class na need natin 
     {
-       // this.CMasterInventory = new Creature; 
+        CMasterInventory[0] = CStrawander;
+        CMasterInventory[1] = CChocowool;
+        CMasterInventory[2] = CParfwit;
+        CMasterInventory[3] = CBrownisaur;
+        CMasterInventory[4] = CFrubat;
+        CMasterInventory[5] = CMalts;
+        CMasterInventory[6] = CSquirpie;
+        CMasterInventory[7] = CChocolite;
+        CMasterInventory[8] = COshacone;
+        //this.CMasterInventory = new Creature; 
         //this.CPlayer = new Player(); 
-    
+        
+    }
+
+    public Creature getCStrawander()
+    {
+        return CMasterInventory[0];
     }
 
     // get players starter creature 
@@ -23,9 +60,10 @@ public class Game{
         System.out.print("\n\n\t\t\t=======MAIN MENU=======\n"+
                          "\t\t\t[1]  View Inventory\n" + 
                           "\t\t\t[2]  Area\n"+
-                        "\t\t\t[2]  Area\n" +
+                        "\t\t\t[3]  Evolve Creature\n" +
+                        "\t\t\t[4]  Exit\n" +
                         "\t\t\t=======================\n");
-        while(nValid == 0 )
+        while(nValid == 0)
         {
             System.out.print("\n\t\t\t[INPUT]: ");
 
@@ -54,7 +92,7 @@ public class Game{
         switch(nMenuChoice)
         {
             case 1: 
-                    System.out.println("you are no in inventory interface");
+                    Inventory.display();
                     break;
             case 2: 
                     System.out.println("you are no in area interface");

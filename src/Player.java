@@ -9,7 +9,7 @@ public class Player
     // constructor 
     public Player()
     {
-        this.CInventory = new Inventory(Creature nStarterCreature); 
+     //   this.CInventory = new Inventory(Creature nStarterCreature); 
         this.nPosX = 0; 
         this.nPosY = 0; 
     } 
