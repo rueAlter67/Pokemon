@@ -6,12 +6,8 @@ public class Driver
         Game CGame = new Game();
 
         CGame.run();
+        CGame.displayMenu();
         
-        do{
-            CGame.displayMenu();
-        }while(CGame.getnChoice() != 4);
 
     }
-
-
 }
