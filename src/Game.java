@@ -42,8 +42,9 @@ public class Game{
         CMasterInventory[8] = COshacone;
         //this.CMasterInventory = new Creature; 
         //this.CPlayer = new Player(); 
-        this.CArea = new Area(this.CPlayer);
         this.CPlayer = new Player(); 
+        this.CArea = new Area(this.CPlayer);
+        
     }
 
     public Creature getCStrawander()
@@ -81,37 +82,26 @@ public class Game{
                 else
                 {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
-                    CReader.nextLine(); //buffer
+                    
+                    CReader.nextLine(); // buffer
                 }
             }
             else
             {
                 System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
-                CReader.nextLine(); //buffer
+                CReader.nextLine(); // buffer
             }
         }
 
-
+        CReader.close();
+        
         switch(nMenuChoice)
         {
             case 1: 
                     //Inventory.display();
                     break;
             case 2: 
-                    {
-                        CArea.run();
-                    
-                        CArea.loadArea(CPlayer);
-                        nAreaChoice = CArea.getMovement(CPlayer);
-                    
-            
-                    if(nAreaChoice == 5)
-                    {
-                        System.out.print("\n\n\t\t\t[SYSTEM MESSAGE]: Press any button to go back to Main Menu.");
-                        CReader.nextLine(); 
-                        displayMenu();
-                    }
-                    }
+                    CArea.run();
                     break;
             case 3: 
                     System.out.println("FEATURE NOT YET AVAILABLE");

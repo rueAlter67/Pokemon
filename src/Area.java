@@ -21,65 +21,64 @@ public class Area {
 
     public void run()
     {
-        System.out.print("\n\n\n");
+        
         Scanner CReader = new Scanner(System.in);
         int nArea=0;
         int nValid = 0;  
         int nAreaChoice; 
-
+        System.out.print("CHECKPOINT");
         System.out.print("\n\n\t\t\t=======CHOOSE AREA=======\n"+
-                         "\t\t\t[1]  AREA 1\n" + 
+                         "\n\t\t\t[1]  AREA 1\n" + 
                           "\t\t\t[2]  AREA 2\n"+
                         "\t\t\t[3]  AREA 3\n" +
                         "\t\t\t=======================\n");
+        System.out.print("CHECKPOINT");
 
-        while(CReader.hasNext())
-            CReader.hasNext();
-
-        while(nValid == 0 )
+        while(nValid==0)
         {
+            //CReader.nextLine(); // buffer
             System.out.print("\n\t\t\t[INPUT]: ");
 
             if(CReader.hasNextInt())
             {   
                 nArea = CReader.nextInt();
+                CReader.nextLine(); // buffer
 
                 if(nArea == 1)
                 {
                     nValid = 1; 
-                    CReader.nextLine(); // buffer
+                    this.nAreaLevel = nArea;
+                
+                    if(this.nAreaLevel == 1)
+                    {
+                        this.nXDim = 5; 
+                        this.nYDim = 1;
+                    }
+                    else if(this.nAreaLevel == 2)
+                    {
+                        this.nXDim = 3; 
+                        this.nYDim = 3;
+                    }
+                    else
+                    {
+                        this.nXDim = 4; 
+                        this.nYDim = 4;
+                    }
+             
         
                 }
                 else
                 {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Only Area 1 is available.\n");
-                    CReader.nextLine(); //buffer
+                    CReader.nextLine(); // buffer
                 }
             }
             else
             {
                 System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
-                CReader.nextLine(); //buffer
+                CReader.nextLine(); // buffer
             }
-        }
-
-        
-        this.nAreaLevel = nArea;
-
-        if(this.nAreaLevel == 1)
-        {
-            this.nXDim = 5; 
-            this.nYDim = 1;
-        }
-        else if(this.nAreaLevel == 2)
-        {
-            this.nXDim = 3; 
-            this.nYDim = 3;
-        }
-        else
-        {
-            this.nXDim = 4; 
-            this.nYDim = 4;
+            
         }
         CReader.close();
     }
@@ -107,7 +106,7 @@ public class Area {
     public int getMovement(Player CPlayer)
     {
         Scanner CReader = new Scanner(System.in);
-        int nValid = 0; 
+        int nChecker = 0; 
         int nMovement= 0;  
         String buffer;
 
@@ -118,16 +117,19 @@ public class Area {
                                 "\n\t\t\t[4] RIGHT" + 
                                 "\n\t\t\t[5] EXIT AREA\n");
 
-            
-        while(nValid == 0)
+        
+        while(nChecker == 0)
         {
             System.out.print("\n\t\t\t[INPUT]: ");
-            nMovement = CReader.nextInt();
+            while(CReader.hasNext())
+                CReader.hasNext();
+            
             if(CReader.hasNextInt())
-            {   
+            {
+                nMovement = CReader.nextInt();   
                 if(nMovement >= 1 && nMovement <= 5)
                 {
-                    nValid = 1; 
+                    nChecker = 1; 
                     CReader.nextLine(); //buffer
                 }
                 else
@@ -166,8 +168,9 @@ public class Area {
                     break;
         }
 
-        return nMovement;
         CReader.close();
+        return nMovement;
+        
     }
 
 
