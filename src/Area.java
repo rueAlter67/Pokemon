@@ -118,31 +118,28 @@ public class Area {
                                 "\n\t\t\t[4] RIGHT" + 
                                 "\n\t\t\t[5] EXIT AREA\n");
 
+            
         while(nValid == 0)
         {
-              System.out.print("\n\t\t\t[INPUT]: ");
-
+            System.out.print("\n\t\t\t[INPUT]: ");
+            nMovement = CReader.nextInt();
             if(CReader.hasNextInt())
             {   
-                nMovement = CReader.nextInt();
                 if(nMovement >= 1 && nMovement <= 5)
                 {
                     nValid = 1; 
-                    if(CReader.hasNextLine())
-                        CReader.nextLine(); //buffer
+                    CReader.nextLine(); //buffer
                 }
                 else
                 {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
-                     if(CReader.hasNextLine())
-                         CReader.nextLine(); //buffer//buffer
+                    CReader.nextLine(); //buffer//buffer
                 }
             }
             else
             {
                 System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
-                if(CReader.hasNextLine())
-                    CReader.nextLine(); //buffer
+                CReader.nextLine(); //buffer
             }
         }
 
