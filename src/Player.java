@@ -58,13 +58,30 @@ public class Player
 
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
     // players can move ()
+     public boolean goUp(int nPosX, int nPosY, int nXLimit, int nYLimit)
+    {
+        if(this.nPosY < nYLimit)
+            this.nPosY+=1; 
+        else if(this.nPosY == nYLimit)
+        {
+            // can't move to the left anymore
+        }
+        return true; 
+    }
+
+    
+    public boolean goDown(int nPosX, int nPosY, int nXLimit, int nYLimit)
+    {
+        return true; 
+    }
+
     public boolean goLeft(int nXLimit, int nYLimit)
     {
         if(this.nPosY < nYLimit)
             this.nPosY+=1; 
         else if(this.nPosY == nYLimit)
         {
-            // can't move to the right anymore
+            System.err.print("\n\n\t\t\t[ERROR]: Player can't move anymore to the left");
         }
 
         return true; 
@@ -82,22 +99,7 @@ public class Player
         return true; 
     }
 
-    public boolean goUp(int nPosX, int nPosY, int nXLimit, int nYLimit)
-    {
-        if(this.nPosY < nYLimit)
-            this.nPosY+=1; 
-        else if(this.nPosY == nYLimit)
-        {
-            // can't move to the left anymore
-        }
-        return true; 
-    }
-
-    public boolean goDown(int nPosX, int nPosY, int nXLimit, int nYLimit)
-    {
-        return true; 
-    }
-
+   
 
   //+++++++++++ setters and getters
     
@@ -106,7 +108,7 @@ public class Player
         return this.nPosX;
     }
     
-    public int getnPosY() {
+    public int getPosY() {
         return nPosY;
     }
 

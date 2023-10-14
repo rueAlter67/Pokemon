@@ -5,6 +5,7 @@ public class Game{
     private Player CPlayer;
     private int nMenuChoice; 
     private Inventory CPlayerInventory = new Inventory();
+    private Area CArea;
     /*
     list bellow is instantiation of initial creature list
     999 cause unlimited health, would have to change it for the enemy creatures health
@@ -41,7 +42,8 @@ public class Game{
         CMasterInventory[8] = COshacone;
         //this.CMasterInventory = new Creature; 
         //this.CPlayer = new Player(); 
-        
+        this.CArea = new Area(this.CPlayer);
+        this.CPlayer = new Player(); 
     }
 
     public Creature getCStrawander()
@@ -92,10 +94,10 @@ public class Game{
         switch(nMenuChoice)
         {
             case 1: 
-                    Inventory.display();
+                    //Inventory.display();
                     break;
             case 2: 
-                    System.out.println("you are no in area interface");
+                    CArea.run();
                     break;
             case 3: 
                     System.out.println("FEATURE NOT YET AVAILABLE");
