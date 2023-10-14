@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Area {
 
     // fields
@@ -5,11 +7,59 @@ public class Area {
     private int nXDim; 
     private int nYDim;
     private Creature CEnemy; 
-    
-    public Area(int nAreaLevel, int nXDim, int nYDim, Creature CEnemy)
+    private Player CPlayer;
+
+    public Area(Player CPlayer)
     {
-        this.nAreaLevel = nAreaLevel; 
+        this.CPlayer = CPlayer;
+        this.CEnemy = null; 
+        this.nAreaLevel = 0; 
+        this.nXDim = 0; 
+        this.nYDim = 0; 
+    }
+
+    public void run()
+    {
+        System.out.print("\n\n\n");
+        Scanner CReader = new Scanner(System.in);
+        int nArea=0;
+        int nValid = 0;  
+
+    
+        System.out.print("\n\n\t\t\t=======CHOOSE AREA=======\n"+
+                         "\t\t\t[1]  AREA 1\n" + 
+                          "\t\t\t[2]  AREA 2\n"+
+                        "\t\t\t[3]  AREA 3\n" +
+                        "\t\t\t=======================\n");
+
+        while(nValid == 0 )
+        {
+            System.out.print("\n\t\t\t[INPUT]: ");
+
+            if(CReader.hasNextInt())
+            {   
+                nArea = CReader.nextInt();
+                if(nArea == 1 )
+                {
+                    nValid = 1; 
+                    CReader.nextLine(); // buffer
+                }
+                else
+                {
+                    System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Only Area 1 is available.\n");
+                    CReader.nextLine(); //buffer
+                }
+            }
+            else
+            {
+                System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
+                CReader.nextLine(); //buffer
+            }
+        }
+
         
+        this.nAreaLevel = nArea;
+
         if(nAreaLevel == 1)
         {
             this.nXDim = 5; 
@@ -26,9 +76,10 @@ public class Area {
             this.nYDim = 4;
         }
 
-        this.CEnemy = null; 
-
+        CReader.close();
     }
+
+
 
 
     public void loadArea(Player CPlayer)
@@ -49,5 +100,10 @@ public class Area {
             System.out.print("\n");
         }
     }
+
+
+
+
+
 
 }
