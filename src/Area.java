@@ -33,6 +33,9 @@ public class Area {
                         "\t\t\t[3]  AREA 3\n" +
                         "\t\t\t=======================\n");
 
+        while(CReader.hasNext())
+            CReader.hasNext();
+
         while(nValid == 0 )
         {
             System.out.print("\n\t\t\t[INPUT]: ");
@@ -40,10 +43,12 @@ public class Area {
             if(CReader.hasNextInt())
             {   
                 nArea = CReader.nextInt();
-                if(nArea == 1 )
+
+                if(nArea == 1)
                 {
                     nValid = 1; 
                     CReader.nextLine(); // buffer
+        
                 }
                 else
                 {
@@ -58,6 +63,7 @@ public class Area {
             }
         }
 
+        
         this.nAreaLevel = nArea;
 
         if(this.nAreaLevel == 1)
@@ -75,32 +81,17 @@ public class Area {
             this.nXDim = 4; 
             this.nYDim = 4;
         }
-        System.out.println("CHECKPOINT");
-
-        do{
-            nAreaChoice = loadArea(CPlayer);
-        }while(nAreaChoice != 5);
-
-        if(nAreaChoice == 5)
-        {
-            System.out.print("\n\n\t\t\t[SYSTEM MESSAGE]: Press any button to go back to Main Menu.");
-            CReader.nextLine(); 
-            //CGame.displayMenu();
-        }
-
+        CReader.close();
     }
 
-    public int loadArea(Player CPlayer)
+    public void loadArea(Player CPlayer)
     {
         int nCol; 
         int nRow; 
-        int nValid = 0; 
-        int nMovement; 
-        //Scanner CReader = new Scanner(System.in);
 
         for(nCol = 0; nCol < this.nYDim; nCol++)
         {
-            System.out.println("\n\t\t\t");
+            System.out.print("\n\n\t\t\t");
             for(nRow = 0; nRow < this.nXDim; nRow++)
             {
                 if(nRow ==  CPlayer.getPosX() && nCol == CPlayer.getPosY())
@@ -111,18 +102,25 @@ public class Area {
 
             System.out.print("\n");
         }
+    }
 
+    public int getMovement(Player CPlayer)
+    {
+        Scanner CReader = new Scanner(System.in);
+        int nValid = 0; 
+        int nMovement= 0;  
+        String buffer;
 
-        while(nValid == 0)
-        {
-            System.out.println("\n\t\t\t=====MOVEMENTS====");
-            System.out.println("\n\t\t\t[1] UP" + 
+        System.out.println("\n\t\t\t=====MOVEMENTS====");
+            System.out.print("\n\t\t\t[1] UP" + 
                                 "\n\t\t\t[2] DOWN" + 
                                 "\n\t\t\t[3] LEFT" + 
                                 "\n\t\t\t[4] RIGHT" + 
-                                "\n\t\t\t[5] EXIT AREA");
+                                "\n\t\t\t[5] EXIT AREA\n");
 
-            System.out.print("\n\t\t\t[INPUT]: ");
+        while(nValid == 0)
+        {
+              System.out.print("\n\t\t\t[INPUT]: ");
 
             if(CReader.hasNextInt())
             {   
@@ -130,46 +128,49 @@ public class Area {
                 if(nMovement >= 1 && nMovement <= 5)
                 {
                     nValid = 1; 
-                    CReader.nextLine(); // buffer
+                    if(CReader.hasNextLine())
+                        CReader.nextLine(); //buffer
                 }
                 else
                 {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
-                    CReader.nextLine(); //buffer
+                     if(CReader.hasNextLine())
+                         CReader.nextLine(); //buffer//buffer
                 }
             }
             else
             {
                 System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
-                CReader.nextLine(); //buffer
+                if(CReader.hasNextLine())
+                    CReader.nextLine(); //buffer
             }
         }
 
         switch(nMovement)
         {
             case 1: 
-                    CPlayer.goUp(CPlayer.getPosX(),CPlayer.getPosY(),nXDim,nYDim);
-                    return nMovement;
+                    CPlayer.goUp(nXDim,nYDim);
+                    nMovement=1;
                     break;
             case 2: 
-                    CPlayer.goDown(CPlayer.getPosX(),CPlayer.getPosY(),nXDim,nYDim);
-                    return nMovement;
+                    CPlayer.goDown(nXDim,nYDim);
+                    nMovement=2;
                     break;
             case 3:
-                    CPlayer.goLeft(CPlayer.getPosX(),CPlayer.getPosY(),nXDim,nYDim);
-                    return nMovement;
+                    CPlayer.goLeft(nXDim,nYDim);
+                    nMovement=3;
                     break;
             case 4: 
-                    CPlayer.goRight(CPlayer.getPosX(),CPlayer.getPosY(),nXDim,nYDim);
-                    return nMovement;
+                    CPlayer.goRight(nXDim,nYDim);
+                    nMovement=4;
                     break;
             case 5: 
-                    CReader.close();
-                    return nMovement;
+                    nMovement=5;
+                    break;
         }
 
-
-
+        return nMovement;
+        CReader.close();
     }
 
 

@@ -55,10 +55,9 @@ public class Player
     }
 
 
-
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
     // players can move ()
-     public boolean goUp(int nPosX, int nPosY, int nXLimit, int nYLimit)
+     public boolean goUp(int nXLimit, int nYLimit)
     {
         if(this.nPosY < nYLimit)
             this.nPosY+=1; 
@@ -70,7 +69,7 @@ public class Player
     }
 
     
-    public boolean goDown(int nPosX, int nPosY, int nXLimit, int nYLimit)
+    public boolean goDown(int nXLimit, int nYLimit)
     {
         return true; 
     }

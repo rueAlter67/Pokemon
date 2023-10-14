@@ -59,6 +59,7 @@ public class Game{
         Scanner CReader = new Scanner(System.in);
         int nMenuChoice = 0; 
         int nValid = 0;  
+        int nAreaChoice = 0; 
         System.out.print("\n\n\t\t\t=======MAIN MENU=======\n"+
                          "\t\t\t[1]  View Inventory\n" + 
                           "\t\t\t[2]  Area\n"+
@@ -97,7 +98,20 @@ public class Game{
                     //Inventory.display();
                     break;
             case 2: 
-                    CArea.run();
+                    {
+                        CArea.run();
+                    
+                        CArea.loadArea(CPlayer);
+                        nAreaChoice = CArea.getMovement(CPlayer);
+                    
+            
+                    if(nAreaChoice == 5)
+                    {
+                        System.out.print("\n\n\t\t\t[SYSTEM MESSAGE]: Press any button to go back to Main Menu.");
+                        CReader.nextLine(); 
+                        displayMenu();
+                    }
+                    }
                     break;
             case 3: 
                     System.out.println("FEATURE NOT YET AVAILABLE");
