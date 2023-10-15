@@ -45,7 +45,7 @@ public class Game{
         //this.CPlayer = new Player(); 
         this.CPlayer = new Player(); 
         this.CArea = new Area(this.CPlayer);
-        
+
     }
 
     public Creature getCStrawander()
@@ -76,25 +76,14 @@ public class Game{
             {   
                 nMenuChoice = CReader.nextInt();
                 if(nMenuChoice >= 1 && nMenuChoice <= 4)
-                {
-                    nValid = 1; 
-                    CReader.nextLine(); // buffer
-                   
-                }
+                    nValid = 1;
                 else
-                {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
-                    CReader.nextLine(); // buffer
-                }
             }
             else
-            {
                 System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
-                CReader.nextLine(); // buffer
-            }
         }
-
-        CReader.close();
+            CReader.nextLine(); // buffer
         
         if(nMenuChoice==1)
         {
@@ -106,7 +95,7 @@ public class Game{
 		}
 		else if(nMenuChoice == 3)
 		{
-			System.out.println("FEATURE NOT YET AVAILABLE");
+			System.out.println("\n\t\t\t\t[SYSTEM MESSAGE]: FEATURE NOT YET AVAILABLE");
 		} 
         else 
 			exitGame();
@@ -114,11 +103,10 @@ public class Game{
 
     public void exitGame()
     {
-        System.out.println("You have exited the game.");
+        System.out.println("\n\n\t\tYou have exited the game.");
         System.exit(0);
     }
 
-    
 
     // setters and getters 
     public void setnChoice(int nChoice) 
