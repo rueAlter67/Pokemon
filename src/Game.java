@@ -1,8 +1,11 @@
  
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.*;
 public class Game{
     
-    private Creature[] CMasterInventory = new Creature[9]; // will contain all the creatures 
+ 
     private Player CPlayer;
     private int nMenuChoice; 
     private Inventory CPlayerInventory = new Inventory();
@@ -20,41 +23,35 @@ public class Game{
     Creature CMalts = new Creature(999, 5,"Malts",'F',"Grass",1,false);
     Creature CSquirpie = new Creature(999, 6,"Squirpie",'G',"Water",1,false);
     Creature CChocolite = new Creature(999, 7,"Chocolite",'H',"Water",1,false);
-    Creature COshacone = new Creature(999, 8,"Oshacone",'I',"Water",1,false);
+    Creature COshacone = new Creature(999, 8, "Oshacone",'I',"Water",1,false); 
 
-    // public void setMasterInventory(int nHealth){
-    //     this.CMasterInventory = CMasterInventory;
-    // }
-    
-    // public Creature getMasterInventory(){
-    //     return CMasterInventory;
-    // }
+    private Creature[] CMasterInventory = {
+        CStrawander, 
+        CChocowool,
+        CParfwit,
+        CBrownisaur,
+        CFrubat,
+        CMalts,
+        CSquirpie,
+        CChocolite,
+        COshacone,
+    };
+        ArrayList<Creature> aStarterCreatures = new ArrayList<>(Arrays.asList(CMasterInventory));
+        ArrayList<Creature> aCapturedCreatures = new ArrayList<>();
+
+        int nIndex = 0; //for testing
+        int nIndex2 = 1; //for testing
+
+        Creature CChosenCreature = CMasterInventory[nIndex]; //for testing
+        Creature CChosenCreature2 = CMasterInventory[nIndex2]; //for testing (scroll down to nMenuChoice == 1 for reference)
 
     public void run() // instantiation ng mga class na need natin 
     {
-        CMasterInventory[0] = CStrawander;
-        CMasterInventory[1] = CChocowool;
-        CMasterInventory[2] = CParfwit;
-        CMasterInventory[3] = CBrownisaur;
-        CMasterInventory[4] = CFrubat;
-        CMasterInventory[5] = CMalts;
-        CMasterInventory[6] = CSquirpie;
-        CMasterInventory[7] = CChocolite;
-        CMasterInventory[8] = COshacone;
-        //this.CMasterInventory = new Creature; 
         //this.CPlayer = new Player(); 
         this.CPlayer = new Player(); 
         this.CArea = new Area(this.CPlayer);
 
     }
-
-    public Creature getCStrawander()
-    {
-        return CMasterInventory[0];
-    }
-
-    // get players starter creature 
-
 
     public void displayMenu() 
     {
@@ -87,7 +84,21 @@ public class Game{
         
         if(nMenuChoice==1)
         {
-			// display inventory
+			int nInput = CPlayerInventory.displayInventory(); 
+            CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature); //for testing of aCapturedCreatures not empty
+            CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature2); //for testing of aCapturedCreatures not empty
+            if(nInput == 1)
+            {   
+                int i;
+                int nlength = aCapturedCreatures.size();
+                for(i=0;i<nlength;i++){
+                    CPlayerInventory.displayCreatureNames(aCapturedCreatures.get(i));
+                    System.out.print("\t");
+                    CPlayerInventory.displayCreatureFamilies(aCapturedCreatures.get(i));
+                    System.out.print("\n");
+                }
+                
+            }
 		}
 		else if(nMenuChoice == 2)
 		{ 
@@ -106,7 +117,6 @@ public class Game{
         System.out.println("\n\n\t\tYou have exited the game.");
         System.exit(0);
     }
-
 
     // setters and getters 
     public void setnChoice(int nChoice) 

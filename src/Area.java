@@ -117,14 +117,14 @@ public class Area{
                 System.out.print("\n\n");
             }
 
-            float fChance = 0.40; 
+            float fChance = 0.40f; 
 
 
             if(fChance == 0.40)
             {
                 System.out.print("\n\n[SYSTEM MESSAGE]: You've encountered an enemy!! Press any button to proceed");
                 CReader.nextLine(); 
-                    battle
+                   // battle
             } 
 
 

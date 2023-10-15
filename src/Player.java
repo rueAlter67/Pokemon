@@ -1,4 +1,5 @@
- 
+import java.util.Scanner;
+
 public class Player 
 {
     // attributes/fields/state
@@ -27,6 +28,15 @@ public class Player
      */
     public boolean chooseStarterCreature()
     {
+        //template of how to use creature classes and arraylist for display: 
+        //just have to find a way to be able to use the CPlayerInventory class and aStarterCreatures in Player.java
+        // int i;
+        // for(i=0;i<9;i++){
+        //     //System.out.print("\t");
+        //     CPlayerInventory.displayCreatureNames(aStarterCreatures.get(i));
+        //     CPlayerInventory.displayCreatureFamilies(aStarterCreatures.get(i));
+        //     System.out.print("\n");
+        // }
 
         return true; 
     }
