@@ -45,16 +45,16 @@ public class Area{
 	
 	
 		do{
-			nMovement = loadArea();
-		
+			loadArea();
+			nMovement = getMovement();
+			
 		}while(nMovement != 5);
 	}
 
-	public int loadArea() 
+	public void loadArea() 
     {
         int nCol; 
         int nRow; 
-		int nMovement; 
 
         for(nCol = 0; nCol < this.nYDim; nCol++)
         {
@@ -67,13 +67,8 @@ public class Area{
                     System.out.printf(" + ");
             }
 
-            System.out.print("\n\n");
+            System.out.print("\n");
         }
-		
-		do
-		{
-			nMovement = getMovement()
-		}while(nMovement != 5);
     }
 	
 	public int getMovement()
@@ -123,19 +118,19 @@ public class Area{
                     return nMovement=1;
                     break;
             case 2: 
-                    this.CPlayer.goDown(nXDim,nYDim);
+                    CPlayer.goDown(nXDim,nYDim);
                     return nMovement=2;
                     break;
             case 3:
-                    this.CPlayer.goLeft(nXDim,nYDim);
+                    CPlayer.goLeft(nXDim,nYDim);
                     return nMovement=3;
                     break;
             case 4: 
-                    this.CPlayer.goRight(nXDim,nYDim);
+                    CPlayer.goRight(nXDim,nYDim);
                     return nMovement=4;
                     break;
             case 5: 
-                    this.return nMovement=5;
+                    return nMovement=5;
                     break;
         }
 	

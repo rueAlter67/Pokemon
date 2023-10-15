@@ -1,4 +1,3 @@
- 
 import java.util.Scanner;
 public class Game{
     
@@ -102,7 +101,8 @@ public class Game{
 		}
 		else if(nMenuChoice == 2)
 		{ 
-			CArea.run();
+			CArea.run(this.CPlayer);
+            CArea.loadArea(this.CPlayer);
 		}
 		else if(nMenuChoice == 3)
 		{

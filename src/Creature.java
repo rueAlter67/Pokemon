@@ -1,3 +1,4 @@
+ 
 public class Creature {
     
     private int nHealth;    
