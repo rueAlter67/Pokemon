@@ -78,11 +78,11 @@ public class Game{
                 {
                     nValid = 1; 
                     CReader.nextLine(); // buffer
+                   
                 }
                 else
                 {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
-                    
                     CReader.nextLine(); // buffer
                 }
             }
