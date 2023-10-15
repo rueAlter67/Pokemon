@@ -29,11 +29,9 @@ public class Area{
         int nCol; 
         int nRow; 
 		int nMovement=0;   
-        int nChecker=0;   
-
-        do{
+        int nChecker=0;  
         
-            for(nCol = 0; nCol < this.nYDim; nCol++)
+        for(nCol = 0; nCol < this.nYDim; nCol++)
             {
               System.out.printf("\n\n\t\t\t");
                 for(nRow = 0; nRow < this.nXDim; nRow++)
@@ -46,6 +44,8 @@ public class Area{
 
                 System.out.print("\n\n");
             }
+
+        do{
 			
 		    System.out.printf("\n\t\t\t=====MOVEMENTS====");
 		    System.out.println("\n\t\t\t[1] UP" + 
@@ -53,10 +53,10 @@ public class Area{
                                 "\n\t\t\t[3] LEFT" + 
                                 "\n\t\t\t[4] RIGHT" + 
                                 "\n\t\t\t[5] EXIT AREA\n");
-							
+			nMovement=0;
+            nChecker = 0;				
     		while(nChecker == 0)
             {
-                System.out.print("\n\t\t\t[INPUT]: ");
                 System.out.println("\nPlayer x-coord : " + CPlayer.getPosX()+
                                     "\nPlayer y-coord : " + CPlayer.getPosY());
                 System.out.print("\n\t\t\t[INPUT]: ");
@@ -67,22 +67,23 @@ public class Area{
                     if(nMovement >= 1 && nMovement <= 5)
                     {
                         nChecker = 1; 
-
+                        CReader.nextLine();
                     }
                     else
                     {
-                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
+                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
+                         CReader.nextLine();
                     
                     }
                 }
                 else
                 {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
-                   
+                     CReader.nextLine();  
                 }
 
             }
-            CReader.nextLine();
+           // CReader.nextLine();
 
 		    switch(nMovement)
             {
@@ -102,9 +103,41 @@ public class Area{
                         break;
             }
 
+             for(nCol = 0; nCol < this.nYDim; nCol++)
+            {
+              System.out.printf("\n\n\t\t\t");
+                for(nRow = 0; nRow < this.nXDim; nRow++)
+                {
+                    if(nRow ==  this.CPlayer.getPosX() && nCol == this.CPlayer.getPosY())
+                        System.out.printf(" O ");
+                    else 
+                        System.out.printf(" + ");
+                }
+
+                System.out.print("\n\n");
+            }
+
+            float fChance = 0.40; 
+
+
+            if(fChance == 0.40)
+            {
+                System.out.print("\n\n[SYSTEM MESSAGE]: You've encountered an enemy!! Press any button to proceed");
+                CReader.nextLine(); 
+                    battle
+            } 
+
+
+            
+
+
+
         }while(nMovement != 5);
 
         return nMovement; 
+
+
+
     }
 
 
@@ -128,5 +161,28 @@ public class Area{
 		do{
 			nMovement = loadArea();
 		}while(nMovement != 5);
-	}
+
+    }
+
+
+
+    public void battle()
+    {
+        int nMovesLeft = 3; 
+        int nEnemyHealth = 100; 
+
+        System.out.println("\n\n\t\t\t================BATTLE=================\n"+
+                            "\t\t\t\tMoves left: "+ nMovesLeft +
+                            "\n\t\t\tEnemy Health: " + nEnemyHealth + 
+
+                             "\t\t\t======================================="+
+
+                         "\n\n\n\t\t\t[1]  ATTACH \n" + 
+                          "\t\t\t[2]  SWAP \n"+
+                        "\t\t\t[3]  CATCH \n" +
+                        "\t\t\t[4]  SKIP CREATURE \n");
+                       
+	
+
+    }
 }
