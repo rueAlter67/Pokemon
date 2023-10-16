@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ListIterator;
 
 public class Inventory { // check if parameters = needed cause cant get info from field or class
     
