@@ -1,50 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.ListIterator;
 
 public class Inventory { // check if parameters = needed cause cant get info from field or class
     
     // displays the inventory functions
-    public int displayInventory(){
-
-      System.out.print("\n\n\t\t\t=======INVENTORY=======\n"+
-                      "\t\t\t[1]  View Captured Creatures\n" + 
-                      "\t\t\t[2]  Change Active Creature\n"+
-                      "\t\t\t[3]  Exit Inventory\n" +
-                      "\t\t\t=======================\n");
-        
-        Scanner CInputScanner = new Scanner(System.in);
-        System.out.print("Enter Inventory Action: ");
-        int nInput = CInputScanner.nextInt();
-        boolean bInputOver = false;
-        int nActionChosen = 0;
-
-        while(bInputOver == false)
-        {
-          if(nInput == 1)
-          {
-            nActionChosen = 1;
-            bInputOver = true;
-            return nActionChosen;
-          }
-          else if(nInput == 2)
-          {
-            nActionChosen = 2;
-            bInputOver = true;
-            return nActionChosen;
-          }
-          else if(nInput == 3)
-          {
-            nActionChosen = 3;
-            bInputOver = true;
-            return nActionChosen;
-          }
-        else
-          System.out.print("Invalid Inventory Menu Action");
-        }
-
-        CInputScanner.close();
-        return nActionChosen;
-    }
 
     public void displayCreatureImage(Creature CCreature) //Can be used for aStarterCreatures aCapturedCreatures
      {
@@ -96,6 +56,19 @@ public class Inventory { // check if parameters = needed cause cant get info fro
            aArray.add(CCreature);
     }
 
+    public Creature findCreature(ArrayList<Creature> aArray, String strCreature, int nLength)
+    {
+      int i;
+      for(i=0;i<nLength;i++)
+      {
+        if(aArray.get(i).getCreatureName().compareTo(strCreature)==0)
+        {
+          return aArray.get(i);
+        }
+      }
+      return null;
+    }
+
      public void swapCreature(Creature CCreatureA, Creature CCreatureB)
      {
         if(CCreatureA.getActiveCreature()==true && CCreatureA.getActiveCreature()==false)
@@ -129,6 +102,46 @@ public class Inventory { // check if parameters = needed cause cant get info fro
           System.out.print("\n");
         }
      }
+
+     public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aArray){
+
+      System.out.print("\n\n\t\t\t=======INVENTORY=======\n"+
+                      "\t\t\t Captured Creatures: \n");  
+      
+      CInventory.displayCapturedCreatures(nlength, aArray, CInventory);
+
+      System.out.print(
+                      "\n\t\t\t[1]  Change Active Creature\n" +
+                      "\t\t\t[2]  Exit Inventory\n" +
+                      "\t\t\t=======================\n");
+        
+        Scanner CInputScanner = new Scanner(System.in);
+        System.out.print("Enter Inventory Action: ");
+        int nInput = CInputScanner.nextInt();
+        boolean bInputOver = false;
+        int nActionChosen = 0;
+
+        while(bInputOver == false)
+        {
+          if(nInput == 1)
+          {
+            nActionChosen = 1;
+            bInputOver = true;
+            return nActionChosen;
+          }
+          else if(nInput == 2)
+          {
+            nActionChosen = 2;
+            bInputOver = true;
+            return nActionChosen;
+          }
+        else
+          System.out.print("Invalid Inventory Menu Action");
+        }
+
+        CInputScanner.close();
+        return nActionChosen;
+    }
 
     public boolean returnToMainMenu()
     {

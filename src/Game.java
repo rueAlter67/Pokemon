@@ -85,14 +85,43 @@ public class Game{
         
         if(nMenuChoice==1)
         {
-			int nInput = CPlayerInventory.displayInventory(); 
             CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature); //for testing of aCapturedCreatures not empty
             CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature2); //for testing of aCapturedCreatures not empty
+            int nlength = aCapturedCreatures.size();
+			int nInput = CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures); 
+               
             if(nInput == 1)
-            {   
-                int nlength = aCapturedCreatures.size();
-                CPlayerInventory.displayCapturedCreatures(nlength, aCapturedCreatures, CPlayerInventory);
+            {
+                boolean bFlag = false;
+                Scanner CStringScanner = new Scanner(System.in);
+                System.out.print("Type Name of Creatures to Swap: "+ "\n");
+                System.out.print("Creature 1: ");
+                String strCreatureA = CStringScanner.nextLine();
+                System.out.print("Creature 2: ");
+                String strCreatureB = CStringScanner.nextLine();
+
+                while(bFlag == false)
+                {
+                Creature CChosenCreatureA = CPlayerInventory.findCreature(aCapturedCreatures, strCreatureA, nlength);
+                Creature CChosenCreatureB = CPlayerInventory.findCreature(aCapturedCreatures, strCreatureB, nlength);
+
+                if(CChosenCreatureA != null && CChosenCreatureB  != null)
+                {
+                    CPlayerInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
+                    bFlag = true;
+                    System.out.print("Creatures Swapped!");
+                }
+                else
+                    System.out.print("Invalid Creature (Check Name or if Active)");
+                }
+                return;
             }
+            else if(nInput == 2)
+            {
+                CPlayerInventory.returnToMainMenu();
+            }
+            else
+                System.out.print("Invalid Action");
 		}
 		else if(nMenuChoice == 2)
 		{ 
