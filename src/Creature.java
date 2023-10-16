@@ -64,9 +64,4 @@ public class Creature {
         return bActive;
     }
 
-    ArrayList<Creature> aStarterList = new ArrayList<>();
-
-    public void addStarterCreature(Creature CCreature) {
-        aStarterList.add(CCreature);
-    }
 }

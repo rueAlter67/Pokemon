@@ -1,17 +1,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Inventory {
-
-       public void addCreature(ArrayList<Creature> alArray, Creature CCreature) {
-           alArray.add(CCreature);
-       }
+public class Inventory { // check if parameters = needed cause cant get info from field or class
     
     // displays the inventory functions
     public int displayInventory(){
+
+      System.out.print("\n\n\t\t\t=======INVENTORY=======\n"+
+                      "\t\t\t[1]  View Captured Creatures\n" + 
+                      "\t\t\t[2]  Change Active Creature\n"+
+                      "\t\t\t[3]  Exit Inventory\n" +
+                      "\t\t\t=======================\n");
         
         Scanner CInputScanner = new Scanner(System.in);
-        System.out.print("Enter Inventory Menu Action: ");
+        System.out.print("Enter Inventory Action: ");
         int nInput = CInputScanner.nextInt();
         boolean bInputOver = false;
         int nActionChosen = 0;
@@ -44,26 +46,89 @@ public class Inventory {
         return nActionChosen;
     }
 
-     public void displayCreatureNames(Creature CCreature) //Can be used for aStarterCreatures aCapturedCreatures
+    public void displayCreatureImage(Creature CCreature) //Can be used for aStarterCreatures aCapturedCreatures
      {
       
-        System.out.print(CCreature.getCreatureName() + "\t");
+        System.out.print("Image ID " + CCreature.getImageID());
+    
+     }
+     
+    public void displayCreatureNames(Creature CCreature) //Can be used for aStarterCreatures aCapturedCreatures
+     {
+      
+        System.out.print(CCreature.getCreatureName());
     
      }
      public void displayCreatureFamilies(Creature CCreature) //Can be used for aStarterCreatures and aCapturedCreatures
      {
-     
+      
       System.out.print(CCreature.getFamily());
       
      }
 
+     public void displayCreatureType(Creature CCreature) //Can be used for aStarterCreatures and aCapturedCreatures
+     {
+      
+      System.out.print(CCreature.getType());
+      
+     }
+
+     public void displayCreatureLevel(Creature CCreature) //Can be used for aStarterCreatures and aCapturedCreatures
+     {
+      
+      System.out.print("EL " + CCreature.getLevel());
+      
+     }
+
+     public void displayActive(Creature CCreature) //Can be used for aStarterCreatures and aCapturedCreatures
+     {
+      if(CCreature.getActiveCreature()==true)
+      {
+         System.out.print("(Active Creature)");
+      }
+     }
+     
      //will still need to create separate displays for each information, I separated them kasi baka sa starters di pakita everything
      //can make one with multiple info if needed
 
-    public void addCreature(int nIndex, Creature[] CCreature, ArrayList<Creature> alArray) //used to add Creatures to diff arrayLists
+    public void addCreature(ArrayList<Creature> aArray, Creature CCreature)  //used to add Creatures to diff arrayLists
     {
-      alArray.add(CCreature[nIndex]);
+           aArray.add(CCreature);
     }
+
+     public void swapCreature(Creature CCreatureA, Creature CCreatureB)
+     {
+        if(CCreatureA.getActiveCreature()==true && CCreatureA.getActiveCreature()==false)
+        {
+          CCreatureA.setActiveCreature(false);
+          CCreatureB.setActiveCreature(true);
+        }
+        else if(CCreatureA.getActiveCreature()==false && CCreatureA.getActiveCreature()==true)
+        {
+          CCreatureA.setActiveCreature(true);
+          CCreatureB.setActiveCreature(false);
+        }
+     }
+
+     public void displayCapturedCreatures(int nlength, ArrayList<Creature> aCapturedArray, Inventory CInventory) //show which creature is active
+     {
+        int i;
+        for(i=0;i<nlength;i++)
+        {
+          CInventory.displayCreatureImage(aCapturedArray.get(i));
+          System.out.print("\n");
+          CInventory.displayCreatureNames(aCapturedArray.get(i));
+          System.out.print("\t");
+          CInventory.displayCreatureType(aCapturedArray.get(i));
+          System.out.print("\t");
+          CInventory.displayCreatureFamilies(aCapturedArray.get(i));
+          System.out.print("\t");
+          CInventory.displayCreatureLevel(aCapturedArray.get(i));
+          System.out.print("\t");
+          CInventory.displayActive(aCapturedArray.get(i));
+          System.out.print("\n");
+        }
+     }
 
     public boolean returnToMainMenu()
     {

@@ -50,7 +50,6 @@ public class Player
     {
 
         return true; 
-
     }
 
     /* does not interact with the creature  */

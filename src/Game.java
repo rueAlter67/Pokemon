@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.*;
+//import java.util.*;
 public class Game{
     
  
@@ -37,7 +37,7 @@ public class Game{
         COshacone,
     };
         ArrayList<Creature> aStarterCreatures = new ArrayList<>(Arrays.asList(CMasterInventory));
-        ArrayList<Creature> aCapturedCreatures = new ArrayList<>();
+        ArrayList<Creature> aCapturedCreatures = new ArrayList<Creature>();
 
         int nIndex = 0; //for testing
         int nIndex2 = 1; //for testing
@@ -55,6 +55,7 @@ public class Game{
 
     public void displayMenu() 
     {
+
         Scanner CReader = new Scanner(System.in);
         int nMenuChoice = 0; 
         int nValid = 0;  
@@ -89,15 +90,8 @@ public class Game{
             CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature2); //for testing of aCapturedCreatures not empty
             if(nInput == 1)
             {   
-                int i;
                 int nlength = aCapturedCreatures.size();
-                for(i=0;i<nlength;i++){
-                    CPlayerInventory.displayCreatureNames(aCapturedCreatures.get(i));
-                    System.out.print("\t");
-                    CPlayerInventory.displayCreatureFamilies(aCapturedCreatures.get(i));
-                    System.out.print("\n");
-                }
-                
+                CPlayerInventory.displayCapturedCreatures(nlength, aCapturedCreatures, CPlayerInventory);
             }
 		}
 		else if(nMenuChoice == 2)
@@ -119,11 +113,11 @@ public class Game{
     }
 
     // setters and getters 
-    public void setnChoice(int nChoice) 
+    public void setnChoice(int nChoice)
     {
         this.nMenuChoice = nChoice;
     }
-    public int getnChoice() 
+    public int getnChoice()
     {
         return this.nMenuChoice;
     }
