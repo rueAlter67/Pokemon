@@ -71,16 +71,11 @@ public class Inventory { // check if parameters = needed cause cant get info fro
 
      public void swapCreature(Creature CCreatureA, Creature CCreatureB)
      {
-        if(CCreatureA.getActiveCreature()==true && CCreatureA.getActiveCreature()==false)
-        {
-          CCreatureA.setActiveCreature(false);
-          CCreatureB.setActiveCreature(true);
-        }
-        else if(CCreatureA.getActiveCreature()==false && CCreatureA.getActiveCreature()==true)
-        {
-          CCreatureA.setActiveCreature(true);
-          CCreatureB.setActiveCreature(false);
-        }
+          boolean bActiveCreatureA = CCreatureA.getActiveCreature();
+          boolean bActiveCreatureB = CCreatureB.getActiveCreature();
+
+          CCreatureA.setActiveCreature(bActiveCreatureB);
+          CCreatureB.setActiveCreature(bActiveCreatureA);
      }
 
      public void displayCapturedCreatures(int nlength, ArrayList<Creature> aCapturedArray, Inventory CInventory) //show which creature is active

@@ -109,12 +109,12 @@ public class Game{
                 {
                     CPlayerInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
                     bFlag = true;
-                    System.out.print("Creatures Swapped!");
+                    System.out.print("Active Creature Changed.");
                 }
                 else
                     System.out.print("Invalid Creature (Check Name or if Active)");
                 }
-                return;
+                CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures);
             }
             else if(nInput == 2)
             {
