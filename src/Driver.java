@@ -7,6 +7,7 @@ public class Driver
         Game CGame = new Game();
 
         CGame.run();
+        CGame.chooseStarterCreature();
         CGame.displayMenu();
        
     }

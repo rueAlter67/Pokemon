@@ -15,7 +15,7 @@ public class Game{
     999 cause unlimited health, would have to change it for the enemy creatures health
     sa image ID i assigned it muna sa index nila sa MasterInventory
     */
-    Creature CStrawander = new Creature(999, 0, "Strawander",'A',"Fire",1,true);
+    Creature CStrawander = new Creature(999, 0, "Strawander",'A',"Fire",1,false);
     Creature CChocowool = new Creature(999, 1,"Chocowool",'B',"Fire",1,false);
     Creature CParfwit = new Creature(999, 2,"Parfwit",'C',"Fire",1,false);
     Creature CBrownisaur = new Creature(999, 3,"Brownisaur",'D',"Grass",1,false);
@@ -53,6 +53,38 @@ public class Game{
 
     }
 
+        //+++++++++++
+    /* chooseStarterCreature will display a list of EL1 creature
+     * from the MasterInventory and then 
+     * add this Creature to the inventory
+     * if addingStarter creature is successful add to 
+     * Inventory of the player. 
+     */
+    public boolean chooseStarterCreature()
+    {
+        //maybe add "are you sure?"
+        System.out.print("Choose Your Starter! \n");
+        int i;
+         for(i=0;i<9;i++)
+         {
+            CPlayerInventory.displayCreatureNames(aStarterCreatures.get(i));
+            System.out.print("\t");
+            CPlayerInventory.displayCreatureType(aStarterCreatures.get(i));
+            System.out.print("\n");
+         }
+         Scanner CStringScanner = new Scanner(System.in);
+         System.out.print("Name of Starter: ");
+         String strCreature = CStringScanner.nextLine();
+         Creature CStarterCreature = CPlayerInventory.findCreature(aStarterCreatures, strCreature, aStarterCreatures.size());
+
+         if(CStarterCreature != null){
+            CPlayerInventory.addCreature(aCapturedCreatures,CStarterCreature);
+            CStarterCreature.setActiveCreature(true);
+         }
+
+        return true; 
+    }
+
     public void displayMenu() 
     {
 
@@ -85,14 +117,42 @@ public class Game{
         
         if(nMenuChoice==1)
         {
-			int nInput = CPlayerInventory.displayInventory(); 
-            CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature); //for testing of aCapturedCreatures not empty
             CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature2); //for testing of aCapturedCreatures not empty
+            int nlength = aCapturedCreatures.size();
+			int nInput = CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures); 
+               
             if(nInput == 1)
-            {   
-                int nlength = aCapturedCreatures.size();
-                CPlayerInventory.displayCapturedCreatures(nlength, aCapturedCreatures, CPlayerInventory);
+            {
+                boolean bFlag = false;
+                Scanner CStringScanner = new Scanner(System.in);
+                System.out.print("Type Name of Creatures to Swap: "+ "\n");
+                System.out.print("Creature 1: ");
+                String strCreatureA = CStringScanner.nextLine();
+                System.out.print("Creature 2: ");
+                String strCreatureB = CStringScanner.nextLine();
+
+                while(bFlag == false)
+                {
+                Creature CChosenCreatureA = CPlayerInventory.findCreature(aCapturedCreatures, strCreatureA, nlength);
+                Creature CChosenCreatureB = CPlayerInventory.findCreature(aCapturedCreatures, strCreatureB, nlength);
+
+                if(CChosenCreatureA != null && CChosenCreatureB  != null)
+                {
+                    CPlayerInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
+                    bFlag = true;
+                    System.out.print("Active Creature Changed.");
+                }
+                else
+                    System.out.print("Invalid Creature (Check Name or if Active)");
+                }
+                CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures);
             }
+            else if(nInput == 2)
+            {
+                CPlayerInventory.returnToMainMenu();
+            }
+            else
+                System.out.print("Invalid Action");
 		}
 		else if(nMenuChoice == 2)
 		{ 
