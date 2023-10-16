@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-
+ 
 public class Creature {
     
     private int nHealth;    
@@ -10,7 +9,10 @@ public class Creature {
     private int nLevel;    
     private boolean bActive;    
 
-    public Creature(int nHealth, int nImageID, String strCreatureName, char cFamily, String strType, int nLevel, boolean bActive){
+    public Creature(int nHealth, int nImageID, 
+                    String strCreatureName, char cFamily, 
+                    String strType, int nLevel, boolean bActive)
+    {
         this.nHealth = nHealth;
         this.nImageID = nImageID;
         this.strCreatureName = strCreatureName;
@@ -64,5 +66,5 @@ public class Creature {
         return bActive;
     }
 
-
+    
 }
