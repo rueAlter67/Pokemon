@@ -33,11 +33,12 @@ public class Area{
 		int nMovement=0;   
         int nChecker=0;  
         boolean bPlayer=true; 
-
+       
 
         do{
-            for(nCol = 0; nCol < this.nYDim; nCol++)
-        
+            
+            System.out.print("\n\n");
+             for(nCol = 0; nCol < this.nYDim; nCol++)
             {
               System.out.printf("\n\n\t\t\t");
                 for(nRow = 0; nRow < this.nXDim; nRow++)
@@ -47,8 +48,6 @@ public class Area{
                     else 
                         System.out.printf(" + ");
                 }
-
-                System.out.print("\n\n");
             }
 			
 		    System.out.printf("\n\t\t\t=====MOVEMENTS====");
@@ -62,8 +61,8 @@ public class Area{
 
     		while(nChecker == 0)
             {
-                System.out.println("\nPlayer x-coord : " + CPlayer.getPosX()+
-                                    "\nPlayer y-coord : " + CPlayer.getPosY());
+                // System.out.println("\nPlayer x-coord : " + CPlayer.getPosX()+
+                //                     "\nPlayer y-coord : " + CPlayer.getPosY());
                 System.out.print("\n\t\t\t[INPUT]: ");
             
                 if(CReader.hasNextInt())
@@ -83,7 +82,7 @@ public class Area{
                 }
                 else
                 {
-                    System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
+                    System.err.println("\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
                      CReader.nextLine();  
                 }
 
@@ -108,20 +107,8 @@ public class Area{
                         bPlayer = false;
                         break;
             }
+           
 
-            for(nCol = 0; nCol < this.nYDim; nCol++)
-            {
-              System.out.printf("\n\n\t\t\t");
-                for(nRow = 0; nRow < this.nXDim; nRow++)
-                {
-                    if(nRow ==  this.CPlayer.getPosX() && nCol == this.CPlayer.getPosY())
-                        System.out.printf(" O ");
-                    else 
-                        System.out.printf(" + ");
-                }
-
-                System.out.print("\n\n");
-            }
 
             double dChance = 0.40; 
 
@@ -210,17 +197,17 @@ public class Area{
 
         do{
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
-                            "\t\t\t\tMoves left: "+ nMovesLeft +
+                            "\t\t\tMoves left: "+ nMovesLeft +
                             "\n\t\t\tEnemy Health: " + this.CEnemy.getHealth() + 
                              "\n\t\t\t======================================="+
+                             "\n\t\t\tEnemy: " + this.CEnemy.getCreatureName() +
+                             "\n\t\t\tFamily: " + this.CEnemy.getType() +
 
                          "\n\n\n\t\t\t[1]  ATTACK \n" + 
                           "\t\t\t[2]  SWAP \n"+
                         "\t\t\t[3]  CATCH \n" +
                         "\t\t\t[4]  SKIP CREATURE \n");
 
-                        System.out.println("Creature: " + this.CEnemy.getCreatureName());
-                       
             nBattleMove=0;
             int nChecker = 0;	
 
@@ -258,22 +245,18 @@ public class Area{
                         CPlayer.attack(this.CEnemy, this.CPlayer);
                         break;
                 case 2: 
-                       // this.CPlayer.goDown(nXDim,nYDim);
+                       // swap
                         break;
                 case 3:
-                       // this.CPlayer.goLeft(nXDim,nYDim);
+                       // catch
                         break;
                 case 4: 
-                       // this.CPlayer.goRight(nXDim,nYDim);
-                        break;
-                case 5: 
                         loadArea();
                         break;
             }
             
            
         }while(nMovesLeft >= 1 && CEnemy.getHealth() >0);
-        
         
     }
 
