@@ -94,33 +94,35 @@ public class Inventory {
         int i;
         for(i=0;i<nlength;i++)
         {
-          System.out.print("Creature " + (i+1) + ": ");
+         
+          System.out.print("\nCreature " + (i+1) + ": ");
           CInventory.displayCreatureImage(aCapturedArray.get(i));
-          System.out.print("\n");
+          System.out.print("\nName: ");
           CInventory.displayCreatureNames(aCapturedArray.get(i));
-          System.out.print("\t");
+          System.out.print(" - Type: ");
           CInventory.displayCreatureType(aCapturedArray.get(i));
-          System.out.print("\t");
+          System.out.print(" - Family ");
           CInventory.displayCreatureFamilies(aCapturedArray.get(i));
-          System.out.print("\t");
+          System.out.print(" - ");
           CInventory.displayCreatureLevel(aCapturedArray.get(i));
-          System.out.print("\t");
+          System.out.print(" ");
           CInventory.displayActive(aCapturedArray.get(i));
           System.out.print("\n");
+
         }
      }
 
      public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aArray){
 
-      System.out.print("\n\n\t\t\t=======INVENTORY=======\n"+
-                      "\t\t\t Captured Creatures: \n");  
+      System.out.print("\n\n====================INVENTORY====================\n"+
+                      "\n\t    Captured Creatures: \n");
       
       CInventory.displayCapturedCreatures(nlength, aArray, CInventory);
-
+      
       System.out.print(
-                      "\n\t\t\t[1]  Change Active Creature\n" +
-                      "\t\t\t[2]  Exit Inventory\n" +
-                      "\t\t\t=======================\n");
+        "\n\t[1]  Change Active Creature\n" +
+        "\t[2]  Exit Inventory\n" +
+        "=================================================\n");
         
         Scanner CInputScanner = new Scanner(System.in);
         System.out.print("Enter Inventory Action: ");
