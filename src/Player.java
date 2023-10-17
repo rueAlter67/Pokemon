@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Player 
@@ -11,7 +12,6 @@ public class Player
     // constructor 
     public Player()
     {
-     //   this.CInventory = new Inventory(Creature nStarterCreature); 
         this.nPosX = 0; 
         this.nPosY = 0; 
     } 
@@ -45,47 +45,73 @@ public class Player
 
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
     // players can move ()
-     public boolean goUp(int nXLimit, int nYLimit)
+    public boolean goUp(int nXLimit, int nYLimit)
     {
+
         System.err.print("\n\n\t\t\t[ERROR]: Player can't move up anymore");   
-        return true; 
+        return false; 
     }
 
     
     public boolean goDown(int nXLimit, int nYLimit)
     {
         System.err.print("\n\n\t\t\t[ERROR]: Player can't move down anymore");   
-        return true; 
+        return false; 
     }
 
     public boolean goLeft(int nXLimit, int nYLimit)
     {
+        boolean bMove = true; 
+
         if(this.nPosX <nXLimit-1)
+        {
             this.nPosX+=1; 
+        }
         else
         {
+            bMove = false;
             System.err.print("\n\n\t\t\t[ERROR]: Player can't move anymore to the left");
         }
 
-        return true; 
+        return bMove; 
     }
 
     public boolean goRight(int nXLimit, int nYLimit)
     {
+        boolean bMove = true; 
+
         if(this.nPosX > 0)
             this.nPosX-=1; 
         else
         {
+            bMove = false; 
             System.err.print("\n\n\t\t\t[ERROR]: Player can't move anymore to the right");
         }
 
         return true; 
     }
 
-   
+    public void attack(Creature CEnemy, Player CPlayer)
+    {
+        Random CRand = new Random();
+        int nMax = 10; 
+        int nMin = 1;
+        int nRandom = CRand.nextInt(nMax - nMin + 1) + nMin;
+        int nDamage = nRandom * 1;// 1 should be the creatures level 
+
+        // insert additional damage 
+
+        CEnemy.setHealth(CEnemy.getHealth() - nDamage);
+    }
+    
+
+    public boolean catchCreature(Creature CEnemy)
+    {
+        double dCatchRate = 0; 
+        return true; 
+    }
 
   //+++++++++++ setters and getters
-    
     public int getPosX()
     {
         return this.nPosX;

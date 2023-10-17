@@ -23,7 +23,11 @@ public class Area{
     }
 	
 
-	public int loadArea() 
+	public Area(Player cPlayer2, Creature[] allCreatures) {
+    }
+
+
+    public int loadArea() 
     {
         Scanner CReader = new Scanner(System.in);
         int nCol; 

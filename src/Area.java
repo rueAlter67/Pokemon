@@ -12,10 +12,11 @@ public class Area{
     private int nYDim=1;
     private Creature CEnemy; 
     private Player CPlayer; 
-
+    private Creature[] CMasterInventory; 
  
-    public Area(Player CPlayer)
+    public Area(Player CPlayer, Creature[] CMasterInventory)
     {
+        this.CMasterInventory = CMasterInventory;
         this.CPlayer = CPlayer; 
         this.CEnemy = null; 
         this.nAreaLevel = 0; 
@@ -24,15 +25,15 @@ public class Area{
     }
 	
 
-	public int loadArea(Game CGame) 
+	public int loadArea() 
     {
         Scanner CReader = new Scanner(System.in);
         int nCol; 
         int nRow; 
 		int nMovement=0;   
         int nChecker=0;  
-        
-        
+        boolean bPlayer=true; 
+
 
         do{
             for(nCol = 0; nCol < this.nYDim; nCol++)
@@ -57,7 +58,7 @@ public class Area{
                                 "\n\t\t\t[4] RIGHT" + 
                                 "\n\t\t\t[5] EXIT AREA\n");
 			nMovement=0;
-            nChecker = 0;	
+            nChecker=0;	
 
     		while(nChecker == 0)
             {
@@ -92,22 +93,23 @@ public class Area{
 		    switch(nMovement)
             {
                 case 1: 
-                        this.CPlayer.goUp(nXDim,nYDim);
+                        bPlayer = this.CPlayer.goUp(nXDim,nYDim);
                         break;
                 case 2: 
-                        this.CPlayer.goDown(nXDim,nYDim);
+                        bPlayer = this.CPlayer.goDown(nXDim,nYDim);
                         break;
                 case 3:
-                        this.CPlayer.goLeft(nXDim,nYDim);
+                        bPlayer = this.CPlayer.goLeft(nXDim,nYDim);
                         break;
                 case 4: 
-                        this.CPlayer.goRight(nXDim,nYDim);
+                        bPlayer = this.CPlayer.goRight(nXDim,nYDim);
                         break;
                 case 5: 
+                        bPlayer = false;
                         break;
             }
 
-             for(nCol = 0; nCol < this.nYDim; nCol++)
+            for(nCol = 0; nCol < this.nYDim; nCol++)
             {
               System.out.printf("\n\n\t\t\t");
                 for(nRow = 0; nRow < this.nXDim; nRow++)
@@ -123,17 +125,17 @@ public class Area{
 
             double dChance = 0.40; 
 
-
-            if(dChance == 0.40)
+            if(dChance == 0.40 && bPlayer == true )
             {
                 System.out.print("\n\n[SYSTEM MESSAGE]: You've encountered an enemy!! Press any button to proceed");
                 CReader.nextLine(); 
                 System.out.println("\n\n\n\n");
-                this.CEnemy = getRandomCreature(CGame.getAllCreatures());
+                int nIndex = 0;
+                nIndex++;
+                this.CEnemy = getRandomCreature(CMasterInventory);
+                this.CEnemy.setHealth(50);
                 battle(this.CEnemy);
             } 
-
-
 
         }while(nMovement != 5);
 
@@ -141,29 +143,62 @@ public class Area{
 
     }
 
-
-    public void run(Game CGame) 
+    public void run() 
     {
-        int nArea = 0;  
-        int nAreaChoice; 
-		int nMovement=0;
+        Scanner CReader = new Scanner(System.in);
+        int nAreaChoice=0;
+        int nChecker =0;; 
 
         System.out.println("\n\n\t\t\t=======CHOOSE AREA=======\n"+
                          "\n\t\t\t[1]  AREA 1\n" + 
                           "\t\t\t[2]  AREA 2\n"+
                         "\t\t\t[3]  AREA 3\n" +
                         "\t\t\t=======================");
-	
-		//insert I/o FOR THE AREA
-		
-		this.nXDim = 5; 
-		this.nYDim = 1; 
-	
-		do{
-			nMovement = loadArea(CGame);
-		}while(nMovement != 5);
+        
+        while(nChecker == 0)
+        {
+            System.out.print("\n\t\t\t[INPUT]: ");
+            if(CReader.hasNextInt())
+               {
+                    nAreaChoice = CReader.nextInt();   
+                    if(nAreaChoice >= 1 && nAreaChoice <= 3)
+                    {
+                        nChecker = 1; 
+                        CReader.nextLine();
+                    }
+                    else
+                    {
+                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
+                         CReader.nextLine();
+                    
+                    }
+                }
+                else
+                {
+                    System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
+                     CReader.nextLine();  
+                }
 
+        }
+           // CReader.nextLine();
 
+		    switch(nAreaChoice)
+            {
+                case 1: 
+                        this.nXDim = 5; 
+		                this.nYDim = 1; 
+                        break;
+                case 2: 
+                        this.nXDim = 5; 
+		                this.nYDim = 1; 
+                        break;
+                case 3:
+                        this.nXDim = 5; 
+		                this.nYDim = 1; 
+                        break;
+    
+            }
+        
     }
 
 
@@ -171,27 +206,26 @@ public class Area{
     {
         Scanner CReader = new Scanner(System.in);
         int nMovesLeft = 3; 
-        int nEnemyHealth = 100; 
         int nBattleMove = 0; 
 
         do{
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
                             "\t\t\t\tMoves left: "+ nMovesLeft +
-                            "\n\t\t\tEnemy Health: " + nEnemyHealth + 
-
-                             "\t\t\t======================================="+
+                            "\n\t\t\tEnemy Health: " + this.CEnemy.getHealth() + 
+                             "\n\t\t\t======================================="+
 
                          "\n\n\n\t\t\t[1]  ATTACK \n" + 
                           "\t\t\t[2]  SWAP \n"+
                         "\t\t\t[3]  CATCH \n" +
                         "\t\t\t[4]  SKIP CREATURE \n");
+
+                        System.out.println("Creature: " + this.CEnemy.getCreatureName());
                        
             nBattleMove=0;
             int nChecker = 0;	
 
     		while(nChecker == 0)
             {
-
                 System.out.print("\n\t\t\t[INPUT]: ");
             
                 if(CReader.hasNextInt())
@@ -221,7 +255,7 @@ public class Area{
             switch(nBattleMove)
             {
                 case 1: 
-                        nEnemyHealth=attack(nEnemyHealth);
+                        CPlayer.attack(this.CEnemy, this.CPlayer);
                         break;
                 case 2: 
                        // this.CPlayer.goDown(nXDim,nYDim);
@@ -233,45 +267,22 @@ public class Area{
                        // this.CPlayer.goRight(nXDim,nYDim);
                         break;
                 case 5: 
+                        loadArea();
                         break;
             }
             
            
-	
-        }while(nMovesLeft >= 1 && nEnemyHealth >0);
+        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0);
         
-    }
-
-
-    public int attack(int nEnemyHealth)
-    {
-        Random CRand = new Random();
-        int nMax = 10; 
-        int nMin = 1;
-        int nRandom = CRand.nextInt(nMax - nMin + 1) + nMin;
-        int nDamage = nRandom * 1;// 1 should be the creatures level 
-
-        return nEnemyHealth-nDamage;
+        
     }
 
     public Creature getRandomCreature(Creature[] MasterInventory)
     {
         Random CRand = new Random();
-        char cRandom = (char)(CRand.nextInt('G'-'A') + 'A');
-        int nFound = -1;
-        int nIndex = 0;
-        
-        do{
-            if(MasterInventory[nIndex].getFamily() == cRandom && MasterInventory[nIndex].getLevel() == this.nAreaLevel)
-                nFound = nIndex;
-            
-            nIndex++;
-
-        }while(nFound == -1 && nIndex < 9);
-
-        return MasterInventory[nFound];
-        
+        int nRandom = (char)(CRand.nextInt(9-1) + 1);
+      
+        return MasterInventory[nRandom];
     }
 
-    
 }

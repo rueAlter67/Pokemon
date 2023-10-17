@@ -97,9 +97,9 @@ public class Inventory { // check if parameters = needed cause cant get info fro
         }
      }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     
-=======
+//=======
      public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aArray){
 
       System.out.print("\n\n\t\t\t=======INVENTORY=======\n"+
@@ -140,7 +140,7 @@ public class Inventory { // check if parameters = needed cause cant get info fro
         return nActionChosen;
     }
 
->>>>>>> 15a6e8bd85352c8ecf566b7deddb2f55e9d0223d
+//>>>>>>> 15a6e8bd85352c8ecf566b7deddb2f55e9d0223d
     public boolean returnToMainMenu()
     {
         return true;

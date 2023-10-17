@@ -5,7 +5,6 @@ import java.util.Scanner;
 //import java.util.*;
 public class Game{
     
- 
     private Player CPlayer;
     private int nMenuChoice; 
     private Inventory CPlayerInventory = new Inventory();
@@ -49,8 +48,7 @@ public class Game{
     {
         //this.CPlayer = new Player(); 
         this.CPlayer = new Player(); 
-        this.CArea = new Area(this.CPlayer);
-
+        this.CArea = new Area(this.CPlayer,getAllCreatures());
     }
 
         //+++++++++++
@@ -92,6 +90,7 @@ public class Game{
         int nMenuChoice = 0; 
         int nValid = 0;  
         int nAreaChoice = 0; 
+        int nMovement; 
         System.out.print("\n\n\t\t\t=======MAIN MENU=======\n"+
                          "\t\t\t[1]  View Inventory\n" + 
                           "\t\t\t[2]  Area\n"+
@@ -157,6 +156,12 @@ public class Game{
 		else if(nMenuChoice == 2)
 		{ 
 			CArea.run();
+            do{
+                nMovement = CArea.loadArea();
+            }while(nMovement != 5);
+
+            if(nMovement == 5)
+                displayMenu();
 		}
 		else if(nMenuChoice == 3)
 		{
