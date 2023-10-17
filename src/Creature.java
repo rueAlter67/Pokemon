@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class Creature {
     
@@ -19,7 +18,7 @@ public class Creature {
         this.nLevel = nLevel;
         this.bActive = bActive;
     }
-    
+
     public void setHealth(int nHealth){
         this.nHealth = nHealth;
     }
@@ -28,29 +27,41 @@ public class Creature {
         return nHealth;
     }
 
+    public void setImageID(int nImageID){
+        this.nImageID = nImageID;
+    }
+
     public int getImageID(){
         return nImageID;
     }
 
-    public void setCreatureName(String strCreatureName) { //the reason i kept this is in if we want to let the player
-        this.strCreatureName = strCreatureName;           //make Captured pokemon nicknames (bonus feature) but we can remove it if di nagamit
+    public void setCreatureName(String strCreatureName) { 
+        this.strCreatureName = strCreatureName;           
     }
 
     public String getCreatureName() {   
         return strCreatureName; 
     }
 
+    public void setFamily(char cFamily) {
+        this.cFamily = cFamily;
+    }
+
     public char getFamily() {
         return cFamily;
+    }
+
+    public void setType(String strType) {
+        this.strType = strType;
     }
 
     public String getType() {
         return strType;
     }
     
-    // public void setLevel(int nLevel) { 
-    //     this.nLevel = nLevel;
-    // } idk if need level setter for evolution, comment out ko muna
+     public void setLevel(int nLevel) { 
+         this.nLevel = nLevel;
+     } 
 
     public int getLevel() {
         return nLevel;
@@ -64,5 +75,9 @@ public class Creature {
         return bActive;
     }
 
-
+    public Creature copyCreatureInfo() //can be used to catch creatures/add creatures to aCapturedCreatures
+    {
+      Creature CNewCreature = new Creature(nHealth, nImageID, strCreatureName, cFamily, strType, nLevel, bActive);
+      return CNewCreature;
+    }
 }

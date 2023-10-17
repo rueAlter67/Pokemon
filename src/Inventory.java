@@ -1,45 +1,43 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Inventory { // check if parameters = needed cause cant get info from field or class
-    
-    // displays the inventory functions
+public class Inventory { 
 
-    public void displayCreatureImage(Creature CCreature) //Can be used for aStarterCreatures aCapturedCreatures
+    public void displayCreatureImage(Creature CCreature) 
      {
       
         System.out.print("Image ID " + CCreature.getImageID());
     
      }
      
-    public void displayCreatureNames(Creature CCreature) //Can be used for aStarterCreatures aCapturedCreatures
+    public void displayCreatureNames(Creature CCreature)
      {
       
         System.out.print(CCreature.getCreatureName());
     
      }
-     public void displayCreatureFamilies(Creature CCreature) //Can be used for aStarterCreatures and aCapturedCreatures
+     public void displayCreatureFamilies(Creature CCreature) 
      {
       
       System.out.print(CCreature.getFamily());
       
      }
 
-     public void displayCreatureType(Creature CCreature) //Can be used for aStarterCreatures and aCapturedCreatures
+     public void displayCreatureType(Creature CCreature) 
      {
       
       System.out.print(CCreature.getType());
       
      }
 
-     public void displayCreatureLevel(Creature CCreature) //Can be used for aStarterCreatures and aCapturedCreatures
+     public void displayCreatureLevel(Creature CCreature) 
      {
       
       System.out.print("EL " + CCreature.getLevel());
       
      }
 
-     public void displayActive(Creature CCreature) //Can be used for aStarterCreatures and aCapturedCreatures
+     public void displayActive(Creature CCreature) 
      {
       if(CCreature.getActiveCreature()==true)
       {
@@ -90,8 +88,8 @@ public class Inventory { // check if parameters = needed cause cant get info fro
           CCreatureA.setActiveCreature(bActiveCreatureB);
           CCreatureB.setActiveCreature(bActiveCreatureA);
      }
-
-     public void displayCapturedCreatures(int nlength, ArrayList<Creature> aCapturedArray, Inventory CInventory) //show which creature is active
+      // displays the inventory functions
+     public void displayCapturedCreatures(int nlength, ArrayList<Creature> aCapturedArray, Inventory CInventory) 
      {
         int i;
         for(i=0;i<nlength;i++)
@@ -112,9 +110,6 @@ public class Inventory { // check if parameters = needed cause cant get info fro
         }
      }
 
-//<<<<<<< HEAD
-    
-//=======
      public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aArray){
 
       System.out.print("\n\n\t\t\t=======INVENTORY=======\n"+
@@ -155,7 +150,6 @@ public class Inventory { // check if parameters = needed cause cant get info fro
         return nActionChosen;
     }
 
-//>>>>>>> 15a6e8bd85352c8ecf566b7deddb2f55e9d0223d
     public boolean returnToMainMenu()
     {
         return true;

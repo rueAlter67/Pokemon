@@ -51,6 +51,8 @@ public class Game{
         this.CArea = new Area(this.CPlayer,getAllCreatures());
     }
 
+    
+
         //+++++++++++
     /* chooseStarterCreature will display a list of EL1 creature
      * from the MasterInventory and then 
@@ -81,8 +83,7 @@ public class Game{
         
          if(CStarterCreature != null)
          {
-            
-            CPlayerInventory.addCreature(aCapturedCreatures,CStarterCreature);
+            CPlayerInventory.addCreature(aCapturedCreatures,CStarterCreature.copyCreatureInfo());
             aCapturedCreatures.get(0).setActiveCreature(true);
          }
          else if(CStarterCreature == null)
@@ -123,8 +124,8 @@ public class Game{
         
         if(nMenuChoice==1)
         {
-            CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature);
-            CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature2); //for testing of aCapturedCreatures not empty
+            CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature.copyCreatureInfo());
+            CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature2.copyCreatureInfo()); //for testing of aCapturedCreatures not empty
             int nlength = aCapturedCreatures.size();
 			int nInput = CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures); 
                
