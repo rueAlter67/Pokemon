@@ -81,29 +81,33 @@ public class Game{
          }
          while (!isValidFamily) {
 
-         System.out.print("Enter Creature Family: ");
-         cFamily = CCharScanner.next().charAt(0);
+            System.out.print("Enter Creature Family: ");
+             cFamily = CCharScanner.next().charAt(0);
          
-         if (cFamily >= 'A' && cFamily <= 'I') 
-            {
-            isValidFamily = true;
-            } else 
-                System.out.println("Invalid Family");
-        }
+                if (cFamily >= 'A' && cFamily <= 'I') 
+                {
+                    isValidFamily = true;
+                } else 
+                    System.out.println("Invalid Family");
+            }
 
             System.out.println("Are you sure you want to choose the " + cFamily + " family Creature? [Y]es / [N]o");
             char cAnswer = CCharScanner.next().charAt(0);
 
-         if (cAnswer == 'Y') {
+         if (cAnswer == 'Y' || cAnswer == 'y') {
             Creature CStarterCreature = CPlayerInventory.findCreatureByFamily(aStarterCreatures, cFamily, aStarterCreatures.size());
                 if (CStarterCreature != null) 
                 {
                 CPlayerInventory.addCreature(aCapturedCreatures, CStarterCreature.copyCreatureInfo());
                 aCapturedCreatures.get(0).setActiveCreature(true);
+                //CCharScanner.close();
                 }
         } else {
          chooseStarterCreature();
+         //CCharScanner.close();
         }
+
+
         return true; 
     }
 
@@ -151,12 +155,12 @@ public class Game{
             if(nInput == 1)
             {
                 Scanner CIntScanner = new Scanner(System.in);
-                //CIntScanner.nextLine();
                 System.out.print("Type Numbers of Creatures to Swap: "+ "\n");
                 System.out.print("Creature 1: ");
                 int nCreatureA = CIntScanner.nextInt();
                 System.out.print("Creature 2: ");
                 int nCreatureB = CIntScanner.nextInt();
+                CIntScanner.nextLine();
 
                 Creature CChosenCreatureA = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureA, nlength);
                 Creature CChosenCreatureB = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureB, nlength);
