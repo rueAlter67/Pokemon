@@ -55,18 +55,32 @@ public class Inventory { // check if parameters = needed cause cant get info fro
            aArray.add(CCreature);
     }
 
-    public Creature findCreature(ArrayList<Creature> aArray, String strCreature, int nLength)
+    public Creature findCreaturebyIndex(ArrayList<Creature> aArray, int nCreature, int nLength) //this is assuming the index being entered is +1 (no 0 index)
     {
       int i;
       for(i=0;i<nLength;i++)
       {
-        if(aArray.get(i).getCreatureName().compareTo(strCreature)==0)
+        if((i+1)==nCreature)
         {
           return aArray.get(i);
         }
       }
       return null;
     }
+
+    public Creature findCreatureByFamily(ArrayList<Creature> aArray, char strCreature, int nLength)
+    {
+      int i;
+      for(i=0;i<nLength;i++)
+      {
+        if(aArray.get(i).getFamily()==strCreature)
+        {
+          return aArray.get(i);
+        }
+      }
+      return null;
+    }
+
 
      public void swapCreature(Creature CCreatureA, Creature CCreatureB)
      {
@@ -82,6 +96,7 @@ public class Inventory { // check if parameters = needed cause cant get info fro
         int i;
         for(i=0;i<nlength;i++)
         {
+          System.out.print("Creature " + (i+1) + ": ");
           CInventory.displayCreatureImage(aCapturedArray.get(i));
           System.out.print("\n");
           CInventory.displayCreatureNames(aCapturedArray.get(i));

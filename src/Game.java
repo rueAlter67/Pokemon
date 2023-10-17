@@ -68,18 +68,25 @@ public class Game{
             CPlayerInventory.displayCreatureNames(aStarterCreatures.get(i));
             System.out.print("\t");
             CPlayerInventory.displayCreatureType(aStarterCreatures.get(i));
+            System.out.print("\t");
+            CPlayerInventory.displayCreatureFamilies(aStarterCreatures.get(i));
             System.out.print("\n");
          }
-         Scanner CStringScanner = new Scanner(System.in);
-         System.out.print("Name of Starter: ");
-         String strCreature = CStringScanner.nextLine();
-         Creature CStarterCreature = CPlayerInventory.findCreature(aStarterCreatures, strCreature, aStarterCreatures.size());
 
-         if(CStarterCreature != null){
+         Scanner CCharScanner = new Scanner(System.in);
+         System.out.print("Type Creature Family: ");
+         char strFamily = CCharScanner.next().charAt(0);
+         
+         Creature CStarterCreature = CPlayerInventory.findCreatureByFamily(aStarterCreatures, strFamily, aStarterCreatures.size());
+        
+         if(CStarterCreature != null)
+         {
+            
             CPlayerInventory.addCreature(aCapturedCreatures,CStarterCreature);
-            CStarterCreature.setActiveCreature(true);
+            aCapturedCreatures.get(0).setActiveCreature(true);
          }
-
+         else if(CStarterCreature == null)
+            System.out.print("Invalid Family");
         return true; 
     }
 
@@ -116,6 +123,7 @@ public class Game{
         
         if(nMenuChoice==1)
         {
+            CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature);
             CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature2); //for testing of aCapturedCreatures not empty
             int nlength = aCapturedCreatures.size();
 			int nInput = CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures); 
@@ -124,18 +132,21 @@ public class Game{
             {
                 boolean bFlag = false;
                 Scanner CStringScanner = new Scanner(System.in);
-                System.out.print("Type Name of Creatures to Swap: "+ "\n");
+                System.out.print("Type Numbers of Creatures to Swap: "+ "\n");
                 System.out.print("Creature 1: ");
-                String strCreatureA = CStringScanner.nextLine();
+                int nCreatureA = CReader.nextInt();
                 System.out.print("Creature 2: ");
-                String strCreatureB = CStringScanner.nextLine();
+                int nCreatureB = CReader.nextInt();
 
                 while(bFlag == false)
                 {
-                Creature CChosenCreatureA = CPlayerInventory.findCreature(aCapturedCreatures, strCreatureA, nlength);
-                Creature CChosenCreatureB = CPlayerInventory.findCreature(aCapturedCreatures, strCreatureB, nlength);
 
-                if(CChosenCreatureA != null && CChosenCreatureB  != null)
+                Creature CChosenCreatureA = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureA, nlength);
+                Creature CChosenCreatureB = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureB, nlength);
+                boolean bCreatureAActive = CChosenCreatureA.getActiveCreature();
+                boolean bCreatureBActive = CChosenCreatureB.getActiveCreature();
+
+                if(CChosenCreatureA != null && CChosenCreatureB != null && bCreatureAActive == true || bCreatureBActive == true)
                 {
                     CPlayerInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
                     bFlag = true;

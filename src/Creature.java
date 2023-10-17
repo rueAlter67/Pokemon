@@ -19,7 +19,7 @@ public class Creature {
         this.nLevel = nLevel;
         this.bActive = bActive;
     }
-
+    
     public void setHealth(int nHealth){
         this.nHealth = nHealth;
     }
