@@ -79,7 +79,6 @@ public class Inventory {
       return null;
     }
 
-
      public void swapCreature(Creature CCreatureA, Creature CCreatureB)
      {
           boolean bActiveCreatureA = CCreatureA.getActiveCreature();
@@ -113,7 +112,13 @@ public class Inventory {
      }
 
      public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aArray){
+      Scanner CInputScanner = new Scanner(System.in);
 
+      int nInput = 0;
+      boolean bInputOver = false;
+
+      while (bInputOver == false) 
+      {
       System.out.print("\n\n====================INVENTORY====================\n"+
                       "\n\t    Captured Creatures: \n");
       
@@ -124,32 +129,25 @@ public class Inventory {
         "\t[2]  Exit Inventory\n" +
         "=================================================\n");
         
-        Scanner CInputScanner = new Scanner(System.in);
         System.out.print("Enter Inventory Action: ");
-        int nInput = CInputScanner.nextInt();
-        boolean bInputOver = false;
-        int nActionChosen = 0;
+        nInput = CInputScanner.nextInt();
 
-        while(bInputOver == false)
+        if (nInput == 1)
         {
-          if(nInput == 1)
-          {
-            nActionChosen = 1;
-            bInputOver = true;
-            return nActionChosen;
-          }
-          else if(nInput == 2)
-          {
-            nActionChosen = 2;
-            bInputOver = true;
-            return nActionChosen;
-          }
-        else
-          System.out.print("Invalid Inventory Menu Action");
+          return nInput;
         }
+        else if(nInput == 2) 
+        {
+          bInputOver = true;
+          return nInput;
+        } 
+        else 
+            System.out.println("Invalid Inventory Menu Action");
+      }
 
-        CInputScanner.close();
-        return nActionChosen;
+      CInputScanner.close();
+    
+      return nInput;
     }
 
     public boolean returnToMainMenu()

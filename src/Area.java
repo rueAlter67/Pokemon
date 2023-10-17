@@ -28,7 +28,6 @@ public class Area{
 	public int loadArea() 
     {
         Scanner CReader = new Scanner(System.in);
-        Random CRandom = new Random();
         int nCol; 
         int nRow; 
 		int nMovement=0;   
@@ -60,7 +59,6 @@ public class Area{
                                 "\n\t\t\t[5] EXIT AREA\n");
 			nMovement=0;
             nChecker=0;	
-            bPlayer=true; 
 
     		while(nChecker == 0)
             {
@@ -111,9 +109,6 @@ public class Area{
                         break;
             }
 
-<<<<<<< HEAD
-            double dChance = CRandom.nextDouble();
-=======
             for(nCol = 0; nCol < this.nYDim; nCol++)
             {
               System.out.printf("\n\n\t\t\t");
@@ -127,13 +122,16 @@ public class Area{
 
                 System.out.print("\n\n");
             }
->>>>>>> 2cc38e4be947dc858d600d2eae8d987d14841bbd
 
-            if(dChance <= 0.40 && bPlayer == true && nMovement != 5 )
+            double dChance = 0.40; 
+
+            if(dChance == 0.40 && bPlayer == true )
             {
                 System.out.print("\n\n[SYSTEM MESSAGE]: You've encountered an enemy!! Press any button to proceed");
                 CReader.nextLine(); 
                 System.out.println("\n\n\n\n");
+                int nIndex = 0;
+                nIndex++;
                 this.CEnemy = getRandomCreature(CMasterInventory);
                 this.CEnemy.setHealth(50);
                 battle(this.CEnemy);
@@ -170,7 +168,7 @@ public class Area{
                     }
                     else
                     {
-                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 3 only.\n");
+                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
                          CReader.nextLine();
                     
                     }
@@ -242,7 +240,7 @@ public class Area{
                     else
                     {
                         System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
-                        CReader.nextLine();
+                         CReader.nextLine();
                     
                     }
                 }
@@ -274,7 +272,7 @@ public class Area{
             }
             
            
-        }while(nMovesLeft >= 1 && CEnemy.getHealth() > 0);
+        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0);
         
         
     }

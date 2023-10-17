@@ -51,8 +51,6 @@ public class Game{
         this.CArea = new Area(this.CPlayer,getAllCreatures());
     }
 
-    
-
         //+++++++++++
     /* chooseStarterCreature will display a list of EL1 creature
      * from the MasterInventory and then 
@@ -62,11 +60,18 @@ public class Game{
      */
     public boolean chooseStarterCreature()
     {
-        //maybe add "are you sure?"
-        System.out.print("Choose Your Starter! \n");
+        boolean isValidFamily = false;
+        Scanner CCharScanner = new Scanner(System.in);
+        char cFamily = '0';
+        System.out.print("//\\//\\//\\//\\//\\//\\//\\//\n");
+        System.out.print("\\Choose Your Starter!\\\n");
+        System.out.print("//\\//\\//\\//\\//\\//\\//\\//\n");
         int i;
+
          for(i=0;i<9;i++)
          {
+            CPlayerInventory.displayCreatureImage(aStarterCreatures.get(i));
+            System.out.print("\t");
             CPlayerInventory.displayCreatureNames(aStarterCreatures.get(i));
             System.out.print("\t");
             CPlayerInventory.displayCreatureType(aStarterCreatures.get(i));
@@ -74,20 +79,31 @@ public class Game{
             CPlayerInventory.displayCreatureFamilies(aStarterCreatures.get(i));
             System.out.print("\n");
          }
+         while (!isValidFamily) {
 
-         Scanner CCharScanner = new Scanner(System.in);
-         System.out.print("Type Creature Family: ");
-         char strFamily = CCharScanner.next().charAt(0);
+         System.out.print("Enter Creature Family: ");
+         cFamily = CCharScanner.next().charAt(0);
          
-         Creature CStarterCreature = CPlayerInventory.findCreatureByFamily(aStarterCreatures, strFamily, aStarterCreatures.size());
-        
-         if(CStarterCreature != null)
-         {
-            CPlayerInventory.addCreature(aCapturedCreatures,CStarterCreature.copyCreatureInfo());
-            aCapturedCreatures.get(0).setActiveCreature(true);
-         }
-         else if(CStarterCreature == null)
-            System.out.print("Invalid Family");
+         if (cFamily >= 'A' && cFamily <= 'I') 
+            {
+            isValidFamily = true;
+            } else 
+                System.out.println("Invalid Family");
+        }
+
+            System.out.println("Are you sure you want to choose the " + cFamily + " family Creature? [Y]es / [N]o");
+            char cAnswer = CCharScanner.next().charAt(0);
+
+         if (cAnswer == 'Y') {
+            Creature CStarterCreature = CPlayerInventory.findCreatureByFamily(aStarterCreatures, cFamily, aStarterCreatures.size());
+                if (CStarterCreature != null) 
+                {
+                CPlayerInventory.addCreature(aCapturedCreatures, CStarterCreature.copyCreatureInfo());
+                aCapturedCreatures.get(0).setActiveCreature(true);
+                }
+        } else {
+         chooseStarterCreature();
+        }
         return true; 
     }
 
@@ -127,20 +143,20 @@ public class Game{
             CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature.copyCreatureInfo());
             CPlayerInventory.addCreature(aCapturedCreatures,CChosenCreature2.copyCreatureInfo()); //for testing of aCapturedCreatures not empty
             int nlength = aCapturedCreatures.size();
-			int nInput = CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures); 
+
+            boolean bExitInventory = false;
+            while (!bExitInventory) {
+            int nInput = CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures); 
                
             if(nInput == 1)
             {
-                boolean bFlag = false;
-                Scanner CStringScanner = new Scanner(System.in);
+                Scanner CIntScanner = new Scanner(System.in);
+                //CIntScanner.nextLine();
                 System.out.print("Type Numbers of Creatures to Swap: "+ "\n");
                 System.out.print("Creature 1: ");
-                int nCreatureA = CReader.nextInt();
+                int nCreatureA = CIntScanner.nextInt();
                 System.out.print("Creature 2: ");
-                int nCreatureB = CReader.nextInt();
-
-                while(bFlag == false)
-                {
+                int nCreatureB = CIntScanner.nextInt();
 
                 Creature CChosenCreatureA = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureA, nlength);
                 Creature CChosenCreatureB = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureB, nlength);
@@ -150,21 +166,23 @@ public class Game{
                 if(CChosenCreatureA != null && CChosenCreatureB != null && bCreatureAActive == true || bCreatureBActive == true)
                 {
                     CPlayerInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
-                    bFlag = true;
                     System.out.print("Active Creature Changed.");
                 }
                 else
-                    System.out.print("Invalid Creature (Check Name or if Active)");
-                }
-                CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures);
+                    System.out.print("Invalid Creature (Check Number or if Active)");
+
+               // CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures);
+                CIntScanner.close();
             }
             else if(nInput == 2)
             {
-                CPlayerInventory.returnToMainMenu();
+                bExitInventory = true;
             }
             else
                 System.out.print("Invalid Action");
-		}
+		    }
+        }
+
 		else if(nMenuChoice == 2)
 		{ 
 			CArea.run();
@@ -181,6 +199,7 @@ public class Game{
 		} 
         else 
 			exitGame();
+            CReader.close();
     }
 
     public void exitGame()
