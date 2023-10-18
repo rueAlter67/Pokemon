@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,24 +25,7 @@ public class Player
      * activecreature of the player with
      * one of the creatures in its inventory
      */
-    public boolean swapCreature()
-    {
-
-        return true; 
-    }
-
-    /* does not interact with the creature  */
-    public boolean skip()
-    {
-        return true; 
-    }
-
-    // public boolean catchCreature(Creature CEnemy)
-    // {
-
-    //     return true; 
-    // }
-
+    
 
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
     // players can move ()
@@ -88,27 +72,59 @@ public class Player
             System.err.print("\n\n\t\t\t[ERROR]: Player can't move anymore to the right");
         }
 
-        return true; 
+        return bMove; 
     }
 
-    public void attack(Creature CEnemy, Player CPlayer)
+    public void attack(Creature CEnemy, Creature CActiveCreature)
     {
         Random CRand = new Random();
         int nMax = 10; 
         int nMin = 1;
         int nRandom = CRand.nextInt(nMax - nMin + 1) + nMin;
-        int nDamage = nRandom * 1;// 1 should be the creatures level 
+        double nDamage = nRandom * 1;// 1 the creature's level 
 
         // insert additional damage 
+        System.out.print("\n\t\t\tINITIAL DAMAGE: "+ nDamage + "\n");
+        if(CActiveCreature.getType() == "Fire")
+        {   
+            if(CEnemy.getType() == "Grass")
+                nDamage*= 1.5; 
+        }
+        else if(CActiveCreature.getType() == "Grass")
+        {
+            if(CEnemy.getType() == "Water")
+                nDamage*= 1.5;
+        } 
+        else if(CActiveCreature.getType() == "Water")
+        {
+              if(CEnemy.getType() == "Fire")
+                 nDamage*= 1.5;
+        }
+
+        System.out.println("\n\t\t\tFINALDAMAGE: "+ nDamage + "\n");
 
         CEnemy.setHealth(CEnemy.getHealth() - nDamage);
     }
-    
 
-    public boolean catchCreature(Creature CEnemy)
+    public boolean catchCreature(Creature CEnemy,ArrayList<Creature> aCaptured, Inventory CInventory)
     {
-        double dCatchRate = 0; 
+        Random CRandom = new Random();
+        boolean bCaught = false; 
+        double dChance = CRandom.nextDouble();
+        double dCatchRate = (40+50-CEnemy.getHealth())/100;
+
+        if(dChance <= dCatchRate)
+        {
+            CInventory.addCreature(aCaptured, CEnemy);
+            bCaught = true; 
+        }
+        return bCaught;
+    }
+
+    public boolean swap()
+    {
         return true; 
+
     }
 
   //+++++++++++ setters and getters
@@ -121,9 +137,6 @@ public class Player
         return nPosY;
     }
 
-    // public Creature getnStarterCreature() {
-    //     return nStarterCreature;
-    // }
-
+  
 
 }

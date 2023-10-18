@@ -48,7 +48,7 @@ public class Game{
     {
         //this.CPlayer = new Player(); 
         this.CPlayer = new Player(); 
-        this.CArea = new Area(this.CPlayer,getAllCreatures());
+        this.CArea = new Area(this.CPlayer,getAllCreatures() );
     }
 
         //+++++++++++
@@ -149,46 +149,54 @@ public class Game{
             int nlength = aCapturedCreatures.size();
 
             boolean bExitInventory = false;
-            do{
-            int nInput = CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures); 
-               
-            if(nInput == 1)
+            while (!bExitInventory) 
             {
-                Scanner CIntScanner = new Scanner(System.in);
-                System.out.print("Type Numbers of Creatures to Swap: "+ "\n");
-                System.out.print("Creature 1: ");
-                int nCreatureA = CIntScanner.nextInt();
-                System.out.print("Creature 2: ");
-                int nCreatureB = CIntScanner.nextInt();
-                CIntScanner.nextLine();
-
-                Creature CChosenCreatureA = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureA, nlength);
-                Creature CChosenCreatureB = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureB, nlength);
-                boolean bCreatureAActive = CChosenCreatureA.getActiveCreature();
-                boolean bCreatureBActive = CChosenCreatureB.getActiveCreature();
-
-                if(CChosenCreatureA != null && CChosenCreatureB != null && bCreatureAActive == true || bCreatureBActive == true)
+                int nInput = CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures); 
+               
+                if(nInput == 1)
                 {
-                    CPlayerInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
-                    System.out.print("Active Creature Changed.");
+                    Scanner CIntScanner = new Scanner(System.in);
+                    System.out.print("Type Numbers of Creatures to Swap: "+ "\n");
+                    System.out.print("Creature 1: ");
+                    int nCreatureA = CIntScanner.nextInt();
+                    System.out.print("Creature 2: ");
+                    int nCreatureB = CIntScanner.nextInt();
+                    CIntScanner.nextLine();
+
+                    Creature CChosenCreatureA = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureA, nlength);
+                    Creature CChosenCreatureB = CPlayerInventory.findCreaturebyIndex(aCapturedCreatures, nCreatureB, nlength);
+                    boolean bCreatureAActive = CChosenCreatureA.getActiveCreature();
+                    boolean bCreatureBActive = CChosenCreatureB.getActiveCreature();
+
+                    if(CChosenCreatureA != null && CChosenCreatureB != null && bCreatureAActive == true || bCreatureBActive == true)
+                    {
+                        CPlayerInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
+                        System.out.print("Active Creature Changed.");
+                    }
+                    else
+                        System.out.print("Invalid Creature (Check Number or if Active)");
+
+               // CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures);
+                    CIntScanner.close();
+                }
+                else if(nInput == 2)
+                {
+                    bExitInventory = true;
                 }
                 else
-                    System.out.print("Invalid Creature (Check Number or if Active)");
-            }
-            else if(nInput == 2)
-            {
-                bExitInventory = true;
-            }
-            else
-                System.out.print("Invalid Action");
-		    }while (bExitInventory == false); 
-        }
+                    System.out.print("Invalid Action");
+		    }
 
+            if(bExitInventory)
+            {
+                displayMenu();
+            }
+        }
 		else if(nMenuChoice == 2)
 		{ 
-			CArea.run();
+			CArea.run();    //public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
             do{
-                nMovement = CArea.loadArea();
+                nMovement = CArea.loadArea(CPlayerInventory.getAllCapturedCreatures(aCapturedCreatures), CPlayerInventory);
             }while(nMovement != 5);
 
             if(nMovement == 5)
@@ -223,5 +231,8 @@ public class Game{
     {
         return  this.CMasterInventory;
     }
+
+ 
+
 
 }
