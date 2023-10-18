@@ -31,7 +31,6 @@ public class Area{
 	public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
     {
         Scanner CReader = new Scanner(System.in);
-        Random CRandom = new Random();
         int nCol; 
         int nRow; 
 		int nMovement=0;   
@@ -63,7 +62,6 @@ public class Area{
                                 "\n\t\t\t[5] EXIT AREA\n");
 			nMovement=0;
             nChecker=0;	
-            bPlayer=true; 
 
     		while(nChecker == 0)
             {
@@ -116,11 +114,13 @@ public class Area{
 
             double dChance = CRandom.nextDouble();
 
-            if(dChance <= 0.40 && bPlayer == true && nMovement != 5 )
+            if(dChance == 0.40 && bPlayer == true )
             {
                 System.out.print("\n\n[SYSTEM MESSAGE]: You've encountered an enemy!! Press any button to proceed");
                 CReader.nextLine(); 
                 System.out.println("\n\n\n\n");
+                int nIndex = 0;
+                nIndex++;
                 this.CEnemy = getRandomCreature(CMasterInventory);
                 this.CEnemy.setHealth(50);
                 battle(this.CEnemy, aCaptured,CInventory);
@@ -157,7 +157,7 @@ public class Area{
                     }
                     else
                     {
-                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 3 only.\n");
+                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
                          CReader.nextLine();
                     
                     }
@@ -230,7 +230,7 @@ public class Area{
                     else
                     {
                         System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
-                        CReader.nextLine();
+                         CReader.nextLine();
                     
                     }
                 }
@@ -262,7 +262,7 @@ public class Area{
             }
             
            
-        }while(nMovesLeft >= 1 && CEnemy.getHealth() > 0);
+        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0);
         
         
     }

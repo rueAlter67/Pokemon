@@ -38,7 +38,13 @@ public class Inventory {
       
      }
 
-    
+     public void displayActiveCreature(Creature CCreature) 
+     {
+      if(CCreature.getActiveCreature()==true)
+      {
+         System.out.print("(Active Creature)");
+      }
+     }
      
      //will still need to create separate displays for each information, I separated them kasi baka sa starters di pakita everything
      //can make one with multiple info if needed
@@ -49,32 +55,36 @@ public class Inventory {
            
     }
 
-    public Creature findCreaturebyIndex(ArrayList<Creature> aArray, int nCreature, int nLength) //this is assuming the index being entered is +1 (no 0 index)
+    public Creature findCreaturebyIndex(ArrayList<Creature> aCapturedArray, int nCreatureIndex, int nLength) //this is assuming the index being entered is +1 (no 0 index)
     {
       int i;
       for(i=0;i<nLength;i++)
       {
-        if((i+1)==nCreature)
+        if((i+1)==nCreatureIndex)
         {
-          return aArray.get(i);
+          return aCapturedArray.get(i);
         }
       }
       return null;
     }
 
-    public Creature findCreatureByFamily(ArrayList<Creature> aArray, char strCreature, int nLength)
+    public Creature findCreatureByFamily(ArrayList<Creature> aCapturedArray, char cCreature, int nLength)
     {
       int i;
       for(i=0;i<nLength;i++)
       {
-        if(aArray.get(i).getFamily()==strCreature)
+        if(aCapturedArray.get(i).getFamily()==cCreature)
         {
-          return aArray.get(i);
+          return aCapturedArray.get(i);
         }
       }
       return null;
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> dd14999d7f84c2c28136a659c2a713ea912e4790
      public void swapCreature(Creature CCreatureA, Creature CCreatureB)
      {
           boolean bActiveCreatureA = CCreatureA.getActiveCreature();
@@ -101,49 +111,62 @@ public class Inventory {
           System.out.print(" - ");
           CInventory.displayCreatureLevel(aCapturedArray.get(i));
           System.out.print(" ");
+<<<<<<< HEAD
          // CInventory.displayActive(aCapturedArray.get(i));
+=======
+          CInventory.displayActiveCreature(aCapturedArray.get(i));
+>>>>>>> dd14999d7f84c2c28136a659c2a713ea912e4790
           System.out.print("\n");
 
         }
      }
+<<<<<<< HEAD
      public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aArray){
+=======
 
+     public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aCapturedArray){
+      Scanner CInputScanner = new Scanner(System.in);
+>>>>>>> dd14999d7f84c2c28136a659c2a713ea912e4790
+
+      int nInput = 0;
+      boolean bInputOver = false;
+
+      while (bInputOver == false) 
+      {
       System.out.print("\n\n====================INVENTORY====================\n"+
                       "\n\t    Captured Creatures: \n");
       
-      CInventory.displayCapturedCreatures(nlength, aArray, CInventory);
+      CInventory.displayCapturedCreatures(nlength, aCapturedArray, CInventory);
       
       System.out.print(
         "\n\t[1]  Change Active Creature\n" +
         "\t[2]  Exit Inventory\n" +
         "=================================================\n");
         
-        Scanner CInputScanner = new Scanner(System.in);
         System.out.print("Enter Inventory Action: ");
-        int nInput = CInputScanner.nextInt();
-        boolean bInputOver = false;
-        int nActionChosen = 0;
+        nInput = CInputScanner.nextInt();
+       // CInputScanner.nextLine();
 
-        while(bInputOver == false)
+        if (nInput == 1)
         {
-          if(nInput == 1)
-          {
-            nActionChosen = 1;
-            bInputOver = true;
-            return nActionChosen;
-          }
-          else if(nInput == 2)
-          {
-            nActionChosen = 2;
-            bInputOver = true;
-            return nActionChosen;
-          }
-        else
-          System.out.print("Invalid Inventory Menu Action");
+          //CInputScanner.nextLine();
+          return nInput;
         }
-
+        else if(nInput == 2) 
+        {
+          //CInputScanner.nextLine();
+          bInputOver = true;
+          return nInput;
+        } 
+        else 
+            System.out.println("Invalid Inventory Menu Action");
+        
         CInputScanner.close();
-        return nActionChosen;
+      }
+
+      CInputScanner.close();
+    
+      return nInput;
     }
 
     

@@ -24,6 +24,17 @@ public class Player
      * activecreature of the player with
      * one of the creatures in its inventory
      */
+    public boolean swapCreature()
+    {
+
+        return true; 
+    }
+
+    /* does not interact with the creature  */
+    public boolean skip()
+    {
+        return true; 
+    }
 
     // public boolean catchCreature(Creature CEnemy)
     // {
