@@ -1,9 +1,5 @@
 import java.lang.*; 
-import java.util.Scanner;
-
-import javax.crypto.Cipher;
-
-import java.util.ArrayList;
+import java.util.Scanner; 
 import java.util.Random;
 
 
@@ -28,16 +24,16 @@ public class Area{
         this.nYDim = 0; 
     }
 	
-	public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
+
+	public int loadArea() 
     {
         Scanner CReader = new Scanner(System.in);
-        Random CRandom = new Random();
         int nCol; 
         int nRow; 
 		int nMovement=0;   
         int nChecker=0;  
         boolean bPlayer=true; 
-        Creature CActive = CInventory.getTheActiveCreature(aCaptured);
+
 
         do{
             for(nCol = 0; nCol < this.nYDim; nCol++)
@@ -113,18 +109,32 @@ public class Area{
                         break;
             }
 
-            double dChance = CRandom.nextDouble();
-
-            if(dChance <= 0.40 && bPlayer == true )
+            for(nCol = 0; nCol < this.nYDim; nCol++)
             {
-                System.out.print("\n\n\t\t\t[SYSTEM MESSAGE]: You've encountered an enemy! Press any button to proceed");
+              System.out.printf("\n\n\t\t\t");
+                for(nRow = 0; nRow < this.nXDim; nRow++)
+                {
+                    if(nRow ==  this.CPlayer.getPosX() && nCol == this.CPlayer.getPosY())
+                        System.out.printf(" O ");
+                    else 
+                        System.out.printf(" + ");
+                }
+
+                System.out.print("\n\n");
+            }
+
+            double dChance = 0.40; 
+
+            if(dChance == 0.40 && bPlayer == true )
+            {
+                System.out.print("\n\n[SYSTEM MESSAGE]: You've encountered an enemy!! Press any button to proceed");
                 CReader.nextLine(); 
                 System.out.println("\n\n\n\n");
                 int nIndex = 0;
                 nIndex++;
                 this.CEnemy = getRandomCreature(CMasterInventory);
                 this.CEnemy.setHealth(50);
-                battle(this.CEnemy, aCaptured,CInventory);
+                battle(this.CEnemy);
             } 
 
         }while(nMovement != 5);
@@ -159,18 +169,18 @@ public class Area{
                     else
                     {
                         System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
-                        CReader.nextLine();
+                         CReader.nextLine();
                     
                     }
                 }
                 else
                 {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
-                    CReader.nextLine();  
+                     CReader.nextLine();  
                 }
 
         }
-
+           // CReader.nextLine();
 
 		    switch(nAreaChoice)
             {
@@ -192,16 +202,15 @@ public class Area{
     }
 
 
-    public void battle(Creature CEnemy, ArrayList<Creature> aCaptured, Inventory CInventory)
+    public void battle(Creature CEnemy)
     {
         Scanner CReader = new Scanner(System.in);
         int nMovesLeft = 3; 
         int nBattleMove = 0; 
-        boolean bCaught = false; 
 
         do{
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
-                            "\t\t\tMoves left: "+ nMovesLeft +
+                            "\t\t\t\tMoves left: "+ nMovesLeft +
                             "\n\t\t\tEnemy Health: " + this.CEnemy.getHealth() + 
                              "\n\t\t\t======================================="+
 
@@ -210,9 +219,8 @@ public class Area{
                         "\t\t\t[3]  CATCH \n" +
                         "\t\t\t[4]  SKIP CREATURE \n");
 
-                        System.out.println("\t\tEnemy Creature: " + this.CEnemy.getCreatureName()+"\tType: "+ this.CEnemy.getType());
-                        System.out.println("\t\tActive Creature: " + CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getCreatureName()+"\tType: "+ 
-                                                            CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getType());
+                        System.out.println("Creature: " + this.CEnemy.getCreatureName());
+                       
             nBattleMove=0;
             int nChecker = 0;	
 
@@ -231,8 +239,9 @@ public class Area{
                     }
                     else
                     {
-                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
+                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
                          CReader.nextLine();
+                    
                     }
                 }
                 else
@@ -246,26 +255,19 @@ public class Area{
             switch(nBattleMove)
             {
                 case 1: 
-                        CPlayer.attack(this.CEnemy, CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)));
+                        CPlayer.attack(this.CEnemy, this.CPlayer);
                         break;
                 case 2: 
-                        //swap
+                       // this.CPlayer.goDown(nXDim,nYDim);
                         break;
                 case 3:
-                       bCaught = CPlayer.catchCreature(this.CEnemy,aCaptured, CInventory);
-                       if(bCaught)
-                       {
-                            System.out.println("\n\t\t\t[SYSTEM MESSAGE]: You caught a creature. Press any button to continue playing.\n");
-                            CReader.nextLine();
-                       }
-                       else
-                       {
-                            System.out.println("\n\t\t\t[SYSTEM MESSAGE]: You failed to catch a creature. Press any button to continue playing.\n");
-                            CReader.nextLine();
-                       }
-                       break;
+                       // this.CPlayer.goLeft(nXDim,nYDim);
+                        break;
                 case 4: 
-                        loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory) ;
+                       // this.CPlayer.goRight(nXDim,nYDim);
+                        break;
+                case 5: 
+                        loadArea();
                         break;
             }
             

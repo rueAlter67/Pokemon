@@ -52,7 +52,6 @@ public class Inventory {
     public void addCreature(ArrayList<Creature> aArray, Creature CCreature)  //used to add Creatures to diff arrayLists
     {
            aArray.add(CCreature);
-           
     }
 
     public Creature findCreaturebyIndex(ArrayList<Creature> aCapturedArray, int nCreatureIndex, int nLength) //this is assuming the index being entered is +1 (no 0 index)
@@ -80,6 +79,7 @@ public class Inventory {
       }
       return null;
     }
+
      public void swapCreature(Creature CCreatureA, Creature CCreatureB)
      {
           boolean bActiveCreatureA = CCreatureA.getActiveCreature();
@@ -112,14 +112,14 @@ public class Inventory {
         }
      }
 
-     public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aCapturedArray){
+     public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aCapturedArray)
+     {
       Scanner CInputScanner = new Scanner(System.in);
 
       int nInput = 0;
       boolean bInputOver = false;
 
-      while (bInputOver == false) 
-      {
+      do{
       System.out.print("\n\n====================INVENTORY====================\n"+
                       "\n\t    Captured Creatures: \n");
       
@@ -131,51 +131,35 @@ public class Inventory {
         "=================================================\n");
         
         System.out.print("Enter Inventory Action: ");
-        nInput = CInputScanner.nextInt();
-       // CInputScanner.nextLine();
+        if (CInputScanner.hasNextInt()) 
+        {
+          nInput = CInputScanner.nextInt();
+        } else 
+        {
+          System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Please enter a valid number.\n");
+          //CInputScanner.nextLine();
+          continue;
+        }
 
         if (nInput == 1)
         {
-          //CInputScanner.nextLine();
+          CInputScanner.nextLine();
+          bInputOver = true;
           return nInput;
         }
         else if(nInput == 2) 
         {
-          //CInputScanner.nextLine();
+          CInputScanner.nextLine();
           bInputOver = true;
           return nInput;
         } 
         else 
             System.out.println("Invalid Inventory Menu Action");
         
-        CInputScanner.close();
-      }
-
+      }while (bInputOver == false);
       CInputScanner.close();
-    
       return nInput;
     }
-
-    
-    public Creature getTheActiveCreature(ArrayList<Creature> aArray)
-    {
-        int k;
-        Creature CActive=null; 
-
-        for(k=0 ; k< aArray.size(); k++)
-        {
-            if(aArray.get(k).getActiveCreature() == true)
-                CActive = aArray.get(k);
-        }
-
-        return CActive;
-    }
-
-    public  ArrayList<Creature> getAllCapturedCreatures( ArrayList<Creature> aCapturedCreatures )
-    {
-        return aCapturedCreatures;
-    }
-
 
     public boolean returnToMainMenu()
     {
