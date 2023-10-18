@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class Player 
 {
-    // attributes/fields/state
-   // private Creature nStarterCreature;
-   //s private Inventory CInventory; 
+    
     private int nPosX; 
     private int nPosY; 
 
-    // constructor 
+    /**
+     * Upon creation the Player's location(<nPosX>, <nPosY>) is set to 0,0
+     */
     public Player()
     {
         this.nPosX = 0; 
@@ -18,10 +18,16 @@ public class Player
     } 
 
 
-    
-
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
-    // players can move ()
+    /**
+     * This method enables the player to move up.
+     * It returns a boolean value true if the player is able to go up and false if they can't. 
+     * 
+     * @param nXLimit   the integer value corresponding to the x-coordinate dimension limit of the Area
+     * @param nYLimit   the integer value corresponding to the y-coordinate dimension limit of the Area
+     * @return          an boolean value if the movement was successful or not. 
+     * 
+     */
     public boolean goUp(int nXLimit, int nYLimit)
     {
 
@@ -29,12 +35,32 @@ public class Player
         return false; 
     }
 
+     //+++++++++++ PLAYER'S INTERACTION WITH AREA
+    /**
+     * This method enables the player to move  down.
+     * It returns a boolean value true if the player is able to go down and false if they can't 
+     * 
+     * @param nXLimit   the integer value corresponding to the x-coordinate dimension limit of the Area
+     * @param nYLimit   the integer value corresponding to the y-coordinate dimension limit of the Area
+     * @return          an boolean value if the movement was successful or not. 
+     * 
+     */
     public boolean goDown(int nXLimit, int nYLimit)
     {
         System.err.print("\n\n\t\t\t[ERROR]: Player can't move down anymore");   
         return false; 
     }
 
+     //+++++++++++ PLAYER'S INTERACTION WITH AREA
+    /**
+     * This method enables the player to move left.
+     * It returns a boolean value true if the player is able to go left and false if they can't 
+     * 
+     * @param nXLimit   the integer value corresponding to the x-coordinate dimension limit of the Area
+     * @param nYLimit   the integer value corresponding to the y-coordinate dimension limit of the Area
+     * @return          an boolean value if the movement was successful or not. 
+     * 
+     */
     public boolean goLeft(int nXLimit, int nYLimit)
     {
         boolean bMove = true; 
@@ -51,6 +77,16 @@ public class Player
         return bMove; 
     }
 
+     //+++++++++++ PLAYER'S INTERACTION WITH AREA
+    /**
+     * This method enables the player to move right.
+     * It returns a boolean value true if the player is able to go right and false if they can't 
+     * 
+     * @param nXLimit   the integer value corresponding to the x-coordinate dimension limit of the Area
+     * @param nYLimit   the integer value corresponding to the y-coordinate dimension limit of the Area
+     * @return          an boolean value if the movement was successful or not. 
+     * 
+     */
     public boolean goRight(int nXLimit, int nYLimit)
     {
         boolean bMove = true; 
@@ -68,6 +104,12 @@ public class Player
         return bMove; 
     }
 
+    /**
+     * This method enables the player to attack the enemy using their active creature. 
+     * 
+     * @param CEnemy            an enemy <Creature>
+     * @param CActiveCreature   a creature used by the player
+     */
     public void attack(Creature CEnemy, Creature CActiveCreature)
     {
         Random CRand = new Random();
@@ -76,7 +118,6 @@ public class Player
         int nRandom = CRand.nextInt(nMax - nMin + 1) + nMin;
         double nDamage = nRandom * 1;// 1 the creature's level 
 
-        // insert additional damage 
         System.out.print("\n\t\t\tINITIAL DAMAGE: "+ nDamage + "\n");
         if(CActiveCreature.getType() == "Fire")
         {   
@@ -99,6 +140,15 @@ public class Player
         CEnemy.setHealth(CEnemy.getHealth() - nDamage);
     }
 
+    /**
+     * This method enables the player to catch a creature they encounter in the area. 
+     * It either successfully captures it or it fails to capture. 
+     * 
+     * @param CEnemy        the creature enemy
+     * @param aCaptured     the array list of creatures containing the captured creatures
+     * @param CInventory    the inventory
+     * @return              the success indicator
+     */
     public boolean catchCreature(Creature CEnemy,ArrayList<Creature> aCaptured, Inventory CInventory)
     {
         Random CRandom = new Random();
@@ -114,6 +164,14 @@ public class Player
         return bCaught;
     }
 
+    /**
+     * This method enables the player to swap creatures when they are in the battle phase
+     * It always returns a 0 or 1 to indicate the success of a swap 
+     * 
+     * @param aCaptured     the array list of creatures
+     * @param CInventory    the inventory
+     * @return              the boolean to indicate if it was successful or not
+     */
     public boolean swap(ArrayList<Creature> aCaptured, Inventory CInventory)
     {
         boolean bSwapped= false; 
@@ -156,12 +214,19 @@ public class Player
         return bSwapped; 
     }
 
-  //+++++++++++ setters and getters
+  /**
+   * This method returns the current x-coordinate position of the player
+   * @return    the x-coordinate position of the player 
+   */
     public int getPosX()
     {
         return this.nPosX;
     }
-    
+
+    /**
+   * This method returns the current y-coordinate position of the player
+   * @return    the y-coordinate position of the player 
+   */
     public int getPosY() {
         return nPosY;
     }

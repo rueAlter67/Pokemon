@@ -7,10 +7,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
+/**
+ * Area is the base class for all the area
+ * that allows the application to 
+ */
+
+
 public class Area{
 
-    // fields 
-
+    /**
+     * The area level that the player 
+     */
     private int nAreaLevel; 
     private int nXDim=5; // default to 0 later
     private int nYDim=1;
@@ -27,7 +34,16 @@ public class Area{
         this.nXDim = 0; 
         this.nYDim = 0; 
     }
-	
+
+    /**
+     * Returns the movement of the Player within the area screen of the game. 
+     * <p>
+     * This method returns 1-5 and only stops loading the area once the input is 5
+     * 
+     * @param aCaptured     the array list containing the creatures captured by the Player
+     * @param CInventory    the instance of Inventory Class used by the Player
+     * @return              the nMovement made by the paler
+     */	
 	public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
     {
         Scanner CReader = new Scanner(System.in);
@@ -132,6 +148,12 @@ public class Area{
 
     }
 
+
+    /**
+     * This method runs opens the Area for the player where they can choose 
+     * which area to choose. The chosen area would then assign the <nXDim> and <nYDim> 
+     * coordinate used to <loadArea>
+     */
     public void run() 
     {
         Scanner CReader = new Scanner(System.in);
@@ -170,7 +192,6 @@ public class Area{
 
         }
 
-
 		    switch(nAreaChoice)
             {
                 case 1: 
@@ -190,7 +211,13 @@ public class Area{
         
     }
 
-
+    /**
+     * This method is where the battle phase of the game occurs. 
+     * 
+     * @param CEnemy        the <CEnemy> creature of the player
+     * @param aCaptured     the array list of captured creatures
+     * @param CInventory    the Inventory of the player
+     */
     public void battle(Creature CEnemy, ArrayList<Creature> aCaptured, Inventory CInventory)
     {
         Scanner CReader = new Scanner(System.in);
@@ -299,6 +326,12 @@ public class Area{
             
     }
 
+    /**
+     * This methods returns a random creature
+     * 
+     * @param MasterInventory   an array of creatures containing all of the creatures of the game
+     * @return <CEnemy>         the enemy creature of the player
+     */
     public Creature getRandomCreature(Creature[] MasterInventory)
     {
         Random CRand = new Random();
