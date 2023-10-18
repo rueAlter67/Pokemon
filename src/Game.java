@@ -48,10 +48,9 @@ public class Game{
     {
         //this.CPlayer = new Player(); 
         this.CPlayer = new Player(); 
-        this.CArea = new Area(this.CPlayer,getAllCreatures());
+        this.CArea = new Area(this.CPlayer,getAllCreatures() );
     }
 
-    
 
         //+++++++++++
     /* chooseStarterCreature will display a list of EL1 creature
@@ -167,9 +166,9 @@ public class Game{
 		}
 		else if(nMenuChoice == 2)
 		{ 
-			CArea.run();
+			CArea.run();    //public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
             do{
-                nMovement = CArea.loadArea();
+                nMovement = CArea.loadArea(CPlayerInventory.getAllCapturedCreatures(aCapturedCreatures), CPlayerInventory);
             }while(nMovement != 5);
 
             if(nMovement == 5)
@@ -203,5 +202,8 @@ public class Game{
     {
         return  this.CMasterInventory;
     }
+
+ 
+
 
 }

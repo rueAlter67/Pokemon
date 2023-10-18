@@ -1,4 +1,5 @@
-import java.lang.*; 
+import java.lang.*;
+import java.util.ArrayList;
 import java.util.Scanner; 
 
 
@@ -27,7 +28,7 @@ public class Area{
     }
 
 
-    public int loadArea() 
+    public int loadArea(ArrayList<Creature> arrayList) 
     {
         Scanner CReader = new Scanner(System.in);
         int nCol; 

@@ -80,19 +80,34 @@ public class Player
         return true; 
     }
 
-    public void attack(Creature CEnemy, Player CPlayer)
+    public void attack(Creature CEnemy, Creature CActiveCreature)
     {
         Random CRand = new Random();
         int nMax = 10; 
         int nMin = 1;
         int nRandom = CRand.nextInt(nMax - nMin + 1) + nMin;
-        int nDamage = nRandom * 1;// 1 should be the creatures level 
+        int nDamage = nRandom * 1;// 1 the creature's level 
 
         // insert additional damage 
 
+        if(CActiveCreature.getType() == "Fire")
+        {   
+            if(CEnemy.getType() == "Grass")
+                nDamage*= 1.5; 
+        }
+        else if(CActiveCreature.getType() == "Grass")
+        {
+            if(CEnemy.getType() == "Water")
+                nDamage*= 1.5;
+        } 
+        else if(CActiveCreature.getType() == "Water")
+        {
+              if(CEnemy.getType() == "Fire")
+                 nDamage*= 1.5;
+        }
+        System.out.println("\n\t\t\tDAMAGE: "+ nDamage + "\n");
         CEnemy.setHealth(CEnemy.getHealth() - nDamage);
     }
-    
 
     public boolean catchCreature(Creature CEnemy)
     {

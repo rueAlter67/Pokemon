@@ -1,5 +1,9 @@
 import java.lang.*; 
-import java.util.Scanner; 
+import java.util.Scanner;
+
+import javax.crypto.Cipher;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -24,8 +28,7 @@ public class Area{
         this.nYDim = 0; 
     }
 	
-
-	public int loadArea() 
+	public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
     {
         Scanner CReader = new Scanner(System.in);
         Random CRandom = new Random();
@@ -34,7 +37,7 @@ public class Area{
 		int nMovement=0;   
         int nChecker=0;  
         boolean bPlayer=true; 
-
+        Creature CActive = CInventory.getTheActiveCreature(aCaptured);
 
         do{
             for(nCol = 0; nCol < this.nYDim; nCol++)
@@ -111,23 +114,7 @@ public class Area{
                         break;
             }
 
-<<<<<<< HEAD
             double dChance = CRandom.nextDouble();
-=======
-            for(nCol = 0; nCol < this.nYDim; nCol++)
-            {
-              System.out.printf("\n\n\t\t\t");
-                for(nRow = 0; nRow < this.nXDim; nRow++)
-                {
-                    if(nRow ==  this.CPlayer.getPosX() && nCol == this.CPlayer.getPosY())
-                        System.out.printf(" O ");
-                    else 
-                        System.out.printf(" + ");
-                }
-
-                System.out.print("\n\n");
-            }
->>>>>>> 2cc38e4be947dc858d600d2eae8d987d14841bbd
 
             if(dChance <= 0.40 && bPlayer == true && nMovement != 5 )
             {
@@ -136,7 +123,7 @@ public class Area{
                 System.out.println("\n\n\n\n");
                 this.CEnemy = getRandomCreature(CMasterInventory);
                 this.CEnemy.setHealth(50);
-                battle(this.CEnemy);
+                battle(this.CEnemy, aCaptured,CInventory);
             } 
 
         }while(nMovement != 5);
@@ -204,11 +191,12 @@ public class Area{
     }
 
 
-    public void battle(Creature CEnemy)
+    public void battle(Creature CEnemy, ArrayList<Creature> aCaptured, Inventory CInventory)
     {
         Scanner CReader = new Scanner(System.in);
         int nMovesLeft = 3; 
         int nBattleMove = 0; 
+        int i;
 
         do{
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
@@ -257,7 +245,7 @@ public class Area{
             switch(nBattleMove)
             {
                 case 1: 
-                        CPlayer.attack(this.CEnemy, this.CPlayer);
+                        CPlayer.attack(this.CEnemy, CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)));
                         break;
                 case 2: 
                        // this.CPlayer.goDown(nXDim,nYDim);
@@ -269,7 +257,7 @@ public class Area{
                        // this.CPlayer.goRight(nXDim,nYDim);
                         break;
                 case 5: 
-                        loadArea();
+                        loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory) ;
                         break;
             }
             

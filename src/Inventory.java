@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Inventory { 
 
     public void displayCreatureImage(Creature CCreature) 
@@ -37,13 +38,7 @@ public class Inventory {
       
      }
 
-     public void displayActive(Creature CCreature) 
-     {
-      if(CCreature.getActiveCreature()==true)
-      {
-         System.out.print("(Active Creature)");
-      }
-     }
+    
      
      //will still need to create separate displays for each information, I separated them kasi baka sa starters di pakita everything
      //can make one with multiple info if needed
@@ -51,6 +46,7 @@ public class Inventory {
     public void addCreature(ArrayList<Creature> aArray, Creature CCreature)  //used to add Creatures to diff arrayLists
     {
            aArray.add(CCreature);
+           
     }
 
     public Creature findCreaturebyIndex(ArrayList<Creature> aArray, int nCreature, int nLength) //this is assuming the index being entered is +1 (no 0 index)
@@ -78,8 +74,7 @@ public class Inventory {
       }
       return null;
     }
-
-
+    
      public void swapCreature(Creature CCreatureA, Creature CCreatureB)
      {
           boolean bActiveCreatureA = CCreatureA.getActiveCreature();
@@ -106,12 +101,11 @@ public class Inventory {
           System.out.print(" - ");
           CInventory.displayCreatureLevel(aCapturedArray.get(i));
           System.out.print(" ");
-          CInventory.displayActive(aCapturedArray.get(i));
+         // CInventory.displayActive(aCapturedArray.get(i));
           System.out.print("\n");
 
         }
      }
-
      public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aArray){
 
       System.out.print("\n\n====================INVENTORY====================\n"+
@@ -151,6 +145,27 @@ public class Inventory {
         CInputScanner.close();
         return nActionChosen;
     }
+
+    
+    public Creature getTheActiveCreature(ArrayList<Creature> aArray)
+    {
+        int k;
+        Creature CActive=null; 
+
+        for(k=0 ; k< aArray.size(); k++)
+        {
+            if(aArray.get(k).getActiveCreature() == true)
+                CActive = aArray.get(k);
+        }
+
+        return CActive;
+    }
+
+    public  ArrayList<Creature> getAllCapturedCreatures( ArrayList<Creature> aCapturedCreatures )
+    {
+        return aCapturedCreatures;
+    }
+
 
     public boolean returnToMainMenu()
     {
