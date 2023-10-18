@@ -31,6 +31,7 @@ public class Area{
 	public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
     {
         Scanner CReader = new Scanner(System.in);
+        Random CRandom = new Random();
         int nCol; 
         int nRow; 
 		int nMovement=0;   
@@ -114,9 +115,9 @@ public class Area{
 
             double dChance = CRandom.nextDouble();
 
-            if(dChance == 0.40 && bPlayer == true )
+            if(dChance <= 0.40 && bPlayer == true )
             {
-                System.out.print("\n\n[SYSTEM MESSAGE]: You've encountered an enemy!! Press any button to proceed");
+                System.out.print("\n\n\t\t\t[SYSTEM MESSAGE]: You've encountered an enemy! Press any button to proceed");
                 CReader.nextLine(); 
                 System.out.println("\n\n\n\n");
                 int nIndex = 0;
@@ -158,18 +159,18 @@ public class Area{
                     else
                     {
                         System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
-                         CReader.nextLine();
+                        CReader.nextLine();
                     
                     }
                 }
                 else
                 {
                     System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Invalid Input. Input must be an integer.\n");
-                     CReader.nextLine();  
+                    CReader.nextLine();  
                 }
 
         }
-           // CReader.nextLine();
+
 
 		    switch(nAreaChoice)
             {
@@ -200,7 +201,7 @@ public class Area{
 
         do{
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
-                            "\t\t\t\tMoves left: "+ nMovesLeft +
+                            "\t\t\tMoves left: "+ nMovesLeft +
                             "\n\t\t\tEnemy Health: " + this.CEnemy.getHealth() + 
                              "\n\t\t\t======================================="+
 
@@ -209,8 +210,9 @@ public class Area{
                         "\t\t\t[3]  CATCH \n" +
                         "\t\t\t[4]  SKIP CREATURE \n");
 
-                        System.out.println("Creature: " + this.CEnemy.getCreatureName());
-                       
+                        System.out.println("\t\tEnemy Creature: " + this.CEnemy.getCreatureName()+"\tType: "+ this.CEnemy.getType());
+                        System.out.println("\t\tActive Creature: " + CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getCreatureName()+"\tType: "+ 
+                                                            CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getType());
             nBattleMove=0;
             int nChecker = 0;	
 
@@ -229,9 +231,8 @@ public class Area{
                     }
                     else
                     {
-                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
+                        System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 4 only.\n");
                          CReader.nextLine();
-                    
                     }
                 }
                 else
@@ -248,15 +249,12 @@ public class Area{
                         CPlayer.attack(this.CEnemy, CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)));
                         break;
                 case 2: 
-                       // this.CPlayer.goDown(nXDim,nYDim);
+                       //catch
                         break;
                 case 3:
-                       // this.CPlayer.goLeft(nXDim,nYDim);
+                       //swap
                         break;
                 case 4: 
-                       // this.CPlayer.goRight(nXDim,nYDim);
-                        break;
-                case 5: 
                         loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory) ;
                         break;
             }

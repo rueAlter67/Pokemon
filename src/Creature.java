@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Creature {
     
-    private int nHealth;    
+    private double nHealth;    
     private int nImageID;    
     private String strCreatureName;    
     private char cFamily;    
@@ -10,7 +10,7 @@ public class Creature {
     private int nLevel;    
     private boolean bActive;    
 
-    public Creature(int nHealth, int nImageID, String strCreatureName, char cFamily, String strType, int nLevel, boolean bActive){
+    public Creature(double nHealth, int nImageID, String strCreatureName, char cFamily, String strType, int nLevel, boolean bActive){
         this.nHealth = nHealth;
         this.nImageID = nImageID;
         this.strCreatureName = strCreatureName;
@@ -20,11 +20,11 @@ public class Creature {
         this.bActive = bActive;
     }
 
-    public void setHealth(int nHealth){
+    public void setHealth(double nHealth){
         this.nHealth = nHealth;
     }
     
-    public int getHealth(){
+    public double getHealth(){
         return nHealth;
     }
 

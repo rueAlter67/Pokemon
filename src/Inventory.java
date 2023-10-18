@@ -80,11 +80,6 @@ public class Inventory {
       }
       return null;
     }
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> dd14999d7f84c2c28136a659c2a713ea912e4790
      public void swapCreature(Creature CCreatureA, Creature CCreatureB)
      {
           boolean bActiveCreatureA = CCreatureA.getActiveCreature();
@@ -111,22 +106,14 @@ public class Inventory {
           System.out.print(" - ");
           CInventory.displayCreatureLevel(aCapturedArray.get(i));
           System.out.print(" ");
-<<<<<<< HEAD
-         // CInventory.displayActive(aCapturedArray.get(i));
-=======
           CInventory.displayActiveCreature(aCapturedArray.get(i));
->>>>>>> dd14999d7f84c2c28136a659c2a713ea912e4790
           System.out.print("\n");
 
         }
      }
-<<<<<<< HEAD
-     public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aArray){
-=======
 
      public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aCapturedArray){
       Scanner CInputScanner = new Scanner(System.in);
->>>>>>> dd14999d7f84c2c28136a659c2a713ea912e4790
 
       int nInput = 0;
       boolean bInputOver = false;

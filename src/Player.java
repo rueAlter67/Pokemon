@@ -88,7 +88,7 @@ public class Player
             System.err.print("\n\n\t\t\t[ERROR]: Player can't move anymore to the right");
         }
 
-        return true; 
+        return bMove; 
     }
 
     public void attack(Creature CEnemy, Creature CActiveCreature)
@@ -97,10 +97,10 @@ public class Player
         int nMax = 10; 
         int nMin = 1;
         int nRandom = CRand.nextInt(nMax - nMin + 1) + nMin;
-        int nDamage = nRandom * 1;// 1 the creature's level 
+        double nDamage = nRandom * 1;// 1 the creature's level 
 
         // insert additional damage 
-
+        System.out.print("\n\t\t\tINITIAL DAMAGE: "+ nDamage + "\n");
         if(CActiveCreature.getType() == "Fire")
         {   
             if(CEnemy.getType() == "Grass")
@@ -116,7 +116,9 @@ public class Player
               if(CEnemy.getType() == "Fire")
                  nDamage*= 1.5;
         }
-        System.out.println("\n\t\t\tDAMAGE: "+ nDamage + "\n");
+
+        System.out.println("\n\t\t\tFINALDAMAGE: "+ nDamage + "\n");
+
         CEnemy.setHealth(CEnemy.getHealth() - nDamage);
     }
 
