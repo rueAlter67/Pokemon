@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,24 +25,7 @@ public class Player
      * activecreature of the player with
      * one of the creatures in its inventory
      */
-    public boolean swapCreature()
-    {
-
-        return true; 
-    }
-
-    /* does not interact with the creature  */
-    public boolean skip()
-    {
-        return true; 
-    }
-
-    // public boolean catchCreature(Creature CEnemy)
-    // {
-
-    //     return true; 
-    // }
-
+    
 
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
     // players can move ()
@@ -122,10 +106,25 @@ public class Player
         CEnemy.setHealth(CEnemy.getHealth() - nDamage);
     }
 
-    public boolean catchCreature(Creature CEnemy)
+    public boolean catchCreature(Creature CEnemy,ArrayList<Creature> aCaptured, Inventory CInventory)
     {
-        double dCatchRate = 0; 
+        Random CRandom = new Random();
+        boolean bCaught = false; 
+        double dChance = CRandom.nextDouble();
+        double dCatchRate = (40+50-CEnemy.getHealth())/100;
+
+        if(dChance <= dCatchRate)
+        {
+            CInventory.addCreature(aCaptured, CEnemy);
+            bCaught = true; 
+        }
+        return bCaught;
+    }
+
+    public boolean swap()
+    {
         return true; 
+
     }
 
   //+++++++++++ setters and getters
@@ -138,9 +137,6 @@ public class Player
         return nPosY;
     }
 
-    // public Creature getnStarterCreature() {
-    //     return nStarterCreature;
-    // }
-
+  
 
 }

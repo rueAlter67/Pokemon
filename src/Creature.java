@@ -76,7 +76,6 @@ public class Creature {
         return bActive;
     }
 
-    
     public Creature copyCreatureInfo() //can be used to catch creatures/add creatures to aCapturedCreatures
     {
       Creature CNewCreature = new Creature(nHealth, nImageID, strCreatureName, cFamily, strType, nLevel, bActive);

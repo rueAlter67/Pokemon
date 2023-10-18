@@ -197,7 +197,7 @@ public class Area{
         Scanner CReader = new Scanner(System.in);
         int nMovesLeft = 3; 
         int nBattleMove = 0; 
-        int i;
+        boolean bCaught = false; 
 
         do{
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
@@ -249,11 +249,21 @@ public class Area{
                         CPlayer.attack(this.CEnemy, CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)));
                         break;
                 case 2: 
-                       //catch
+                        //swap
                         break;
                 case 3:
-                       //swap
-                        break;
+                       bCaught = CPlayer.catchCreature(this.CEnemy,aCaptured, CInventory);
+                       if(bCaught)
+                       {
+                            System.out.println("\n\t\t\t[SYSTEM MESSAGE]: You caught a creature. Press any button to continue playing.\n");
+                            CReader.nextLine();
+                       }
+                       else
+                       {
+                            System.out.println("\n\t\t\t[SYSTEM MESSAGE]: You failed to catch a creature. Press any button to continue playing.\n");
+                            CReader.nextLine();
+                       }
+                       break;
                 case 4: 
                         loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory) ;
                         break;
