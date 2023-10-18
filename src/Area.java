@@ -255,7 +255,7 @@ public class Area{
                        bCaught = CPlayer.catchCreature(this.CEnemy,aCaptured, CInventory);
                        if(bCaught)
                        {
-                            System.out.println("\n\t\t\t[SYSTEM MESSAGE]: You caught a creature. Press any button to continue playing.\n");
+                            System.out.println("\n\t\t\t[SYSTEM MESSAGE]: You caught a creature. Press any button to go back to Area.\n");
                             CReader.nextLine();
                        }
                        else
@@ -270,7 +270,7 @@ public class Area{
             }
             
            
-        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0);
+        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0 && bCaught != true);
         
         
     }

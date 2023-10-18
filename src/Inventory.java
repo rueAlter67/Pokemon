@@ -148,11 +148,8 @@ public class Inventory {
         else 
             System.out.println("Invalid Inventory Menu Action");
         
-        CInputScanner.close();
       }
 
-      CInputScanner.close();
-    
       return nInput;
     }
 

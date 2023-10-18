@@ -176,8 +176,7 @@ public class Game{
                     else
                         System.out.print("Invalid Creature (Check Number or if Active)");
 
-               // CPlayerInventory.displayInventory(CPlayerInventory,nlength,aCapturedCreatures);
-                    CIntScanner.close();
+
                 }
                 else if(nInput == 2)
                 {
@@ -194,7 +193,7 @@ public class Game{
         }
 		else if(nMenuChoice == 2)
 		{ 
-			CArea.run();    //public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
+			CArea.run();    
             do{
                 nMovement = CArea.loadArea(CPlayerInventory.getAllCapturedCreatures(aCapturedCreatures), CPlayerInventory);
             }while(nMovement != 5);
@@ -207,8 +206,11 @@ public class Game{
 			System.out.println("\n\t\t\t\t[SYSTEM MESSAGE]: FEATURE NOT YET AVAILABLE");
 		} 
         else 
-			exitGame();
+        {
             CReader.close();
+			exitGame();
+        }
+            
     }
 
     public void exitGame()
