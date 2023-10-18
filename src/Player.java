@@ -18,13 +18,6 @@ public class Player
     } 
 
 
-    // behaviors 
-
-    //+++++++++++ PLAYER'S INTERACTION WITH ENEMY
-    /* swapCreature changes the 
-     * activecreature of the player with
-     * one of the creatures in its inventory
-     */
     
 
     //+++++++++++ PLAYER'S INTERACTION WITH AREA
@@ -36,7 +29,6 @@ public class Player
         return false; 
     }
 
-    
     public boolean goDown(int nXLimit, int nYLimit)
     {
         System.err.print("\n\n\t\t\t[ERROR]: Player can't move down anymore");   
@@ -47,13 +39,12 @@ public class Player
     {
         boolean bMove = true; 
 
-        if(this.nPosX <nXLimit-1)
-        {
-            this.nPosX+=1; 
-        }
+
+        if(this.nPosX > 0)
+            this.nPosX-=1; 
         else
         {
-            bMove = false;
+            bMove = false; 
             System.err.print("\n\n\t\t\t[ERROR]: Player can't move anymore to the left");
         }
 
@@ -64,13 +55,15 @@ public class Player
     {
         boolean bMove = true; 
 
-        if(this.nPosX > 0)
-            this.nPosX-=1; 
+        if(this.nPosX <nXLimit-1)
+            this.nPosX+=1; 
         else
         {
-            bMove = false; 
-            System.err.print("\n\n\t\t\t[ERROR]: Player can't move anymore to the right");
+            bMove = false;
+            System.err.print("\n\n\t\t\t[ERROR]: Player can't move anymore to the left");
+
         }
+        
 
         return bMove; 
     }
@@ -121,10 +114,46 @@ public class Player
         return bCaught;
     }
 
-    public boolean swap()
+    public boolean swap(ArrayList<Creature> aCaptured, Inventory CInventory)
     {
-        return true; 
+        boolean bSwapped= false; 
+        int nInput= CInventory.displayInventory(CInventory,aCaptured.size(),aCaptured);
+        boolean bExitInventory = false;
 
+        if(nInput == 1)
+        {
+            Scanner CIntScanner = new Scanner(System.in);
+            System.out.print("Type Numbers of Creatures to Swap: "+ "\n");
+            System.out.print("Creature 1: ");
+            int nCreatureA = CIntScanner.nextInt();
+            System.out.print("Creature 2: ");
+            int nCreatureB = CIntScanner.nextInt();
+            CIntScanner.nextLine();
+
+            Creature CChosenCreatureA = CInventory.findCreaturebyIndex(aCaptured, nCreatureA, aCaptured.size());
+            Creature CChosenCreatureB = CInventory.findCreaturebyIndex(aCaptured, nCreatureB, aCaptured.size());
+            boolean bCreatureAActive = CChosenCreatureA.getActiveCreature();
+            boolean bCreatureBActive = CChosenCreatureB.getActiveCreature();
+
+            if(CChosenCreatureA != null && CChosenCreatureB != null && bCreatureAActive == true || bCreatureBActive == true)
+            {
+                CInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
+                System.out.print("\n\t\t\t[SYSTEM MESSAGE]: Active Creature Changed.");
+                bSwapped = true; 
+            }
+            else
+                System.out.print("\n\t\t\t[SYSTEM MESSAGE]: Invalid Creature (Check Number or if Active)");
+
+        }
+        else if(nInput == 2)
+        {
+            bExitInventory = true;
+        }
+        else
+            System.out.print("\n\t\t\t[SYSTEM MESSAGE]: Invalid Action");
+
+
+        return bSwapped; 
     }
 
   //+++++++++++ setters and getters

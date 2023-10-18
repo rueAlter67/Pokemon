@@ -88,10 +88,10 @@ public class Game{
                 {
                     isValidFamily = true;
                 } else 
-                    System.out.println("Invalid Family");
+                    System.out.println("[SYSTEM MESSAGE]: Invalid Family");
             }
 
-            System.out.println("Are you sure you want to choose the " + cFamily + " family Creature? [Y]es / [N]o");
+            System.out.println("[SYSTEM MESSAGE]: Are you sure you want to choose the " + cFamily + " family Creature? [Y]es / [N]o");
             char cAnswer = CCharScanner.next().charAt(0);
 
          if (cAnswer == 'Y' || cAnswer == 'y') {
@@ -171,10 +171,10 @@ public class Game{
                     if(CChosenCreatureA != null && CChosenCreatureB != null && bCreatureAActive == true || bCreatureBActive == true)
                     {
                         CPlayerInventory.swapCreature(CChosenCreatureA, CChosenCreatureB);
-                        System.out.print("Active Creature Changed.");
+                        System.out.print("[SYSTEM MESSAGE]:Active Creature Changed.");
                     }
                     else
-                        System.out.print("Invalid Creature (Check Number or if Active)");
+                        System.out.print("[SYSTEM MESSAGE]:Invalid Creature (Check Number or if Active)");
 
 
                 }
@@ -183,7 +183,7 @@ public class Game{
                     bExitInventory = true;
                 }
                 else
-                    System.out.print("Invalid Action");
+                    System.out.print("[SYSTEM MESSAGE]: Invalid Action");
 		    }
 
             if(bExitInventory)
@@ -215,7 +215,7 @@ public class Game{
 
     public void exitGame()
     {
-        System.out.println("\n\n\t\tYou have exited the game.");
+        System.out.println("\n\n\t\t[FINAL MESSAGE]:You have exited the game.");
         System.exit(0);
     }
 

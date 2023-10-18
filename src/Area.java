@@ -66,8 +66,7 @@ public class Area{
 
     		while(nChecker == 0)
             {
-                System.out.println("\nPlayer x-coord : " + CPlayer.getPosX()+
-                                    "\nPlayer y-coord : " + CPlayer.getPosY());
+        
                 System.out.print("\n\t\t\t[INPUT]: ");
             
                 if(CReader.hasNextInt())
@@ -115,7 +114,7 @@ public class Area{
 
             double dChance = CRandom.nextDouble();
 
-            if(dChance <= 0.40 && bPlayer == true )
+            if(dChance <= 0.40 && bPlayer == true && nMovement != 5 )
             {
                 System.out.print("\n\n\t\t\t[SYSTEM MESSAGE]: You've encountered an enemy! Press any button to proceed");
                 CReader.nextLine(); 
@@ -198,21 +197,23 @@ public class Area{
         int nMovesLeft = 3; 
         int nBattleMove = 0; 
         boolean bCaught = false; 
+        boolean bSwapped = false; 
+        int nLeave = 0; 
 
         do{
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
                             "\t\t\tMoves left: "+ nMovesLeft +
                             "\n\t\t\tEnemy Health: " + this.CEnemy.getHealth() + 
                              "\n\t\t\t======================================="+
-
-                         "\n\n\n\t\t\t[1]  ATTACK \n" + 
+                             "\n\n\t\t\tActive Creature: " + CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getCreatureName()+"\tType: "+ 
+                                                            CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getType()+
+                             "\n\t\t\tEnemy Creature: " + this.CEnemy.getCreatureName()+"\tType: "+ this.CEnemy.getType()+
+                             
+                         "\n\n\t\t\t[1]  ATTACK \n" + 
                           "\t\t\t[2]  SWAP \n"+
                         "\t\t\t[3]  CATCH \n" +
                         "\t\t\t[4]  SKIP CREATURE \n");
 
-                        System.out.println("\t\tEnemy Creature: " + this.CEnemy.getCreatureName()+"\tType: "+ this.CEnemy.getType());
-                        System.out.println("\t\tActive Creature: " + CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getCreatureName()+"\tType: "+ 
-                                                            CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getType());
             nBattleMove=0;
             int nChecker = 0;	
 
@@ -226,8 +227,8 @@ public class Area{
                     if(nBattleMove >= 1 && nBattleMove <= 4)
                     {
                         nChecker = 1; 
-                        CReader.nextLine();
                         nMovesLeft-=1;
+                        CReader.nextLine();
                     }
                     else
                     {
@@ -249,10 +250,33 @@ public class Area{
                         CPlayer.attack(this.CEnemy, CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)));
                         break;
                 case 2: 
-                        //swap
+                        if(aCaptured.size() == 1)
+                        {
+                            System.out.println("[SYSTEM MESSAGE]: You can't swap if you only have 1 creature in your inventory\n" );
+
+                        }
+                        else
+                        {
+                            bSwapped = CPlayer.swap(aCaptured,CInventory);
+
+                            if(bSwapped && nMovesLeft >= 1)
+                            {
+                                System.out.println("\n\t\t\t[SYSTEM MESSAGE]: Swapping successful! Press any button to continue playing");
+                                CReader.nextLine();
+                            }
+                            else
+                            {
+                                System.out.println("\n\t\t\t[SYSTEM MESSAGE]: Swapping successful! Press any button to return to Area");
+                                CReader.nextLine();
+                            }
+    
+
+                        }
+
                         break;
                 case 3:
                        bCaught = CPlayer.catchCreature(this.CEnemy,aCaptured, CInventory);
+        
                        if(bCaught)
                        {
                             System.out.println("\n\t\t\t[SYSTEM MESSAGE]: You caught a creature. Press any button to go back to Area.\n");
@@ -265,14 +289,14 @@ public class Area{
                        }
                        break;
                 case 4: 
-                        loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory) ;
-                        break;
+                       loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory);
+                       break;
             }
             
            
         }while(nMovesLeft >= 1 && CEnemy.getHealth() >0 && bCaught != true);
-        
-        
+    
+            
     }
 
     public Creature getRandomCreature(Creature[] MasterInventory)

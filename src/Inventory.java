@@ -146,7 +146,7 @@ public class Inventory {
           return nInput;
         } 
         else 
-            System.out.println("Invalid Inventory Menu Action");
+            System.out.println("[SYSTEM MESSAGE]: Invalid Inventory Menu Action");
         
       }
 
