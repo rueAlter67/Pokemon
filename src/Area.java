@@ -11,8 +11,6 @@ import java.util.Random;
  * Area is the base class for all the area
  * that allows the application to 
  */
-
-
 public class Area{
 
     /**

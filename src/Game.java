@@ -44,9 +44,12 @@ public class Game{
         Creature CChosenCreature = CMasterInventory[nIndex]; //for testing
         Creature CChosenCreature2 = CMasterInventory[nIndex2]; //for testing (scroll down to nMenuChoice == 1 for reference)
 
+    
+    /**
+     * This method starts the entire game. 
+     */
     public void run() // instantiation ng mga class na need natin 
     {
-        //this.CPlayer = new Player(); 
         this.CPlayer = new Player(); 
         this.CArea = new Area(this.CPlayer,getAllCreatures() );
     }
@@ -111,6 +114,9 @@ public class Game{
         return true; 
     }
 
+    /**
+     * This method displays the Main Menu of the game 
+     */
     public void displayMenu() 
     {
 
@@ -213,22 +219,37 @@ public class Game{
             
     }
 
+    /**
+     * This method termiantes the game.
+     */
     public void exitGame()
     {
         System.out.println("\n\n\t\t[FINAL MESSAGE]:You have exited the game.");
         System.exit(0);
     }
 
-    // setters and getters 
+    /**
+     * This method sets the choice of the main menu
+     * @param nChoice   integer value containing the choice
+     */
     public void setnChoice(int nChoice)
     {
         this.nMenuChoice = nChoice;
     }
+
+    /**
+     * This method gets the choice of the main menu
+     * @return the integer value of choice
+     */
     public int getnChoice()
     {
         return this.nMenuChoice;
     }
 
+    /**
+     * This method gets all the creatures to be used throughout the game
+     * @return      an array of creatures 
+     */
     public Creature[] getAllCreatures()
     {
         return  this.CMasterInventory;
