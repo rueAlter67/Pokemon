@@ -53,7 +53,7 @@ public class Area{
         boolean bPlayer=true; 
         Creature CActive = CInventory.getTheActiveCreature(aCaptured);
 
-        do{
+            
             for(nCol = 0; nCol < this.nYDim; nCol++)
         
             {
@@ -94,7 +94,7 @@ public class Area{
                     else
                     {
                         System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
-                         CReader.nextLine();
+                        CReader.nextLine();
                     
                     }
                 }
@@ -105,7 +105,7 @@ public class Area{
                 }
 
             }
-           // CReader.nextLine();
+        
 
 		    switch(nMovement)
             {
@@ -138,12 +138,9 @@ public class Area{
                 this.CEnemy = getRandomCreature(CMasterInventory);
                 this.CEnemy.setHealth(50);
                 battle(this.CEnemy, aCaptured,CInventory);
-            } 
-
-        }while(nMovement != 5);
+            }
 
         return nMovement; 
-
     }
 
 
@@ -226,6 +223,8 @@ public class Area{
         int nLeave = 0; 
 
         do{
+        
+
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
                             "\t\t\tMoves left: "+ nMovesLeft +
                             "\n\t\t\tEnemy Health: " + this.CEnemy.getHealth() + 
@@ -313,13 +312,10 @@ public class Area{
                             CReader.nextLine();
                        }
                        break;
-                case 4: 
-                       loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory);
-                       break;
-            }
             
+            }
            
-        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0 && bCaught != true);
+        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0 && bCaught != true && nBattleMove != 4);
     
             
     }

@@ -205,7 +205,10 @@ public class Game{
             }while(nMovement != 5);
 
             if(nMovement == 5)
+            {
                 displayMenu();
+                nMovement = 0; 
+            }
 		}
 		else if(nMenuChoice == 3)
 		{

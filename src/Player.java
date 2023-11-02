@@ -135,7 +135,7 @@ public class Player
                  nDamage*= 1.5;
         }
 
-        System.out.println("\n\t\t\tFINALDAMAGE: "+ nDamage + "\n");
+        //System.out.println("\n\t\t\tFINALDAMAGE: "+ nDamage + "\n");
 
         CEnemy.setHealth(CEnemy.getHealth() - nDamage);
     }
