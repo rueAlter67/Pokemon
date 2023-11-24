@@ -27,9 +27,10 @@ public class StartUpView extends JFrame{
         setResizable(false);;
 
         this.creatureLbl = new JButton();
-
         this.creatureLbl.setText("Choose");
         this.creatureLbl.addMouseListener(new MyMouseListener()); 
+
+
         add(creatureLbl);
 
 
