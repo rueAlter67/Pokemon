@@ -81,7 +81,7 @@ public class Inventory {
     *  @param (CCreature) is the specific creature whose active status is being checked and displayed
     *  
     */
-     public void displayActiveCreature(Creature CCreature) 
+     public void displayActiveCreature(CapturedCreature CCreature) 
      {
       if(CCreature.getActiveCreature()==true)
       {
@@ -96,9 +96,11 @@ public class Inventory {
     *  @param (CCreature) is the specific creature whose being added to the specific arrayList
     *  
     */
-    public void addCreature(ArrayList<Creature> aArray, Creature CCreature) 
+    public void addCreature(ArrayList<CapturedCreature> aArray, Creature CCreature) 
     {
-           aArray.add(CCreature);
+            CapturedCreature NewCreature = new CapturedCreature((Creature)CCreature);
+
+          aArray.add(NewCreature);
            
     }
 
@@ -111,7 +113,7 @@ public class Inventory {
     *  @param (nLength) is the length or amount of elements inside of aCapturedArray arrayList
     *  @returns (Creature) that is found to have the same index as nCreatureIndex, null if no creature of the same index is found  
     */    
-    public Creature findCreaturebyIndex(ArrayList<Creature> aCapturedArray, int nCreatureIndex, int nLength)
+    public CapturedCreature findCreaturebyIndex(ArrayList<CapturedCreature> aCapturedArray, int nCreatureIndex, int nLength)
     {
       int i;
       for(i=0;i<nLength;i++)
@@ -154,7 +156,7 @@ public class Inventory {
     *  @param (CCreatureB) is the second specific creature whose active boolean indicator is being swapped with CCreatureA
     *   
     */  
-     public void swapCreature(Creature CCreatureA, Creature CCreatureB)
+     public void swapCreature(CapturedCreature CCreatureA, CapturedCreature CCreatureB)
      {
           boolean bActiveCreatureA = CCreatureA.getActiveCreature();
           boolean bActiveCreatureB = CCreatureB.getActiveCreature();
@@ -172,7 +174,7 @@ public class Inventory {
     *  @param (CInventory) is the inventory that contains aCapturedArray
     *   
     */ 
-     public void displayCapturedCreatures(int nlength, ArrayList<Creature> aCapturedArray, Inventory CInventory) 
+     public void displayCapturedCreatures(int nlength, ArrayList<CapturedCreature> aCapturedArray, Inventory CInventory) 
      {
         int i;
         for(i=0;i<nlength;i++)
@@ -204,7 +206,7 @@ public class Inventory {
      *  @param (aCapturedArray) is the specific arrayList of captured creatures
      *   
      */ 
-     public int displayInventory(Inventory CInventory, int nlength, ArrayList<Creature> aCapturedArray){
+     public int displayInventory(Inventory CInventory, int nlength, ArrayList<CapturedCreature> aCapturedArray){
       Scanner CInputScanner = new Scanner(System.in);
 
       int nInput = 0;
@@ -250,10 +252,10 @@ public class Inventory {
      *  @return the (CActive) creature who is currently active
      *   
      */ 
-    public Creature getTheActiveCreature(ArrayList<Creature> aArray)
+    public CapturedCreature getTheActiveCreature(ArrayList<CapturedCreature> aArray)
     {
         int k;
-        Creature CActive=null; 
+        CapturedCreature CActive=null; 
 
         for(k=0 ; k< aArray.size(); k++)
         {
@@ -272,7 +274,7 @@ public class Inventory {
      *  @return (aCapturedCreatures) arrayList of captured creatures
      *   
      */ 
-    public  ArrayList<Creature> getAllCapturedCreatures(ArrayList<Creature> aCapturedCreatures)
+    public  ArrayList<CapturedCreature> getAllCapturedCreatures(ArrayList<CapturedCreature> aCapturedCreatures)
     {
         return aCapturedCreatures;
     }

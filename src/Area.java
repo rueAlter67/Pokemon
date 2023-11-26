@@ -19,11 +19,11 @@ public class Area{
     private int nAreaLevel; 
     private int nXDim=5; // default to 0 later
     private int nYDim=1;
-    private Creature CEnemy; 
+    private Enemy CEnemy; 
     private Player CPlayer; 
-    private Creature[] CMasterInventory; 
+    private ArrayList<Creature> CMasterInventory; 
  
-    public Area(Player CPlayer, Creature[] CMasterInventory)
+    public Area(Player CPlayer, ArrayList<Creature> CMasterInventory)
     {
         this.CMasterInventory = CMasterInventory;
         this.CPlayer = CPlayer; 
@@ -42,7 +42,7 @@ public class Area{
      * @param CInventory    the instance of Inventory Class used by the Player
      * @return              the nMovement made by the paler
      */	
-	public int loadArea(ArrayList<Creature> aCaptured, Inventory CInventory) 
+	public int loadArea(ArrayList<CapturedCreature> aCaptured, Inventory CInventory) 
     {
         Scanner CReader = new Scanner(System.in);
         Random CRandom = new Random();
@@ -51,9 +51,9 @@ public class Area{
 		int nMovement=0;   
         int nChecker=0;  
         boolean bPlayer=true; 
-        Creature CActive = CInventory.getTheActiveCreature(aCaptured);
+        CapturedCreature CActive = CInventory.getTheActiveCreature(aCaptured);
 
-            
+        do{
             for(nCol = 0; nCol < this.nYDim; nCol++)
         
             {
@@ -94,7 +94,7 @@ public class Area{
                     else
                     {
                         System.err.println("\n\t\t\t[SYSTEM MESSAGE]: Input out of bounds. Choose 1 to 5 only.\n");
-                        CReader.nextLine();
+                         CReader.nextLine();
                     
                     }
                 }
@@ -105,7 +105,7 @@ public class Area{
                 }
 
             }
-        
+           // CReader.nextLine();
 
 		    switch(nMovement)
             {
@@ -138,9 +138,12 @@ public class Area{
                 this.CEnemy = getRandomCreature(CMasterInventory);
                 this.CEnemy.setHealth(50);
                 battle(this.CEnemy, aCaptured,CInventory);
-            }
+            } 
+
+        }while(nMovement != 5);
 
         return nMovement; 
+
     }
 
 
@@ -213,7 +216,7 @@ public class Area{
      * @param aCaptured     the array list of captured creatures
      * @param CInventory    the Inventory of the player
      */
-    public void battle(Creature CEnemy, ArrayList<Creature> aCaptured, Inventory CInventory)
+    public void battle(Enemy CEnemy, ArrayList<CapturedCreature> aCaptured, Inventory CInventory)
     {
         Scanner CReader = new Scanner(System.in);
         int nMovesLeft = 3; 
@@ -223,8 +226,6 @@ public class Area{
         int nLeave = 0; 
 
         do{
-        
-
             System.out.println("\n\n\t\t\t================BATTLE=================\n"+
                             "\t\t\tMoves left: "+ nMovesLeft +
                             "\n\t\t\tEnemy Health: " + this.CEnemy.getHealth() + 
@@ -312,10 +313,13 @@ public class Area{
                             CReader.nextLine();
                        }
                        break;
-            
+                case 4: 
+                       loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory);
+                       break;
             }
+            
            
-        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0 && bCaught != true && nBattleMove != 4);
+        }while(nMovesLeft >= 1 && CEnemy.getHealth() >0 && bCaught != true);
     
             
     }
@@ -326,12 +330,12 @@ public class Area{
      * @param MasterInventory   an array of creatures containing all of the creatures of the game
      * @return <CEnemy>         the enemy creature of the player
      */
-    public Creature getRandomCreature(Creature[] MasterInventory)
+    public Enemy getRandomCreature(ArrayList<Creature> MasterInventory)
     {
         Random CRand = new Random();
         int nRandom = (char)(CRand.nextInt(9-1) + 1);
       
-        return MasterInventory[nRandom];
+        return new Enemy(MasterInventory.get(nRandom));
     }
 
 }
