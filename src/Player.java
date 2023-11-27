@@ -8,6 +8,8 @@ public class Player
     private int nPosX; 
     private int nPosY; 
 
+    ArrayList<CapturedCreature> aCapturedCreatures = new ArrayList<CapturedCreature>();
+
     /**
      * Upon creation the Player's location(<nPosX>, <nPosY>) is set to 0,0
      */
@@ -107,10 +109,10 @@ public class Player
     /**
      * This method enables the player to attack the enemy using their active creature. 
      * 
-     * @param CEnemy            an enemy <Creature>
+     * @param CEnemy            an enemy
      * @param CActiveCreature   a creature used by the player
      */
-    public void attack(Creature CEnemy, Creature CActiveCreature)
+    public void attack(Enemy CEnemy, CapturedCreature CActiveCreature)
     {
         Random CRand = new Random();
         int nMax = 10; 
@@ -135,7 +137,7 @@ public class Player
                  nDamage*= 1.5;
         }
 
-        //System.out.println("\n\t\t\tFINALDAMAGE: "+ nDamage + "\n");
+        System.out.println("\n\t\t\tFINALDAMAGE: "+ nDamage + "\n");
 
         CEnemy.setHealth(CEnemy.getHealth() - nDamage);
     }
@@ -149,7 +151,7 @@ public class Player
      * @param CInventory    the inventory
      * @return              the success indicator
      */
-    public boolean catchCreature(Creature CEnemy,ArrayList<Creature> aCaptured, Inventory CInventory)
+    public boolean catchCreature(Enemy CEnemy, ArrayList<CapturedCreature> aCaptured, Inventory CInventory)
     {
         Random CRandom = new Random();
         boolean bCaught = false; 
@@ -172,7 +174,7 @@ public class Player
      * @param CInventory    the inventory
      * @return              the boolean to indicate if it was successful or not
      */
-    public boolean swap(ArrayList<Creature> aCaptured, Inventory CInventory)
+    public boolean swap(ArrayList<CapturedCreature> aCaptured, Inventory CInventory)
     {
         boolean bSwapped= false; 
         int nInput= CInventory.displayInventory(CInventory,aCaptured.size(),aCaptured);
@@ -188,8 +190,8 @@ public class Player
             int nCreatureB = CIntScanner.nextInt();
             CIntScanner.nextLine();
 
-            Creature CChosenCreatureA = CInventory.findCreaturebyIndex(aCaptured, nCreatureA, aCaptured.size());
-            Creature CChosenCreatureB = CInventory.findCreaturebyIndex(aCaptured, nCreatureB, aCaptured.size());
+            CapturedCreature CChosenCreatureA = CInventory.findCreaturebyIndex(aCaptured, nCreatureA, aCaptured.size());
+            CapturedCreature CChosenCreatureB = CInventory.findCreaturebyIndex(aCaptured, nCreatureB, aCaptured.size());
             boolean bCreatureAActive = CChosenCreatureA.getActiveCreature();
             boolean bCreatureBActive = CChosenCreatureB.getActiveCreature();
 

@@ -1,7 +1,9 @@
- 
+import java.util.ArrayList;
+
 public class Driver 
 {
 
+    
     /** 
      * @param args
      */
@@ -9,9 +11,11 @@ public class Driver
     {
         Game CGame = new Game();
 
-        CGame.run();
-        CGame.chooseStarterCreature();
-        CGame.displayMenu();
+        ArrayList<Creature> CMasterInventory = new ArrayList<>();
+
+        CGame.run(CMasterInventory);
+        CGame.chooseStarterCreature(CMasterInventory);
+        CGame.displayMenu(CMasterInventory);
        
     }
 
