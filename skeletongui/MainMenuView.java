@@ -2,17 +2,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.w3c.dom.events.MouseEvent;
-
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JPanel;
 
 import java.awt.FlowLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 public class MainMenuView extends JFrame{
 
@@ -35,16 +32,17 @@ public class MainMenuView extends JFrame{
 
         // inventory button
         this.inventoryBtn = new JButton("Inventory");
-
-
+        this.inventoryBtn.addMouseListener(new InventoryBtnListener());
+    
         // area button
         this.areaBtn  = new JButton("Area");
+        this.areaBtn.addMouseListener(new AreaBtnListener());
 
-       
         // evolve button
         this.evolveBtn = new JButton("Evolve");
-
-        // evolve button
+        this.evolveBtn.addMouseListener(new EvolveBtnListener());
+        
+        // exit button
         this.exitBtn = new JButton("Exit");
 
         add(menuLbl);
@@ -55,23 +53,71 @@ public class MainMenuView extends JFrame{
         setVisible(true); 
     }
     
-
-    public void setInventoryBtnListener(ActionListener actionListener){
-        this.inventoryBtn.addActionListener(actionListener);
-    }
-
-    public void setAreaBtnListener(ActionListener actionListener){
-        this.areaBtn.addActionListener(actionListener);
-    }
-
-    public void setEvolveBtnListener(ActionListener actionListener){
-        this.evolveBtn.addActionListener(actionListener);
-    }
-
-    public void setExitBtnListener(ActionListener actionListener){
-        this.exitBtn.addActionListener(actionListener);
-    }
    
-       
-    
+    private class InventoryBtnListener implements MouseListener{
+
+        @Override 
+        public void mouseClicked(MouseEvent e){
+            // go to main menu
+            InventoryView inventoryView = new InventoryView();
+            dispose();
+        }
+
+        // other interfaces
+        @Override 
+        public void mousePressed(MouseEvent e){}
+        @Override
+        public void mouseReleased(MouseEvent e){}
+        @Override public 
+        void mouseEntered(MouseEvent e){}
+        @Override public
+        void mouseExited(MouseEvent e) {}
+
+    }
+
+    private class AreaBtnListener implements MouseListener{
+
+        @Override 
+        public void mouseClicked(MouseEvent e){
+            // go to main menu
+            AreaView areaView = new AreaView();
+            dispose();
+        }
+
+        // other interfaces
+        @Override 
+        public void mousePressed(MouseEvent e){}
+        @Override
+        public void mouseReleased(MouseEvent e){}
+        @Override public 
+        void mouseEntered(MouseEvent e){}
+        @Override public
+        void mouseExited(MouseEvent e) {}
+
+    }
+
+
+    private class EvolveBtnListener implements MouseListener{
+
+        @Override 
+        public void mouseClicked(MouseEvent e){
+            // go to main menu
+            EvolveView evolveView = new EvolveView();
+            dispose();
+        }
+
+        // other interfaces
+        @Override 
+        public void mousePressed(MouseEvent e){}
+        @Override
+        public void mouseReleased(MouseEvent e){}
+        @Override public 
+        void mouseEntered(MouseEvent e){}
+        @Override public
+        void mouseExited(MouseEvent e) {}
+
+    }
+
+
+
 }

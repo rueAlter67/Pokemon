@@ -8,14 +8,12 @@ import javax.swing.JPanel;
 
 import java.awt.FlowLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.*; 
 import java.awt.event.*;
 
 public class StartUpView extends JFrame{
 
-    private JButton creatureLbl; 
+    private JButton creatureBtn; 
 
     public StartUpView(){
         
@@ -26,48 +24,24 @@ public class StartUpView extends JFrame{
 		setSize(1000, 800);
         setResizable(false);;
 
-        this.creatureLbl = new JButton();
-        this.creatureLbl.setText("Choose");
-        this.creatureLbl.addMouseListener(new MyMouseListener()); 
+        this.creatureBtn = new JButton();
+        this.creatureBtn.setText("Choose Starter Creature");
+        this.creatureBtn.addMouseListener(new MouseAdapter(){
+            @Override 
+            public void mouseClicked(MouseEvent e){
+                // go to main menu
+                MainMenuView mainMenuView = new MainMenuView();
+                dispose();
+            }
+        }); 
 
-
-        add(creatureLbl);
-
-
-        /*todo: 
-        *  - add a background 
-            - add a preferred size 
-        */
-       
-        
+        add(creatureBtn);
         setVisible(true); 
         
     }
 
-    private class MyMouseListener implements MouseListener{
 
-        @Override 
-        public void mouseClicked(MouseEvent evt){
-            // go to main menu
-            MainMenuView MainMenuView = new MainMenuView();
-            dispose();
-        }
-
-        // other interfaces
-        @Override 
-        public void mousePressed(MouseEvent evt){
-            
-        }
-        @Override
-        public void mouseReleased(MouseEvent evt){}
-        @Override public 
-        void mouseEntered(MouseEvent evt){}
-        @Override public
-        void mouseExited(MouseEvent evt) {}
-
-    }
-       
-
+    
 }
     
 
