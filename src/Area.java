@@ -21,6 +21,7 @@ public class Area{
     private int nYDim=1;
     private Enemy CEnemy; 
     private Player CPlayer; 
+    private Inventory CInventory;
     private ArrayList<Creature> CMasterInventory; 
  
     public Area(Player CPlayer, ArrayList<Creature> CMasterInventory)
@@ -42,7 +43,7 @@ public class Area{
      * @param CInventory    the instance of Inventory Class used by the Player
      * @return              the nMovement made by the paler
      */	
-	public int loadArea(ArrayList<CapturedCreature> aCaptured, Inventory CInventory) 
+	public int loadArea(ArrayList<CapturedCreature> aCaptured) 
     {
         Scanner CReader = new Scanner(System.in);
         Random CRandom = new Random();
@@ -51,7 +52,7 @@ public class Area{
 		int nMovement=0;   
         int nChecker=0;  
         boolean bPlayer=true; 
-        CapturedCreature CActive = CInventory.getTheActiveCreature(aCaptured);
+        CapturedCreature CActive = CPlayer.getTheActiveCreature();
 
         do{
             for(nCol = 0; nCol < this.nYDim; nCol++)
@@ -137,7 +138,7 @@ public class Area{
                 nIndex++;
                 this.CEnemy = getRandomCreature(CMasterInventory);
                 this.CEnemy.setHealth(50);
-                battle(this.CEnemy, aCaptured,CInventory);
+                battle(this.CEnemy, aCaptured, CInventory);
             } 
 
         }while(nMovement != 5);
@@ -230,8 +231,8 @@ public class Area{
                             "\t\t\tMoves left: "+ nMovesLeft +
                             "\n\t\t\tEnemy Health: " + this.CEnemy.getHealth() + 
                              "\n\t\t\t======================================="+
-                             "\n\n\t\t\tActive Creature: " + CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getCreatureName()+"\tType: "+ 
-                                                            CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)).getType()+
+                             "\n\n\t\t\tActive Creature: " + CPlayer.getTheActiveCreature().getCreatureName()+"\tType: "+ 
+                                                            CPlayer.getTheActiveCreature().getType()+
                              "\n\t\t\tEnemy Creature: " + this.CEnemy.getCreatureName()+"\tType: "+ this.CEnemy.getType()+
                              
                          "\n\n\t\t\t[1]  ATTACK \n" + 
@@ -272,7 +273,7 @@ public class Area{
             switch(nBattleMove)
             {
                 case 1: 
-                        CPlayer.attack(this.CEnemy, CInventory.getTheActiveCreature(CInventory.getAllCapturedCreatures(aCaptured)));
+                        CPlayer.attack(this.CEnemy, CPlayer.getTheActiveCreature());
                         break;
                 case 2: 
                         if(aCaptured.size() == 1)
@@ -282,7 +283,7 @@ public class Area{
                         }
                         else
                         {
-                            bSwapped = CPlayer.swap(aCaptured,CInventory);
+                            bSwapped = CPlayer.swap(CInventory);
 
                             if(bSwapped && nMovesLeft >= 1)
                             {
@@ -300,7 +301,7 @@ public class Area{
 
                         break;
                 case 3:
-                       bCaught = CPlayer.catchCreature(this.CEnemy,aCaptured, CInventory);
+                       bCaught = CPlayer.catchCreature(this.CEnemy);
         
                        if(bCaught)
                        {
@@ -314,7 +315,7 @@ public class Area{
                        }
                        break;
                 case 4: 
-                       loadArea(CInventory.getAllCapturedCreatures(aCaptured) , CInventory);
+                       loadArea(CPlayer.getAllCapturedCreatures());
                        break;
             }
             
