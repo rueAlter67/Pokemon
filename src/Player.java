@@ -8,18 +8,26 @@ public class Player
     private int nPosX; 
     private int nPosY; 
     private ArrayList<CapturedCreature> aCapturedCreatures;
-//    private Inventory CPlayerInventory;
+    private ArrayList<Creature> CMasterInventory;
 
     /**
      * Upon creation the Player's location(<nPosX>, <nPosY>) is set to 0,0
      */
-    public Player()
+    public Player(ArrayList<Creature> CMasterInventory)
     {
         this.nPosX = 0; 
         this.nPosY = 0; 
         aCapturedCreatures = new ArrayList<CapturedCreature>();
+        this.CMasterInventory = CMasterInventory;
     } 
 
+    public boolean checkSameCreature(CapturedCreature CCreatureA, CapturedCreature CCreatureB){
+        if(CCreatureA.getLevel()==CCreatureB.getLevel() && CCreatureA.getFamily() == CCreatureB.getFamily()){
+            return true;
+        }
+        else
+            return false;
+    }
 
     /**
     *
@@ -36,6 +44,99 @@ public class Player
            
     }
 
+    public void removeCreature(int index) 
+    {
+        aCapturedCreatures.remove(index);
+           
+    }
+
+    public CapturedCreature getEvolvedCreature(char cFamily, int nLevel){
+        
+        CapturedCreature CCreature = null;
+        
+        for(int i=0; i<CMasterInventory.size();i++)
+        {
+            if(cFamily == CMasterInventory.get(i).getFamily() && (nLevel+1) == CMasterInventory.get(i).getLevel()){
+                CCreature = (CapturedCreature)CMasterInventory.get(i);
+                return CCreature;
+            }
+        }
+        return CCreature;
+    }
+
+    public CapturedCreature evolve(CapturedCreature CCreatureA, CapturedCreature CCreatureB, int indexA, int indexB){
+
+        if(checkSameCreature(CCreatureA, CCreatureB)==true){
+            
+            if(CCreatureA.getActiveCreature()==true || CCreatureB.getActiveCreature()==true)
+            this.getEvolvedCreature(CCreatureA.getFamily(),CCreatureA.getLevel()).setActiveCreature(true);
+            
+            this.removeCreature(indexA);
+            this.removeCreature(indexB);
+
+            this.displayCreatureFamilies(CCreatureB);
+
+            this.addCreature(this.getEvolvedCreature(CCreatureA.getFamily(),CCreatureA.getLevel()));
+
+                return this.getEvolvedCreature(CCreatureA.getFamily(),CCreatureA.getLevel());
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    public boolean displayEvolution(){
+        
+        this.displayCapturedCreatures(this.getPlayerInventorySize());
+        boolean bGoSignal = false;
+        while(!bGoSignal){
+
+            System.out.print("Type Numbers of the Creatures for Evolving (type -1 for both to exit): "+ "\n");
+            Scanner CIntScanner = new Scanner(System.in);
+            System.out.println("First creature: ");
+            int firstIndex = CIntScanner.nextInt();
+            System.out.println("Second creature: ");
+            int secondIndex = CIntScanner.nextInt();
+
+            CapturedCreature CChosenCreatureA = this.getCreature(firstIndex);
+            CapturedCreature CChosenCreatureB = this.getCreature(secondIndex);
+
+            if(firstIndex != secondIndex && CChosenCreatureA.getLevel() < 3 && CChosenCreatureB.getLevel() < 3)
+            {
+
+                Creature CAddedCreature = evolve(CChosenCreatureA, CChosenCreatureB, firstIndex, secondIndex);
+
+                if(CAddedCreature instanceof CapturedCreature == true)
+                {
+                    System.out.println("Evolution Successful!");
+                    System.out.println(CAddedCreature.getCreatureName());
+                }
+                else if(CAddedCreature instanceof CapturedCreature == false)
+                {
+                    System.out.println("Evolution Failed.");
+                    System.out.println(CAddedCreature);
+                }
+
+                bGoSignal = true;
+
+                return true;
+
+            }else if(firstIndex == -1 && secondIndex == -1){
+                
+                return false;
+
+            }
+            else
+            {
+                System.err.println("Can't choose the same creature to evolve. Can't evolve level 3 creature.");
+            }
+
+        }
+
+        return false;
+    }
   
     public CapturedCreature getCreature(int index) 
     {
@@ -147,19 +248,19 @@ public class Player
         double nDamage = nRandom * 1;// 1 the creature's level 
 
         System.out.print("\n\t\t\tINITIAL DAMAGE: "+ nDamage + "\n");
-        if(CActiveCreature.getType() == "Fire")
+        if(CActiveCreature.getType().equals("Fire"))
         {   
-            if(CEnemy.getType() == "Grass")
+            if(CEnemy.getType().equals("Grass"))
                 nDamage*= 1.5; 
         }
-        else if(CActiveCreature.getType() == "Grass")
+        else if(CActiveCreature.getType().equals("Grass"))
         {
-            if(CEnemy.getType() == "Water")
+            if(CEnemy.getType().equals("Water"))
                 nDamage*= 1.5;
         } 
-        else if(CActiveCreature.getType() == "Water")
+        else if(CActiveCreature.getType().equals("Water"))
         {
-              if(CEnemy.getType() == "Fire")
+              if(CEnemy.getType().equals("Fire"))
                  nDamage*= 1.5;
         }
 
@@ -186,7 +287,7 @@ public class Player
 
         if(dChance <= dCatchRate)
         {
-            this.addCreature(CEnemy);
+            this.addCreature((Creature)CEnemy);
             bCaught = true; 
         }
         return bCaught;
@@ -434,6 +535,7 @@ public class Player
     public int getPosY() {
         return nPosY;
     }
+
 
   
 

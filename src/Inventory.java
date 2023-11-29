@@ -3,43 +3,49 @@ import java.util.Scanner;
 
 
 public class Inventory { 
-
+    
   private ArrayList<Creature> CInventory;
-  private Player CPlayer;
-  
-  public Inventory() 
-  {
+ 
+  /**
+   * The constructor the class. It instantiates its fields 
+   * CInventory
+   */
+  public Inventory() {
     CInventory = new ArrayList<>();
   }
 
   /**
-    *
     *  Adds a Creature to the MasterInventory. 
     *
     *  @param (CCreature) is the specific creature whose ImageID is being displayed
     *  
     */
 
-  public void addCreature(Creature CCreature) 
-  {
-    CInventory.add(CCreature);
+  public void addCreature(Creature CCreature) {
+      CInventory.add(CCreature);
   }
 
   /**
-    *
     *  Returns the passed creature. 
-    *
     *  @param (CCreature) is the specific creature who is being called
     *  
     */
 
-  public Creature getCreature(int index) 
-  {
+    /**
+     * This returns the creature at a specified index from the Inventory
+     * @param index
+     * @return Creature from the inventory
+     */
+  public Creature getCreature(int index){
     return CInventory.get(index);
   }
 
-  public int getInventorySize(){
 
+  /**
+   * 
+   * @return int the size or total number of cratures in the inventory
+   */
+  public int getInventorySize(){
     return CInventory.size();
   }
 
@@ -51,11 +57,9 @@ public class Inventory {
     *  
     */
     public void displayCreatureImage(Creature CCreature) 
-     {
-      
-        System.out.print("Image ID " + CCreature.getImageID());
-    
-     }
+    {  
+      System.out.print("Image ID " + CCreature.getImageID());
+    }
 
     /**
     *
@@ -64,12 +68,9 @@ public class Inventory {
     *  @param (CCreature) is the specific creature whose name is being displayed
     *  
     */
-    public void displayCreatureNames(Creature CCreature)
-     {
-      
+    public void displayCreatureNames(Creature CCreature){
         System.out.print(CCreature.getCreatureName());
-    
-     }
+    }
 
     /**
     *
@@ -78,12 +79,9 @@ public class Inventory {
     *  @param (CCreature) is the specific creature whose family is being displayed
     *  
     */
-     public void displayCreatureFamilies(Creature CCreature) 
-     {
-      
+    public void displayCreatureFamilies(Creature CCreature){
       System.out.print(CCreature.getFamily());
-      
-     }
+    }
 
     /**
     *
@@ -92,12 +90,9 @@ public class Inventory {
     *  @param (CCreature) is the specific creature whose type is being displayed
     *  
     */
-     public void displayCreatureType(Creature CCreature) 
-     {
-      
+    public void displayCreatureType(Creature CCreature){
       System.out.print(CCreature.getType());
-      
-     }
+    }
 
     /**
     *
@@ -106,12 +101,9 @@ public class Inventory {
     *  @param (CCreature) is the specific creature whose evolution level is being displayed
     *  
     */
-     public void displayCreatureLevel(Creature CCreature) 
-     {
-      
+    public void displayCreatureLevel(Creature CCreature){
       System.out.print("EL " + CCreature.getLevel());
-      
-     }
+    }
 
 
     /**
@@ -123,8 +115,8 @@ public class Inventory {
     *  @param (nLength) is the length or amount of elements inside of aCapturedArray arrayList
     *  @returns (Creature) that is found to have the same character as cCreature, null if no creature with that family is found  
     */  
-    public Creature findCreatureByFamily(ArrayList<Creature> CMasterInventory, char cCreature, int nLength)
-    {
+    public Creature findCreatureByFamily(ArrayList<Creature> CMasterInventory, char cCreature, int nLength){
+      
       int i;
       for(i=0;i<nLength;i++)
       {
@@ -204,8 +196,7 @@ public class Inventory {
      *  @return true
      *   
      */ 
-    public boolean returnToMainMenu()
-    {
+    public boolean returnToMainMenu(){
         return true;
     }
 }

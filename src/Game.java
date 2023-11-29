@@ -7,7 +7,6 @@ public class Game{
     
     private Player CPlayer;
     private int nMenuChoice; 
-  //  private Inventory CPlayerInventory = new Inventory();
     private Area CArea;
 
     Inventory CMasterInventory = new Inventory();
@@ -15,10 +14,8 @@ public class Game{
     /**
      * This method starts the entire game. 
      */
-    public void run() // instantiation ng mga class na need natin 
+    public void run()
     {
-        this.CPlayer = new Player(); 
-        this.CArea = new Area(this.CPlayer, CMasterInventory.getAllCapturedCreatures());
          for (int i=0;i<27;i++) {
         CMasterInventory.addCreature(new Creature(0, "Strawander",'A',"Fire",1));
         CMasterInventory.addCreature(new Creature(1,"Chocowool",'B',"Fire",1));
@@ -48,6 +45,9 @@ public class Game{
         CMasterInventory.addCreature(new Creature(25, "Icesundae",'H',"Water",3));
         CMasterInventory.addCreature(new Creature(26, "Samurcone",'I',"Water",3));
     }
+
+        this.CPlayer = new Player(CMasterInventory.getAllCapturedCreatures()); 
+        this.CArea = new Area(this.CPlayer, CPlayer.getAllCapturedCreatures());
     }
 
         //+++++++++++
@@ -106,7 +106,6 @@ public class Game{
          //CCharScanner.close();
         }
 
-
         return true; 
     }
 
@@ -146,14 +145,7 @@ public class Game{
         
         if(nMenuChoice==1)
         {
-        int nIndex = 0; //for testing
-        int nIndex2 = 1; //for testing
 
-        Enemy CChosenCreature = new Enemy(CMasterInventory.getCreature(nIndex));
-
-        Enemy CChosenCreature2 = new Enemy(CMasterInventory.getCreature(nIndex2)); //for testing (scroll down to nMenuChoice == 1 for reference)
-            CPlayer.addCreature((Creature)CChosenCreature);
-            CPlayer.addCreature((Creature)CChosenCreature2); //for testing of aCapturedCreatures not empty
             int nlength = CPlayer.getPlayerInventorySize();
 
             boolean bExitInventory = false;
@@ -203,7 +195,7 @@ public class Game{
 		{ 
 			CArea.run();    
             do{
-                nMovement = CArea.loadArea(CPlayer.getAllCapturedCreatures(),CMasterInventory);
+                nMovement = CArea.loadArea(CPlayer.getAllCapturedCreatures(), CMasterInventory);
             }while(nMovement != 5);
 
             if(nMovement == 5)
@@ -211,7 +203,21 @@ public class Game{
 		}
 		else if(nMenuChoice == 3)
 		{
-			System.out.println("\n\t\t\t\t[SYSTEM MESSAGE]: FEATURE NOT YET AVAILABLE");
+            boolean bExitInventory = false;
+           
+            while(!bExitInventory){
+			  boolean playerExit = CPlayer.displayEvolution();
+              if(playerExit==true)
+              {
+                bExitInventory = true;
+              }
+            }
+
+            if(bExitInventory)
+            {
+                displayMenu();
+            }
+
 		} 
         else 
         {
@@ -247,15 +253,6 @@ public class Game{
     {
         return this.nMenuChoice;
     }
-
-    // /**
-    //  * This method gets all the creatures to be used throughout the game
-    //  * @return      an array of creatures 
-    //  */
-    // public ArrayList<Creature> Game.getAllCreatures(){
-        
-    //     return this.CMasterInventory;
-    // }
 
  
 }

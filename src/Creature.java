@@ -43,17 +43,6 @@ public class Creature { //make children: enemy and caught/player creature
 
     /**
      *
-     * Sets the creature's name. For nicknaming?
-     *
-     * @param (strCreatureName) the String value of creature's assigned name
-     *   
-     */ 
-    public void setCreatureName(String strCreatureName) { 
-        this.strCreatureName = strCreatureName;           
-    }
-
-    /**
-     *
      * Gets the creature's name.
      *
      * @return (strCreatureName), the String value of creature's assigned name
