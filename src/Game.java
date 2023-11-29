@@ -18,7 +18,7 @@ public class Game{
     public void run() // instantiation ng mga class na need natin 
     {
         this.CPlayer = new Player(); 
-     //   this.CArea = new Area(this.CPlayer, this.CMasterInventory);
+        this.CArea = new Area(this.CPlayer, CMasterInventory.getAllCapturedCreatures());
          for (int i=0;i<27;i++) {
         CMasterInventory.addCreature(new Creature(0, "Strawander",'A',"Fire",1));
         CMasterInventory.addCreature(new Creature(1,"Chocowool",'B',"Fire",1));
@@ -95,9 +95,9 @@ public class Game{
 
          if (cAnswer == 'Y' || cAnswer == 'y') {
             Creature CStarterCreature = CMasterInventory.findCreatureByFamily(CMasterInventory.getAllCapturedCreatures(), cFamily, CMasterInventory.getInventorySize());
-                if (CStarterCreature != null) 
+                if (CStarterCreature instanceof Creature) 
                 {
-                CMasterInventory.addCreature(CStarterCreature);
+                CPlayer.addCreature(CStarterCreature);
                 CPlayer.getCreature(0).setActiveCreature(true);
                 //CCharScanner.close();
                 }
@@ -152,14 +152,14 @@ public class Game{
         Enemy CChosenCreature = new Enemy(CMasterInventory.getCreature(nIndex));
 
         Enemy CChosenCreature2 = new Enemy(CMasterInventory.getCreature(nIndex2)); //for testing (scroll down to nMenuChoice == 1 for reference)
-            CPlayer.addCreature(CChosenCreature);
-            CPlayer.addCreature(CChosenCreature2); //for testing of aCapturedCreatures not empty
+            CPlayer.addCreature((Creature)CChosenCreature);
+            CPlayer.addCreature((Creature)CChosenCreature2); //for testing of aCapturedCreatures not empty
             int nlength = CPlayer.getPlayerInventorySize();
 
             boolean bExitInventory = false;
             while (!bExitInventory) 
             {
-                int nInput = CMasterInventory.displayInventory(nlength, CPlayer.getAllCapturedCreatures()); 
+                int nInput = CMasterInventory.displayInventory(CPlayer); 
                
                 if(nInput == 1)
                 {
@@ -203,7 +203,7 @@ public class Game{
 		{ 
 			CArea.run();    
             do{
-                nMovement = CArea.loadArea(CPlayer.getAllCapturedCreatures());
+                nMovement = CArea.loadArea(CPlayer.getAllCapturedCreatures(),CMasterInventory);
             }while(nMovement != 5);
 
             if(nMovement == 5)
@@ -256,5 +256,7 @@ public class Game{
         
     //     return this.CMasterInventory;
     // }
+
+ 
 }
 

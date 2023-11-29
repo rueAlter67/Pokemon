@@ -8,7 +8,7 @@ public class Player
     private int nPosX; 
     private int nPosY; 
     private ArrayList<CapturedCreature> aCapturedCreatures;
-    private Inventory CPlayerInventory;
+//    private Inventory CPlayerInventory;
 
     /**
      * Upon creation the Player's location(<nPosX>, <nPosY>) is set to 0,0
@@ -28,9 +28,9 @@ public class Player
     *  @param (CCreature) is the specific creature whose being added to the specific arrayList
     *  
     */
-    public void addCreature(Enemy CEnemy) 
+    public void addCreature(Creature CCreature) 
     {
-        CapturedCreature NewCreature = new CapturedCreature((Creature)CEnemy);
+        CapturedCreature NewCreature = new CapturedCreature(CCreature);
 
         aCapturedCreatures.add(NewCreature);
            
@@ -280,24 +280,24 @@ public class Player
     *  @param (CInventory) is the inventory that contains aCapturedArray
     *   
     */ 
-    public void displayCapturedCreatures(int nlength, ArrayList<CapturedCreature> aCapturedArray) 
+    public void displayCapturedCreatures(int nlength) 
     {
        int i;
        for(i=0;i<nlength;i++)
        {
         
          System.out.print("\nCreature " + (i+1) + ": ");
-         CPlayerInventory.displayCreatureImage(aCapturedArray.get(i));
+         this.displayCreatureImage(aCapturedCreatures.get(i));
          System.out.print("\nName: ");
-         CPlayerInventory.displayCreatureNames(aCapturedArray.get(i));
+         this.displayCreatureNames(aCapturedCreatures.get(i));
          System.out.print(" - Type: ");
-         CPlayerInventory.displayCreatureType(aCapturedArray.get(i));
+         this.displayCreatureType(aCapturedCreatures.get(i));
          System.out.print(" - Family ");
-         CPlayerInventory.displayCreatureFamilies(aCapturedArray.get(i));
+         this.displayCreatureFamilies(aCapturedCreatures.get(i));
          System.out.print(" - ");
-         CPlayerInventory.displayCreatureLevel(aCapturedArray.get(i));
+         this.displayCreatureLevel(aCapturedCreatures.get(i));
          System.out.print(" ");
-         this.displayActiveCreature(aCapturedArray.get(i));
+         this.displayActiveCreature(aCapturedCreatures.get(i));
          System.out.print("\n");
 
        }
@@ -365,7 +365,7 @@ public class Player
     public boolean swap(Inventory CInventory)
     {
         boolean bSwapped= false; 
-        int nInput= CInventory.displayInventory(aCapturedCreatures.size(), aCapturedCreatures);
+        int nInput= CInventory.displayInventory(this);
         boolean bExitInventory = false;
 
         if(nInput == 1)

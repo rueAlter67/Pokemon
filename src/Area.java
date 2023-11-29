@@ -17,21 +17,20 @@ public class Area{
      * The area level that the player 
      */
     private int nAreaLevel; 
-    private int nXDim;// default to 0 later
-    private int nYDim;
+    private int nXDim=5; // default to 0 later
+    private int nYDim=1;
     private Enemy CEnemy; 
-    private Player CPlayer; 
-    private Inventory CInventory;
+    private Player CPlayer;
     private ArrayList<Creature> CMasterInventory; 
  
-    public Area(Player CPlayer, ArrayList<Creature> CMasterInventory, int nXDim, int nYDim)
+    public Area(Player CPlayer, ArrayList<Creature> CMasterInventory)
     {
         this.CMasterInventory = CMasterInventory;
         this.CPlayer = CPlayer; 
         this.CEnemy = null; 
         this.nAreaLevel = 0; 
-        this.nXDim = nXDim; 
-        this.nYDim =nYDim;
+        this.nXDim = 0; 
+        this.nYDim = 0; 
     }
 
     /**
@@ -43,7 +42,7 @@ public class Area{
      * @param CInventory    the instance of Inventory Class used by the Player
      * @return              the nMovement made by the paler
      */	
-	public int loadArea(ArrayList<CapturedCreature> aCaptured) 
+	public int loadArea(ArrayList<CapturedCreature> aCaptured, Inventory CInventory) 
     {
         Scanner CReader = new Scanner(System.in);
         Random CRandom = new Random();
@@ -315,7 +314,7 @@ public class Area{
                        }
                        break;
                 case 4: 
-                       loadArea(CPlayer.getAllCapturedCreatures());
+                       loadArea(CPlayer.getAllCapturedCreatures(), CInventory);
                        break;
             }
             

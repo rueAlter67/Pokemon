@@ -159,7 +159,7 @@ public class Inventory {
      *  @param (aCapturedArray) is the specific arrayList of captured creatures
      *   
      */ 
-    public int displayInventory(int nlength, ArrayList<CapturedCreature> aCapturedArray){
+    public int displayInventory(Player CPlayer){
       Scanner CInputScanner = new Scanner(System.in);
 
       int nInput = 0;
@@ -170,7 +170,7 @@ public class Inventory {
         System.out.print("\n\n====================INVENTORY====================\n"+
                       "\n\t    Captured Creatures: \n");
       
-        CPlayer.displayCapturedCreatures(nlength, aCapturedArray);
+        CPlayer.displayCapturedCreatures(CPlayer.getPlayerInventorySize());
       
         System.out.print(
         "\n\t[1]  Change Active Creature\n" +
