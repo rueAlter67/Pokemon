@@ -34,14 +34,14 @@ public class CapturedCreature extends Creature {
         this.bActive = bActive;
     }
 
-    /**
+      /**
      *
-     * Gets a creature's active status, true (if active) or false (not active).
+     * Gets a creature's active status and returns if it is true (active) or false (not active).
      *
-     * @return (bActive), the boolean value of creature's assigned active status
+     * @param (bActive) the boolean value of creature's assigned active status
      *   
      */ 
-    public boolean getActiveCreature() {
+    public boolean getActiveCreature() { 
         return bActive;
     }
 

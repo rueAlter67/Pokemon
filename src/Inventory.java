@@ -4,6 +4,45 @@ import java.util.Scanner;
 
 public class Inventory { 
 
+  private ArrayList<Creature> CInventory;
+  private Player CPlayer;
+  
+  public Inventory() 
+  {
+    CInventory = new ArrayList<>();
+  }
+
+  /**
+    *
+    *  Adds a Creature to the MasterInventory. 
+    *
+    *  @param (CCreature) is the specific creature whose ImageID is being displayed
+    *  
+    */
+
+  public void addCreature(Creature CCreature) 
+  {
+    CInventory.add(CCreature);
+  }
+
+  /**
+    *
+    *  Returns the passed creature. 
+    *
+    *  @param (CCreature) is the specific creature who is being called
+    *  
+    */
+
+  public Creature getCreature(int index) 
+  {
+    return CInventory.get(index);
+  }
+
+  public int getInventorySize(){
+
+    return CInventory.size();
+  }
+
     /**
     *
     *  Displays the image ID of the passed creature. 
@@ -74,57 +113,6 @@ public class Inventory {
       
      }
 
-    /**
-    *
-    *  Displays if the passed creature is the active creature.
-    *
-    *  @param (CCreature) is the specific creature whose active status is being checked and displayed
-    *  
-    */
-     public void displayActiveCreature(CapturedCreature CCreature) 
-     {
-      if(CCreature.getActiveCreature()==true)
-      {
-         System.out.print("(Active Creature)");
-      }
-     }
-
-    /**
-    *
-    *  Is used to add the passed creature into a specific arrayList.
-    *
-    *  @param (CCreature) is the specific creature whose being added to the specific arrayList
-    *  
-    */
-    public void addCreature(ArrayList<CapturedCreature> aArray, Creature CCreature) 
-    {
-            CapturedCreature NewCreature = new CapturedCreature((Creature)CCreature);
-
-          aArray.add(NewCreature);
-           
-    }
-
-    /**
-    *
-    *  Is used to find a creature in an arrayList based on the passed index.
-    *
-    *  @param (aCapturedArray) is the specific arrayList (of captured creatures) where the creature is being found
-    *  @param (nCreatureIndex) is the index to be compared to the indices of the aCapturedArray arrayList
-    *  @param (nLength) is the length or amount of elements inside of aCapturedArray arrayList
-    *  @returns (Creature) that is found to have the same index as nCreatureIndex, null if no creature of the same index is found  
-    */    
-    public CapturedCreature findCreaturebyIndex(ArrayList<CapturedCreature> aCapturedArray, int nCreatureIndex, int nLength)
-    {
-      int i;
-      for(i=0;i<nLength;i++)
-      {
-        if((i+1)==nCreatureIndex)
-        {
-          return aCapturedArray.get(i);
-        }
-      }
-      return null;
-    }
 
     /**
     *
@@ -135,67 +123,32 @@ public class Inventory {
     *  @param (nLength) is the length or amount of elements inside of aCapturedArray arrayList
     *  @returns (Creature) that is found to have the same character as cCreature, null if no creature with that family is found  
     */  
-    public Creature findCreatureByFamily(ArrayList<Creature> aCapturedArray, char cCreature, int nLength)
+    public Creature findCreatureByFamily(ArrayList<Creature> CMasterInventory, char cCreature, int nLength)
     {
       int i;
       for(i=0;i<nLength;i++)
       {
-        if(aCapturedArray.get(i).getFamily()==cCreature)
+        if(CMasterInventory.get(i).getFamily()==cCreature)
         {
-          return aCapturedArray.get(i);
+          return CMasterInventory.get(i);
         }
       }
       return null;
     }
 
-    /**
-    *
-    *  Is used to swap the current active creature by changing two creatures active boolean indicators.
-    *
-    *  @param (CCreatureA) is the first specific creature whose active boolean indicator is being swapped with CCreatureB
-    *  @param (CCreatureB) is the second specific creature whose active boolean indicator is being swapped with CCreatureA
-    *   
-    */  
-     public void swapCreature(CapturedCreature CCreatureA, CapturedCreature CCreatureB)
-     {
-          boolean bActiveCreatureA = CCreatureA.getActiveCreature();
-          boolean bActiveCreatureB = CCreatureB.getActiveCreature();
 
-          CCreatureA.setActiveCreature(bActiveCreatureB);
-          CCreatureB.setActiveCreature(bActiveCreatureA);
-     }
-      
     /**
-    *
-    *  Is used to display all information of captured creatures in the inventory.
-    *
-    *  @param (nlength) is the length or amount of elements inside of aCapturedArray arrayList
-    *  @param (aCapturedArray) is the specific arrayList of captured creatures
-    *  @param (CInventory) is the inventory that contains aCapturedArray
-    *   
-    */ 
-     public void displayCapturedCreatures(int nlength, ArrayList<CapturedCreature> aCapturedArray, Inventory CInventory) 
-     {
-        int i;
-        for(i=0;i<nlength;i++)
-        {
-         
-          System.out.print("\nCreature " + (i+1) + ": ");
-          CInventory.displayCreatureImage(aCapturedArray.get(i));
-          System.out.print("\nName: ");
-          CInventory.displayCreatureNames(aCapturedArray.get(i));
-          System.out.print(" - Type: ");
-          CInventory.displayCreatureType(aCapturedArray.get(i));
-          System.out.print(" - Family ");
-          CInventory.displayCreatureFamilies(aCapturedArray.get(i));
-          System.out.print(" - ");
-          CInventory.displayCreatureLevel(aCapturedArray.get(i));
-          System.out.print(" ");
-          CInventory.displayActiveCreature(aCapturedArray.get(i));
-          System.out.print("\n");
-
-        }
-     }
+     *
+     *  Is used to get all the captured creatures from the arrayList.
+     *
+     *  @param (aCapturedCreatures) is the specific arrayList of captured creatures
+     *  @return (aCapturedCreatures) arrayList of captured creatures
+     *   
+     */ 
+    public  ArrayList<Creature> getAllCapturedCreatures()
+    {
+        return CInventory;
+    }
 
     /**
      *
@@ -206,7 +159,7 @@ public class Inventory {
      *  @param (aCapturedArray) is the specific arrayList of captured creatures
      *   
      */ 
-     public int displayInventory(Inventory CInventory, int nlength, ArrayList<CapturedCreature> aCapturedArray){
+    public int displayInventory(int nlength, ArrayList<CapturedCreature> aCapturedArray){
       Scanner CInputScanner = new Scanner(System.in);
 
       int nInput = 0;
@@ -217,7 +170,7 @@ public class Inventory {
         System.out.print("\n\n====================INVENTORY====================\n"+
                       "\n\t    Captured Creatures: \n");
       
-        CInventory.displayCapturedCreatures(nlength, aCapturedArray, CInventory);
+        CPlayer.displayCapturedCreatures(nlength, aCapturedArray);
       
         System.out.print(
         "\n\t[1]  Change Active Creature\n" +
@@ -242,41 +195,6 @@ public class Inventory {
       }
 
       return nInput;
-    }
-
-    /**
-     *
-     *  Is used to check amoung the ArrayList which creature is currently active.
-     *
-     *  @param (aArray) is the specific arrayList of captured creatures
-     *  @return the (CActive) creature who is currently active
-     *   
-     */ 
-    public CapturedCreature getTheActiveCreature(ArrayList<CapturedCreature> aArray)
-    {
-        int k;
-        CapturedCreature CActive=null; 
-
-        for(k=0 ; k< aArray.size(); k++)
-        {
-            if(aArray.get(k).getActiveCreature() == true)
-                CActive = aArray.get(k);
-        }
-
-        return CActive;
-    }
-
-    /**
-     *
-     *  Is used to get all the captured creatures from the arrayList.
-     *
-     *  @param (aCapturedCreatures) is the specific arrayList of captured creatures
-     *  @return (aCapturedCreatures) arrayList of captured creatures
-     *   
-     */ 
-    public  ArrayList<CapturedCreature> getAllCapturedCreatures(ArrayList<CapturedCreature> aCapturedCreatures)
-    {
-        return aCapturedCreatures;
     }
 
     /**

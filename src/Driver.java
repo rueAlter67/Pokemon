@@ -9,11 +9,9 @@ public class Driver
     {
         Game CGame = new Game();
 
-        ArrayList<Creature> CMasterInventory = new ArrayList<>();
-
-        CGame.run(CMasterInventory);
-        CGame.chooseStarterCreature(CMasterInventory);
-        CGame.displayMenu(CMasterInventory);
+        CGame.run();
+        CGame.chooseStarterCreature();
+        CGame.displayMenu();
        
     }
 
